@@ -1,0 +1,31 @@
+[project]
+name = "meskofit"
+version = "1.0.0"
+description = "Self-hosted workout, food and progress tracker. Python port of MeskoFit."
+requires-python = ">=3.11"
+dependencies = [
+  "starlette>=0.40",
+  "uvicorn>=0.30",
+  "httpx>=0.27",
+  "cryptography>=42",
+  "segno>=1.6",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+meskofit = "meskofit.__main__:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["meskofit*"]
+
+[tool.setuptools.package-data]
+meskofit = ["data/**/*", "web/dist/**/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

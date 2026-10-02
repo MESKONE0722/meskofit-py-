@@ -1,0 +1,1350 @@
+{
+ "version": 1,
+ "levels": {
+  "beginner": {
+   "label": "Beginner",
+   "weeklyGoal": 3,
+   "coreGoal": 2,
+   "restSec": 120,
+   "rpe": "5\u20136",
+   "effort": "Finish every set feeling like you could do 4 or more extra reps. Smooth and controlled.",
+   "loadHint": "Start with a weight you could lift about 15 times, and do the listed reps.",
+   "warmup": {
+    "minutes": 5,
+    "maxMinutes": 10,
+    "minMinutes": 5,
+    "default": "treadmill-walk",
+    "options": [
+     "treadmill-walk",
+     "recumbent-bike",
+     "elliptical",
+     "stairmaster"
+    ],
+    "intensity": "Easy pace \u2014 you can talk in full sentences.",
+    "progression": "Add 1 minute each week until you reach 10 minutes."
+   },
+   "cooldown": {
+    "minutes": 5,
+    "machine": "treadmill-walk",
+    "phases": [
+     {
+      "label": "Easy walk",
+      "end": 120
+     },
+     {
+      "label": "Comfortable walk",
+      "end": 240
+     },
+     {
+      "label": "Slow walk",
+      "end": 300
+     }
+    ]
+   },
+   "stretchMinutes": 5,
+   "levelUp": "After 8+ weeks of hitting your weekly goal with low knee pain, try Intermediate.",
+   "days": [
+    {
+     "id": "chest-triceps",
+     "name": "Chest / Triceps",
+     "short": "Chest",
+     "suggested": "Mon",
+     "focus": [
+      "chest",
+      "triceps"
+     ],
+     "exercises": [
+      {
+       "id": "ct1",
+       "ex": "machine-chest-press",
+       "sets": 2,
+       "reps": "10-12"
+      },
+      {
+       "id": "ct2",
+       "ex": "dip-machine",
+       "sets": 2,
+       "reps": "10-12"
+      },
+      {
+       "id": "ct3",
+       "ex": "pec-deck",
+       "sets": 2,
+       "reps": "12"
+      },
+      {
+       "id": "ct4",
+       "ex": "decline-chest-press",
+       "sets": 2,
+       "reps": "10"
+      },
+      {
+       "id": "ct5",
+       "ex": "tricep-pushdown",
+       "sets": 2,
+       "reps": "12-15"
+      }
+     ],
+     "stretches": [
+      "st-elbows-back",
+      "st-chest-shoulder-stick",
+      "st-triceps",
+      "st-cross-body-shoulder"
+     ]
+    },
+    {
+     "id": "back-biceps",
+     "name": "Back / Biceps",
+     "short": "Back",
+     "suggested": "Tue",
+     "focus": [
+      "lats",
+      "middle back",
+      "biceps"
+     ],
+     "exercises": [
+      {
+       "id": "bb1",
+       "ex": "lat-pulldown",
+       "sets": 2,
+       "reps": "10-12"
+      },
+      {
+       "id": "bb2",
+       "ex": "seated-cable-row",
+       "sets": 2,
+       "reps": "12"
+      },
+      {
+       "id": "bb3",
+       "ex": "high-row-machine",
+       "sets": 2,
+       "reps": "10"
+      },
+      {
+       "id": "bb4",
+       "ex": "reverse-fly-machine",
+       "sets": 2,
+       "reps": "12"
+      },
+      {
+       "id": "bb5",
+       "ex": "seated-db-curl",
+       "sets": 2,
+       "reps": "12"
+      },
+      {
+       "id": "bb6",
+       "ex": "hammer-curl",
+       "sets": 2,
+       "reps": "12"
+      }
+     ],
+     "stretches": [
+      "st-lat-wall",
+      "st-upper-back",
+      "st-standing-twist",
+      "st-biceps",
+      "st-wrists"
+     ]
+    },
+    {
+     "id": "legs-glutes",
+     "name": "Legs / Glutes",
+     "short": "Legs",
+     "suggested": "Wed",
+     "focus": [
+      "quadriceps",
+      "glutes",
+      "hamstrings"
+     ],
+     "exercises": [
+      {
+       "id": "lg1",
+       "ex": "hip-abductor",
+       "sets": 2,
+       "reps": "12"
+      },
+      {
+       "id": "lg2",
+       "ex": "hip-adductor",
+       "sets": 2,
+       "reps": "12"
+      },
+      {
+       "id": "lg3",
+       "ex": "leg-press",
+       "sets": 2,
+       "reps": "12",
+       "note": "Light, partial range"
+      },
+      {
+       "id": "lg4",
+       "ex": "seated-leg-curl",
+       "sets": 2,
+       "reps": "10-12"
+      },
+      {
+       "id": "lg5",
+       "ex": "cable-pull-through",
+       "sets": 2,
+       "reps": "12"
+      },
+      {
+       "id": "lg6",
+       "ex": "seated-calf-raise",
+       "sets": 2,
+       "reps": "15"
+      },
+      {
+       "id": "lg7",
+       "ex": "sit-to-stand",
+       "sets": 2,
+       "reps": "8",
+       "note": "Only if pain-free"
+      }
+     ],
+     "stretches": [
+      "st-calf-wall",
+      "st-seated-hamstring",
+      "st-hip-flexor",
+      "st-figure4",
+      "st-hip-circles"
+     ]
+    },
+    {
+     "id": "shoulders-traps",
+     "name": "Shoulders / Traps",
+     "short": "Shoulders",
+     "suggested": "Thu",
+     "focus": [
+      "shoulders",
+      "traps"
+     ],
+     "exercises": [
+      {
+       "id": "st1",
+       "ex": "machine-shoulder-press",
+       "sets": 2,
+       "reps": "10-12"
+      },
+      {
+       "id": "st2",
+       "ex": "lateral-raise-machine",
+       "sets": 2,
+       "reps": "12"
+      },
+      {
+       "id": "st3",
+       "ex": "face-pull",
+       "sets": 2,
+       "reps": "12"
+      },
+      {
+       "id": "st4",
+       "ex": "reverse-fly-machine",
+       "sets": 2,
+       "reps": "12"
+      },
+      {
+       "id": "st5",
+       "ex": "db-shrug",
+       "sets": 2,
+       "reps": "12"
+      }
+     ],
+     "stretches": [
+      "st-cross-body-shoulder",
+      "st-upward",
+      "st-neck",
+      "st-upper-back"
+     ]
+    },
+    {
+     "id": "core-calisthenics",
+     "name": "Core / Calisthenics / Light Upper",
+     "short": "Core+",
+     "suggested": "Sun",
+     "focus": [
+      "abdominals",
+      "chest",
+      "lats"
+     ],
+     "exercises": [
+      {
+       "id": "cc1",
+       "ex": "incline-plank",
+       "sets": 2,
+       "secs": 20
+      },
+      {
+       "id": "cc2",
+       "ex": "ab-crunch-machine",
+       "sets": 2,
+       "reps": "12"
+      },
+      {
+       "id": "cc3",
+       "ex": "cable-wood-chop",
+       "sets": 2,
+       "reps": "10/side"
+      },
+      {
+       "id": "cc4",
+       "ex": "incline-pushup",
+       "sets": 2,
+       "reps": "8"
+      },
+      {
+       "id": "cc5",
+       "ex": "lat-pulldown",
+       "sets": 2,
+       "reps": "10"
+      },
+      {
+       "id": "cc6",
+       "ex": "seated-db-curl",
+       "sets": 2,
+       "reps": "12",
+       "note": "Light"
+      },
+      {
+       "id": "cc7",
+       "ex": "tricep-pushdown",
+       "sets": 2,
+       "reps": "12",
+       "note": "Light"
+      }
+     ],
+     "stretches": [
+      "st-lateral",
+      "st-overhead",
+      "st-pelvic-tilt",
+      "st-triceps",
+      "st-elbows-back"
+     ]
+    }
+   ],
+   "core": {
+    "id": "core",
+    "name": "Core Workout",
+    "short": "Core",
+    "suggested": "",
+    "focus": [
+     "abdominals"
+    ],
+    "exercises": [
+     {
+      "id": "co1",
+      "ex": "seated-leg-tucks",
+      "sets": 2,
+      "reps": "8"
+     },
+     {
+      "id": "co2",
+      "ex": "cable-russian-twist",
+      "sets": 2,
+      "reps": "10/side"
+     },
+     {
+      "id": "co3",
+      "ex": "standing-knee-drive",
+      "sets": 2,
+      "reps": "10/side"
+     },
+     {
+      "id": "co4",
+      "ex": "incline-plank",
+      "sets": 2,
+      "secs": 20
+     },
+     {
+      "id": "co5",
+      "ex": "ab-crunch-machine",
+      "sets": 2,
+      "reps": "12"
+     }
+    ],
+    "stretches": [
+     "st-lateral",
+     "st-overhead",
+     "st-pelvic-tilt"
+    ]
+   }
+  },
+  "intermediate": {
+   "label": "Intermediate",
+   "weeklyGoal": 4,
+   "coreGoal": 2,
+   "restSec": 90,
+   "rpe": "7",
+   "effort": "Stop each set with 2\u20133 good reps left in the tank.",
+   "loadHint": "Add weight once you hit the top of the rep range on every set.",
+   "warmup": {
+    "minutes": 8,
+    "maxMinutes": 10,
+    "minMinutes": 5,
+    "default": "stairmaster",
+    "options": [
+     "stairmaster",
+     "elliptical",
+     "recumbent-bike",
+     "treadmill-walk"
+    ],
+    "intensity": "StairMaster level 3\u20135 \u2014 breathing harder, can still talk.",
+    "progression": "Work toward 10 minutes at level 5."
+   },
+   "cooldown": {
+    "minutes": 5,
+    "machine": "treadmill-run",
+    "phases": [
+     {
+      "label": "Walk",
+      "end": 120
+     },
+     {
+      "label": "Brisk walk",
+      "end": 240
+     },
+     {
+      "label": "Light jog",
+      "end": 300,
+      "impact": true,
+      "easy": "Brisk walk"
+     }
+    ]
+   },
+   "stretchMinutes": 8,
+   "levelUp": "When you're hitting 4 workouts a week and the top of your rep ranges, try Expert.",
+   "days": [
+    {
+     "id": "chest-triceps",
+     "name": "Chest / Triceps",
+     "short": "Chest",
+     "suggested": "Mon",
+     "focus": [
+      "chest",
+      "triceps"
+     ],
+     "exercises": [
+      {
+       "id": "ct1",
+       "ex": "dip-machine",
+       "sets": 3,
+       "reps": "12"
+      },
+      {
+       "id": "ct2",
+       "ex": "incline-db-press",
+       "sets": 3,
+       "reps": "10"
+      },
+      {
+       "id": "ct4",
+       "ex": "barbell-bench",
+       "sets": 3,
+       "reps": "8-12"
+      },
+      {
+       "id": "ct5",
+       "ex": "cable-flies",
+       "sets": 3,
+       "reps": "10",
+       "note": "Pick 1\u20132 variations"
+      },
+      {
+       "id": "ct6",
+       "ex": "decline-chest-press",
+       "sets": 2,
+       "reps": "10"
+      },
+      {
+       "id": "ct7",
+       "ex": "tricep-pushdown",
+       "sets": 3,
+       "reps": "12-15"
+      },
+      {
+       "id": "ct8",
+       "ex": "cable-overhead-ext",
+       "sets": 3,
+       "reps": "10"
+      }
+     ],
+     "stretches": [
+      "st-elbows-back",
+      "st-chest-shoulder-stick",
+      "st-triceps",
+      "st-cross-body-shoulder"
+     ]
+    },
+    {
+     "id": "back-biceps",
+     "name": "Back / Biceps",
+     "short": "Back",
+     "suggested": "Tue",
+     "focus": [
+      "lats",
+      "middle back",
+      "biceps"
+     ],
+     "exercises": [
+      {
+       "id": "bb1",
+       "ex": "superman",
+       "sets": 3,
+       "reps": "12"
+      },
+      {
+       "id": "bb2",
+       "ex": "lat-pulldown",
+       "sets": 3,
+       "reps": "10-12"
+      },
+      {
+       "id": "bb4",
+       "ex": "high-row-machine",
+       "sets": 3,
+       "reps": "10"
+      },
+      {
+       "id": "bb5",
+       "ex": "bent-over-row",
+       "sets": 3,
+       "reps": "10"
+      },
+      {
+       "id": "bb6",
+       "ex": "deadlift",
+       "sets": 3,
+       "reps": "8-10",
+       "note": "Moderate weight, perfect form"
+      },
+      {
+       "id": "bb9",
+       "ex": "seated-cable-row",
+       "sets": 3,
+       "reps": "12"
+      },
+      {
+       "id": "bb8",
+       "ex": "reverse-fly-machine",
+       "sets": 3,
+       "reps": "12"
+      },
+      {
+       "id": "bb10",
+       "ex": "db-curl",
+       "sets": 3,
+       "reps": "12"
+      },
+      {
+       "id": "bb11",
+       "ex": "hammer-curl",
+       "sets": 3,
+       "reps": "12"
+      }
+     ],
+     "stretches": [
+      "st-lat-wall",
+      "st-upper-back",
+      "st-standing-twist",
+      "st-biceps",
+      "st-wrists"
+     ]
+    },
+    {
+     "id": "legs-glutes",
+     "name": "Legs / Glutes",
+     "short": "Legs",
+     "suggested": "Wed",
+     "focus": [
+      "quadriceps",
+      "glutes",
+      "hamstrings"
+     ],
+     "exercises": [
+      {
+       "id": "lg1",
+       "ex": "hip-abductor",
+       "sets": 3,
+       "reps": "12"
+      },
+      {
+       "id": "lg2",
+       "ex": "hip-adductor",
+       "sets": 3,
+       "reps": "12"
+      },
+      {
+       "id": "lg3",
+       "ex": "leg-press",
+       "sets": 3,
+       "reps": "12-15"
+      },
+      {
+       "id": "lg4",
+       "ex": "leg-extension",
+       "sets": 3,
+       "reps": "12"
+      },
+      {
+       "id": "lg8",
+       "ex": "lying-leg-curl",
+       "sets": 3,
+       "reps": "10"
+      },
+      {
+       "id": "lg9",
+       "ex": "barbell-squat",
+       "sets": 3,
+       "reps": "8-10"
+      },
+      {
+       "id": "lg5",
+       "ex": "walking-lunges",
+       "sets": 2,
+       "reps": "10/leg"
+      },
+      {
+       "id": "lg6",
+       "ex": "sumo-squat",
+       "sets": 3,
+       "reps": "12"
+      },
+      {
+       "id": "lg7",
+       "ex": "calf-raise",
+       "sets": 3,
+       "reps": "15"
+      }
+     ],
+     "stretches": [
+      "st-calf-wall",
+      "st-seated-hamstring",
+      "st-hip-flexor",
+      "st-figure4",
+      "st-hip-circles"
+     ]
+    },
+    {
+     "id": "shoulders-traps",
+     "name": "Shoulders / Traps",
+     "short": "Shoulders",
+     "suggested": "Thu",
+     "focus": [
+      "shoulders",
+      "traps"
+     ],
+     "exercises": [
+      {
+       "id": "st1",
+       "ex": "db-shrug",
+       "sets": 3,
+       "reps": "12"
+      },
+      {
+       "id": "st2",
+       "ex": "db-shoulder-press",
+       "sets": 3,
+       "reps": "10-12"
+      },
+      {
+       "id": "st4",
+       "ex": "lateral-raise-machine",
+       "sets": 3,
+       "reps": "10-12"
+      },
+      {
+       "id": "st5",
+       "ex": "db-front-raise",
+       "sets": 2,
+       "reps": "10-12"
+      },
+      {
+       "id": "st6",
+       "ex": "rear-delt-fly",
+       "sets": 3,
+       "reps": "12"
+      },
+      {
+       "id": "st7",
+       "ex": "face-pull",
+       "sets": 3,
+       "reps": "10"
+      },
+      {
+       "id": "st3",
+       "ex": "upright-row",
+       "sets": 2,
+       "reps": "10-12",
+       "note": "Light"
+      }
+     ],
+     "stretches": [
+      "st-cross-body-shoulder",
+      "st-upward",
+      "st-neck",
+      "st-upper-back"
+     ]
+    },
+    {
+     "id": "core-calisthenics",
+     "name": "Core / Calisthenics / Light Upper",
+     "short": "Core+",
+     "suggested": "Sun",
+     "focus": [
+      "abdominals",
+      "chest",
+      "lats"
+     ],
+     "exercises": [
+      {
+       "id": "cc1",
+       "ex": "plank",
+       "sets": 3,
+       "secs": 30
+      },
+      {
+       "id": "cc2",
+       "ex": "crunches",
+       "sets": 3,
+       "reps": "12"
+      },
+      {
+       "id": "cc4",
+       "ex": "flutter-kicks",
+       "sets": 3,
+       "reps": "12"
+      },
+      {
+       "id": "cc6",
+       "ex": "side-bend",
+       "sets": 3,
+       "reps": "12"
+      },
+      {
+       "id": "cc7",
+       "ex": "push-ups",
+       "sets": 3,
+       "reps": "10",
+       "note": "Incline if needed"
+      },
+      {
+       "id": "cc8",
+       "ex": "assisted-pullup",
+       "sets": 3,
+       "reps": "8"
+      },
+      {
+       "id": "cc11",
+       "ex": "dip-machine",
+       "sets": 3,
+       "reps": "10"
+      },
+      {
+       "id": "cc12",
+       "ex": "barbell-bench",
+       "sets": 3,
+       "reps": "8-12",
+       "note": "Light"
+      },
+      {
+       "id": "cc13",
+       "ex": "db-curl",
+       "sets": 3,
+       "reps": "12",
+       "note": "Light"
+      },
+      {
+       "id": "cc14",
+       "ex": "tricep-pushdown",
+       "sets": 3,
+       "reps": "12",
+       "note": "Light"
+      }
+     ],
+     "stretches": [
+      "st-lateral",
+      "st-overhead",
+      "st-pelvic-tilt",
+      "st-triceps",
+      "st-elbows-back"
+     ]
+    }
+   ],
+   "core": {
+    "id": "core",
+    "name": "Core Workout",
+    "short": "Core",
+    "suggested": "",
+    "focus": [
+     "abdominals"
+    ],
+    "exercises": [
+     {
+      "id": "co1",
+      "ex": "leg-raises",
+      "sets": 3,
+      "reps": "8-10"
+     },
+     {
+      "id": "co2",
+      "ex": "russian-twists",
+      "sets": 3,
+      "reps": "12"
+     },
+     {
+      "id": "co4",
+      "ex": "bicycle-crunches",
+      "sets": 3,
+      "reps": "10"
+     },
+     {
+      "id": "co5",
+      "ex": "flutter-kicks",
+      "sets": 3,
+      "reps": "15"
+     },
+     {
+      "id": "co6",
+      "ex": "plank",
+      "sets": 3,
+      "secs": 30
+     }
+    ],
+    "stretches": [
+     "st-lateral",
+     "st-overhead",
+     "st-pelvic-tilt"
+    ]
+   }
+  },
+  "expert": {
+   "label": "Expert",
+   "weeklyGoal": 5,
+   "coreGoal": 3,
+   "restSec": 75,
+   "rpe": "8\u20139",
+   "effort": "Hard sets \u2014 finish with 1\u20132 reps left.",
+   "loadHint": "Progress weight whenever every set hits the top of the range.",
+   "warmup": {
+    "minutes": 10,
+    "maxMinutes": 10,
+    "minMinutes": 5,
+    "default": "stairmaster",
+    "options": [
+     "stairmaster",
+     "elliptical",
+     "recumbent-bike",
+     "treadmill-walk"
+    ],
+    "intensity": "StairMaster level 5 minimum. 10 minutes (5 minimum).",
+    "progression": "Your regimen as written."
+   },
+   "cooldown": {
+    "minutes": 5,
+    "machine": "treadmill-run",
+    "phases": [
+     {
+      "label": "Walk",
+      "end": 120
+     },
+     {
+      "label": "Jog",
+      "end": 240,
+      "impact": true,
+      "easy": "Brisk walk"
+     },
+     {
+      "label": "Run",
+      "end": 300,
+      "impact": true,
+      "easy": "Brisk walk"
+     }
+    ]
+   },
+   "stretchMinutes": 10,
+   "levelUp": null,
+   "days": [
+    {
+     "id": "chest-triceps",
+     "name": "Chest / Triceps",
+     "short": "Chest",
+     "suggested": "Mon",
+     "focus": [
+      "chest",
+      "triceps"
+     ],
+     "exercises": [
+      {
+       "id": "ct1",
+       "ex": "dip-machine",
+       "sets": 4,
+       "reps": "12"
+      },
+      {
+       "id": "ct2",
+       "ex": "incline-db-press",
+       "sets": 3,
+       "reps": "10"
+      },
+      {
+       "id": "ct3",
+       "ex": "db-pullover",
+       "sets": 3,
+       "reps": "10"
+      },
+      {
+       "id": "ct4",
+       "ex": "barbell-bench",
+       "sets": 4,
+       "reps": "8-12"
+      },
+      {
+       "id": "ct5",
+       "ex": "cable-flies",
+       "sets": 3,
+       "reps": "10",
+       "note": "All 3 variations"
+      },
+      {
+       "id": "ct6",
+       "ex": "decline-chest-press",
+       "sets": 3,
+       "reps": "10"
+      },
+      {
+       "id": "ct7",
+       "ex": "tricep-pushdown",
+       "sets": 4,
+       "reps": "12-15"
+      },
+      {
+       "id": "ct8",
+       "ex": "cable-overhead-ext",
+       "sets": 3,
+       "reps": "10"
+      },
+      {
+       "id": "ct9",
+       "ex": "triceps-press",
+       "sets": 3,
+       "reps": "10-12"
+      }
+     ],
+     "stretches": [
+      "st-elbows-back",
+      "st-chest-shoulder-stick",
+      "st-triceps",
+      "st-cross-body-shoulder"
+     ]
+    },
+    {
+     "id": "back-biceps",
+     "name": "Back / Biceps",
+     "short": "Back",
+     "suggested": "Tue",
+     "focus": [
+      "lats",
+      "middle back",
+      "biceps"
+     ],
+     "exercises": [
+      {
+       "id": "bb1",
+       "ex": "superman",
+       "sets": 4,
+       "reps": "15"
+      },
+      {
+       "id": "bb2",
+       "ex": "lat-pulldown",
+       "sets": 3,
+       "reps": "10-12"
+      },
+      {
+       "id": "bb3",
+       "ex": "reverse-cable-crossover",
+       "sets": 3,
+       "reps": "10"
+      },
+      {
+       "id": "bb4",
+       "ex": "high-row-machine",
+       "sets": 3,
+       "reps": "10"
+      },
+      {
+       "id": "bb5",
+       "ex": "bent-over-row",
+       "sets": 4,
+       "reps": "10"
+      },
+      {
+       "id": "bb6",
+       "ex": "deadlift",
+       "sets": 4,
+       "reps": "8-12"
+      },
+      {
+       "id": "bb7",
+       "ex": "landmine-row",
+       "sets": 4,
+       "reps": "12"
+      },
+      {
+       "id": "bb8",
+       "ex": "reverse-fly-machine",
+       "sets": 3,
+       "reps": "12"
+      },
+      {
+       "id": "bb9",
+       "ex": "seated-cable-row",
+       "sets": 3,
+       "reps": "12"
+      },
+      {
+       "id": "bb10",
+       "ex": "db-curl",
+       "sets": 4,
+       "reps": "15"
+      },
+      {
+       "id": "bb11",
+       "ex": "hammer-curl",
+       "sets": 4,
+       "reps": "15"
+      },
+      {
+       "id": "bb12",
+       "ex": "preacher-curl",
+       "sets": 4,
+       "reps": "15"
+      },
+      {
+       "id": "bb13",
+       "ex": "cable-wrist-curl",
+       "sets": 4,
+       "reps": "20"
+      }
+     ],
+     "stretches": [
+      "st-lat-wall",
+      "st-upper-back",
+      "st-standing-twist",
+      "st-biceps",
+      "st-wrists"
+     ]
+    },
+    {
+     "id": "legs-glutes",
+     "name": "Legs / Glutes",
+     "short": "Legs",
+     "suggested": "Wed",
+     "focus": [
+      "quadriceps",
+      "glutes",
+      "hamstrings"
+     ],
+     "exercises": [
+      {
+       "id": "lg1",
+       "ex": "hip-abductor",
+       "sets": 4,
+       "reps": "12"
+      },
+      {
+       "id": "lg2",
+       "ex": "hip-adductor",
+       "sets": 4,
+       "reps": "12"
+      },
+      {
+       "id": "lg3",
+       "ex": "leg-press",
+       "sets": 3,
+       "reps": "12-15"
+      },
+      {
+       "id": "lg4",
+       "ex": "leg-extension",
+       "sets": 4,
+       "reps": "12"
+      },
+      {
+       "id": "lg5",
+       "ex": "walking-lunges",
+       "sets": 3,
+       "note": "Reps not specified \u2014 log what you do"
+      },
+      {
+       "id": "lg6",
+       "ex": "sumo-squat",
+       "sets": 3,
+       "reps": "12"
+      },
+      {
+       "id": "lg7",
+       "ex": "calf-raise",
+       "sets": 4,
+       "reps": "15"
+      },
+      {
+       "id": "lg8",
+       "ex": "lying-leg-curl",
+       "sets": 3,
+       "reps": "10"
+      },
+      {
+       "id": "lg9",
+       "ex": "barbell-squat",
+       "sets": 4,
+       "reps": "8-12",
+       "note": "3\u20134 sets"
+      },
+      {
+       "id": "lg10",
+       "ex": "box-jumps",
+       "sets": 3,
+       "reps": "6-10"
+      }
+     ],
+     "stretches": [
+      "st-calf-wall",
+      "st-seated-hamstring",
+      "st-hip-flexor",
+      "st-figure4",
+      "st-hip-circles"
+     ]
+    },
+    {
+     "id": "shoulders-traps",
+     "name": "Shoulders / Traps",
+     "short": "Shoulders",
+     "suggested": "Thu",
+     "focus": [
+      "shoulders",
+      "traps"
+     ],
+     "exercises": [
+      {
+       "id": "st1",
+       "ex": "db-shrug",
+       "sets": 3,
+       "reps": "12"
+      },
+      {
+       "id": "st2",
+       "ex": "db-shoulder-press",
+       "sets": 3,
+       "reps": "10-12"
+      },
+      {
+       "id": "st3",
+       "ex": "upright-row",
+       "sets": 3,
+       "reps": "10-12"
+      },
+      {
+       "id": "st4",
+       "ex": "lateral-raise-machine",
+       "sets": 3,
+       "reps": "10-12"
+      },
+      {
+       "id": "st5",
+       "ex": "db-front-raise",
+       "sets": 3,
+       "reps": "10-12"
+      },
+      {
+       "id": "st6",
+       "ex": "rear-delt-fly",
+       "sets": 3,
+       "reps": "12"
+      },
+      {
+       "id": "st7",
+       "ex": "face-pull",
+       "sets": 3,
+       "reps": "10"
+      },
+      {
+       "id": "st8",
+       "ex": "smith-shrug",
+       "sets": 3,
+       "reps": "10-12"
+      }
+     ],
+     "stretches": [
+      "st-cross-body-shoulder",
+      "st-upward",
+      "st-neck",
+      "st-upper-back"
+     ]
+    },
+    {
+     "id": "core-calisthenics",
+     "name": "Core / Calisthenics / Light Upper",
+     "short": "Core+",
+     "suggested": "Sun",
+     "focus": [
+      "abdominals",
+      "chest",
+      "lats"
+     ],
+     "exercises": [
+      {
+       "id": "cc1",
+       "ex": "plank",
+       "sets": 3,
+       "secs": 45
+      },
+      {
+       "id": "cc2",
+       "ex": "crunches",
+       "sets": 3,
+       "reps": "12"
+      },
+      {
+       "id": "cc3",
+       "ex": "sit-ups",
+       "sets": 3,
+       "reps": "12"
+      },
+      {
+       "id": "cc4",
+       "ex": "flutter-kicks",
+       "sets": 3,
+       "reps": "12"
+      },
+      {
+       "id": "cc5",
+       "ex": "barbell-rollout",
+       "sets": 3,
+       "reps": "12"
+      },
+      {
+       "id": "cc6",
+       "ex": "side-bend",
+       "sets": 3,
+       "reps": "15"
+      },
+      {
+       "id": "cc7",
+       "ex": "push-ups",
+       "sets": 4,
+       "reps": "25"
+      },
+      {
+       "id": "cc8",
+       "ex": "pull-ups",
+       "sets": 5,
+       "reps": "10"
+      },
+      {
+       "id": "cc9",
+       "ex": "handstands",
+       "sets": 4,
+       "secs": 10
+      },
+      {
+       "id": "cc10",
+       "ex": "muscle-ups",
+       "sets": 4,
+       "reps": "5"
+      },
+      {
+       "id": "cc11",
+       "ex": "dips",
+       "sets": 4,
+       "reps": "10"
+      },
+      {
+       "id": "cc12",
+       "ex": "barbell-bench",
+       "sets": 4,
+       "reps": "8-12",
+       "note": "Light"
+      },
+      {
+       "id": "cc13",
+       "ex": "db-curl",
+       "sets": 4,
+       "reps": "12",
+       "note": "Light"
+      },
+      {
+       "id": "cc14",
+       "ex": "tricep-pushdown",
+       "sets": 4,
+       "reps": "12",
+       "note": "Light"
+      }
+     ],
+     "stretches": [
+      "st-lateral",
+      "st-overhead",
+      "st-pelvic-tilt",
+      "st-triceps",
+      "st-elbows-back"
+     ]
+    }
+   ],
+   "core": {
+    "id": "core",
+    "name": "Core Workout",
+    "short": "Core",
+    "suggested": "",
+    "focus": [
+     "abdominals"
+    ],
+    "exercises": [
+     {
+      "id": "co1",
+      "ex": "leg-raises",
+      "sets": 3,
+      "reps": "8-12"
+     },
+     {
+      "id": "co2",
+      "ex": "russian-twists",
+      "sets": 3,
+      "reps": "12-15"
+     },
+     {
+      "id": "co3",
+      "ex": "leg-raises",
+      "sets": 3,
+      "reps": "10-12"
+     },
+     {
+      "id": "co4",
+      "ex": "bicycle-crunches",
+      "sets": 3,
+      "reps": "10"
+     },
+     {
+      "id": "co5",
+      "ex": "flutter-kicks",
+      "sets": 3,
+      "reps": "25"
+     },
+     {
+      "id": "co6",
+      "ex": "plank-get-ups",
+      "sets": 3,
+      "reps": "15"
+     }
+    ],
+    "stretches": [
+     "st-lateral",
+     "st-overhead",
+     "st-pelvic-tilt"
+    ]
+   }
+  }
+ }
+}
