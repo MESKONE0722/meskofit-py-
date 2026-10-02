@@ -9,7 +9,7 @@ same API, and uses the same database format, so a `meskofit-data` folder works w
 
 ## Quick start
 
-Needs Python 3.10 or newer.
+Needs Python 3.11 or newer.
 
 ```
 pip install .
@@ -20,6 +20,22 @@ Or without installing: `pip install starlette uvicorn httpx cryptography segno`,
 
 Your browser opens a setup page with a QR code. Scan it with the iPhone camera, open the link, then
 **Share → Add to Home Screen**. Keep the program running while you use the app; `Ctrl+C` stops it.
+
+## Streamlit version
+
+`streamlit_app.py` is the same app with a Streamlit interface (Train, Food, Body, Progress and Settings
+tabs), using the same database and logic.
+
+```
+pip install -r requirements.txt
+streamlit run streamlit_app.py
+```
+
+Data is kept in `meskofit-data` (or the folder in `$MESKOFIT_DATA`). Set a password with
+`$MESKOFIT_PASSWORD` or the Streamlit secret `password`. On Streamlit Community Cloud the disk is wiped
+whenever the app restarts, so download a backup from the Settings tab; that is fine for testing, not for
+your real logs. The Streamlit version has no live camera barcode scanner (type the barcode instead);
+use the full web app for that.
 
 ## Away from home
 
