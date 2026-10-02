@@ -119,6 +119,15 @@ def fresh_expander(label: str, name: str, expanded: bool = False):
     return st.expander(label + "​" * n, expanded=expanded)
 
 
+def target(ex: dict) -> str:
+    """The prescription for an exercise: reps, a hold time, or a free note."""
+    if ex.get("reps"):
+        return f"{ex['sets']} × {ex['reps']}"
+    if ex.get("secs"):
+        return f"{ex['sets']} × {ex['secs']} sec"
+    return f"{ex['sets']} sets"
+
+
 def card_html(inner: str) -> None:
     st.markdown(f'<div class="mf-card">{inner}</div>', unsafe_allow_html=True)
 
@@ -220,7 +229,7 @@ with t_train:
         if pick:
             for ex in pick["exercises"]:
                 e = cat.get(ex["ex"], {"name": ex["ex"]})
-                st.markdown(f"**{e['name']}** · {ex['sets']} × {ex['reps']}")
+                st.markdown(f"**{e['name']}** · {target(ex)}")
             if st.button("Start workout", type="primary", width="stretch"):
                 safe(A.post, "/api/sessions", {"dayId": pick["id"], "dayName": pick["name"], "level": level, "date": today_s})
                 st.rerun()
@@ -240,7 +249,7 @@ with t_train:
         for ex in exercises:
             e = cat.get(ex["ex"], {"name": ex["ex"], "kind": "weight"})
             mark = "✅" if ex_done(ex) else "⬜"
-            with st.expander(f"{mark}  {e['name']} · {ex['sets']} × {ex['reps']}", expanded=(ex["id"] == first_open)):
+            with st.expander(f"{mark}  {e['name']} · {target(ex)}", expanded=(ex["id"] == first_open)):
                 if e.get("steps"):
                     st.caption(e["steps"][0])
                 files = [str(base / e["lib"] / f"{i}.jpg") for i in e.get("frames", [])] if e.get("lib") else []
@@ -249,23 +258,29 @@ with t_train:
                     st.image(files, width=140)
                 last = A.get("/api/history/last", keys=ex["ex"], day=active["dayId"]).get(ex["ex"], {})
                 if last.get("last"):
-                    st.caption("Last time: " + ", ".join(f"{to_disp(s['weightKg'])} {wl} × {s['reps']}"
+                    st.caption("Last time: " + ", ".join(f"{to_disp(s['weightKg'])} {wl} × {s.get('reps') or '-'}"
                                                          for s in last["last"].get("sets", []) if s.get("weightKg") is not None))
+                timed = bool(ex.get("secs")) and not ex.get("reps")
+                rcol = "Seconds" if timed else "Reps"
+                if note := ex.get("note"):
+                    st.caption(note)
                 df = pd.DataFrame([{
                     "Set": n,
                     f"Weight ({wl})": to_disp(saved[(ex["id"], n)]["weightKg"]) if saved.get((ex["id"], n), {}).get("weightKg") is not None else 0.0,
-                    "Reps": int(saved.get((ex["id"], n), {}).get("reps") or 0),
+                    ("Seconds" if timed else "Reps"): int(saved.get((ex["id"], n), {}).get("secs" if timed else "reps") or 0),
                     "Done": bool(saved.get((ex["id"], n), {}).get("done")),
                 } for n in range(1, int(ex["sets"]) + 1)])
                 ed = st.data_editor(df, hide_index=True, key=f"ed-{active['id']}-{ex['id']}", width="stretch", disabled=["Set"], num_rows="fixed")
             for _, r in ed.iterrows():
                 row = {"planExId": ex["id"], "exKey": ex["ex"], "setNo": int(r["Set"]), "weightKg": to_kg(float(r[f"Weight ({wl})"])) or None,
-                       "reps": int(r["Reps"]) or None, "done": bool(r["Done"])}
+                       "reps": None if timed else (int(r[rcol]) or None), **({"secs": int(r[rcol]) or None} if timed else {}),
+                       "done": bool(r["Done"])}
                 all_rows.append(row)
                 old = saved.get((ex["id"], row["setNo"]), {})
-                if (old.get("weightKg") or None, old.get("reps") or None, bool(old.get("done"))) != (
-                        round(row["weightKg"], 6) if row["weightKg"] else None, row["reps"], row["done"]):
-                    if not (not old and not row["weightKg"] and not row["reps"] and not row["done"]):
+                amount = row.get("secs") if timed else row["reps"]
+                if (old.get("weightKg") or None, (old.get("secs") if timed else old.get("reps")) or None, bool(old.get("done"))) != (
+                        round(row["weightKg"], 6) if row["weightKg"] else None, amount, row["done"]):
+                    if not (not old and not row["weightKg"] and not amount and not row["done"]):
                         changed = True
         if changed:  # save as you go, then redraw so finished exercises fold up
             safe(A.put, f"/api/sessions/{active['id']}/sets", {"sets": all_rows})
