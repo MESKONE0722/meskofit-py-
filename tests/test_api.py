@@ -180,3 +180,16 @@ def test_server_info_and_qr(env):
     assert c.get("/api/qr.svg", params={"data": "http://x"}).text.startswith("<svg")
     assert c.get("/api/qr.svg").status_code == 400
     assert c.get("/ca.crt").status_code == 404  # no certs in this fixture
+
+
+def test_shots(env):
+    _, c = env
+    assert c.get("/api/shots").json() == []
+    r = c.post("/api/shots", json={"date": "2026-10-02", "doseMg": 2.5, "site": "Abdomen"})
+    assert r.status_code == 201 and r.json()["id"] == 1 and r.json()["drug"] == "Mounjaro"
+    c.post("/api/shots", json={"date": "2026-09-25", "doseMg": 2.5})
+    assert [s["date"] for s in c.get("/api/shots").json()] == ["2026-09-25", "2026-10-02"]
+    assert c.post("/api/shots", json={"date": "nope", "doseMg": 2.5}).status_code == 400
+    assert "Abdomen" in c.get("/api/export").text
+    assert c.delete("/api/shots/1").status_code == 200
+    assert len(c.get("/api/shots").json()) == 1

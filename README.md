@@ -23,8 +23,9 @@ Your browser opens a setup page with a QR code. Scan it with the iPhone camera, 
 
 ## Streamlit version
 
-`streamlit_app.py` is the same app with a Streamlit interface (Train, Food, Body, Progress and Settings
-tabs), using the same database and logic.
+`streamlit_app.py` is the same app with a Streamlit interface, using the same database and logic.
+Tabs: Train, Food, Body & BMI (automatic BMI with a body figure), Goal (weight projection graph),
+Shots (weekly injection log with weight graphs, for example Mounjaro), Progress and More.
 
 ```
 pip install -r requirements.txt

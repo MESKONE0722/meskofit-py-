@@ -351,6 +351,7 @@ def export(app, req: Req):
         "water": table_json(app, "SELECT * FROM water_log ORDER BY date"),
         "fasts": table_json(app, "SELECT * FROM fasts ORDER BY start_at"),
         "activities": table_json(app, "SELECT * FROM activities ORDER BY date"),
+        "shots": app.db.kv_get("shots") or [],
         "photos": table_json(app, "SELECT id, date, file, note FROM photos ORDER BY date"),
     }
     resp = json_resp(doc)
