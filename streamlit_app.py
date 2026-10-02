@@ -365,8 +365,10 @@ with t_body:
     with st.form("weighin"):
         d = st.date_input("Date", today, key="bd").isoformat()
         w = num(st.text_input(f"Weight ({wl})", placeholder=f"e.g. {'210.5' if imperial else '95.5'}"))
-        c1, c2, c3 = st.columns(3)
-        waist, neck, hip = (num(c1.text_input("Waist (cm)")), num(c2.text_input("Neck (cm)")), num(c3.text_input("Hip (cm)")))
+        st.caption("Your BMI only needs weight and height. Tape measurements below are optional, for tracking inches.")
+        with st.expander("Optional: tape measurements (cm)"):
+            c1, c2, c3 = st.columns(3)
+            waist, neck, hip = (num(c1.text_input("Waist")), num(c2.text_input("Neck")), num(c3.text_input("Hip")))
         if st.form_submit_button("Save", type="primary"):
             payload = {k: v for k, v in {"weightKg": to_kg(w) if w else None, "waistCm": waist, "neckCm": neck, "hipCm": hip}.items() if v}
             if payload:
@@ -374,7 +376,7 @@ with t_body:
                 if safe(A.put, f"/api/body/{d}", {**{k: v for k, v in existing.items() if k != "date"}, **payload}) is not None:
                     st.rerun()
             else:
-                st.error("Type a weight or a measurement.")
+                st.error("Type your weight.")
 
     st.markdown("### Your BMI")
     what_if = num(st.text_input(f"What if I weighed… ({wl})", placeholder="leave blank to use your latest weight"))
