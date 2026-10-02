@@ -24,6 +24,7 @@ Your browser opens a setup page with a QR code. Scan it with the iPhone camera, 
 ## Streamlit version
 
 `streamlit_app.py` is the same app with a Streamlit interface, using the same database and logic.
+Every exercise shows a front/back muscle map (main and helper muscles), start/finish photos and step-by-step instructions, plus an Exercise guide to look up any of 870+ exercises.
 Tabs: Train, Food, Body & BMI (automatic BMI with a body figure), Goal (weight projection graph),
 Shots (weekly injection log with weight graphs, for example Mounjaro), Progress and More.
 

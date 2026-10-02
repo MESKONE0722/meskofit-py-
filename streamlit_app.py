@@ -128,6 +128,34 @@ def target(ex: dict) -> str:
     return f"{ex['sets']} sets"
 
 
+_IMG_BASE = Path(str(resources.files("meskofit") / "data" / "exercise-img"))
+
+
+def exercise_guide(e: dict, key: str) -> None:
+    """Muscle map, photos and step-by-step instructions for one exercise."""
+    prim, sec = e.get("primary") or [], e.get("secondary") or []
+    if prim:
+        st.markdown(f'<div style="text-align:center">{calc.muscle_svg(prim, sec, 210)}</div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div class="mf-sub" style="text-align:center;margin:.1rem 0 .6rem"><span style="color:#e11d48">●</span> main &nbsp; '
+            '<span style="color:#f6a3b5">●</span> helps</div>', unsafe_allow_html=True)
+    files = [str(_IMG_BASE / e["lib"] / f"{i}.jpg") for i in e.get("frames", [])] if e.get("lib") else []
+    files = [f for f in files if Path(f).is_file()]
+    if files:
+        st.image(files, caption=["Start", "Finish"][: len(files)] if len(files) == 2 else None, width=165)
+    if prim:
+        txt = "**Main:** " + ", ".join(calc.muscle_label(m) for m in prim)
+        if sec:
+            txt += "  \n**Also:** " + ", ".join(calc.muscle_label(m) for m in sec if m not in prim)
+        st.markdown(txt)
+    if e.get("steps"):
+        st.markdown("**How to do it**")
+        st.markdown("\n".join(f"{i}. {t}" for i, t in enumerate(e["steps"], 1)))
+    if e.get("tips"):
+        st.markdown("**Tips**")
+        st.markdown("\n".join(f"- {t}" for t in e["tips"]))
+
+
 def card_html(inner: str) -> None:
     st.markdown(f'<div class="mf-card">{inner}</div>', unsafe_allow_html=True)
 
@@ -227,12 +255,34 @@ with t_train:
         days = plan["days"] + ([plan["core"]] if plan.get("core") else [])
         pick = st.selectbox("Choose a workout", days, format_func=lambda d: d["name"], index=None, placeholder="Choose a workout")
         if pick:
+            day_prim = sorted({m for ex in pick["exercises"] for m in cat.get(ex["ex"], {}).get("primary", [])})
+            day_sec = sorted({m for ex in pick["exercises"] for m in cat.get(ex["ex"], {}).get("secondary", [])} - set(day_prim))
+            if day_prim:
+                st.markdown(f'<div style="text-align:center">{calc.muscle_svg(day_prim, day_sec, 210)}</div>', unsafe_allow_html=True)
+                st.caption("Muscles this workout hits: " + ", ".join(calc.muscle_label(m) for m in day_prim))
             for ex in pick["exercises"]:
                 e = cat.get(ex["ex"], {"name": ex["ex"]})
-                st.markdown(f"**{e['name']}** · {target(ex)}")
+                with st.expander(f"{e['name']} · {target(ex)}"):
+                    exercise_guide(e, ex["id"])
             if st.button("Start workout", type="primary", width="stretch"):
                 safe(A.post, "/api/sessions", {"dayId": pick["id"], "dayName": pick["name"], "level": level, "date": today_s})
                 st.rerun()
+        st.markdown("### Exercise guide")
+        st.caption("Look up any exercise to see the muscles it works and how to do it.")
+        mus = st.selectbox("Muscle", sorted(calc._muscle_data()["labels"]), index=None, placeholder="Any muscle",
+                           format_func=calc.muscle_label, key="gmus")
+        qq = st.text_input("Or search by name", placeholder="e.g. leg press", key="gq")
+        if mus or qq.strip():
+            res = A.get("/api/library", q=qq.strip().replace(" ", "+"), **({"muscle": mus} if mus else {}))["results"]
+            if res:
+                pickx = st.selectbox("Exercise", res, index=None, placeholder="Choose an exercise", key="gpick",
+                                     format_func=lambda r: f"{r['name']} ({r['equipment'] or 'bodyweight'})")
+                if pickx:
+                    ex_full = A.get(f"/api/library/{pickx['id']}")
+                    st.markdown(f"#### {ex_full['name']}")
+                    exercise_guide(ex_full, "guide")
+            else:
+                st.info("No matches.")
     else:
         day = next((d for d in plan["days"] + [plan.get("core") or {}] if d.get("id") == active["dayId"]), None)
         st.subheader(active["dayName"])
@@ -250,12 +300,6 @@ with t_train:
             e = cat.get(ex["ex"], {"name": ex["ex"], "kind": "weight"})
             mark = "✅" if ex_done(ex) else "⬜"
             with st.expander(f"{mark}  {e['name']} · {target(ex)}", expanded=(ex["id"] == first_open)):
-                if e.get("steps"):
-                    st.caption(e["steps"][0])
-                files = [str(base / e["lib"] / f"{i}.jpg") for i in e.get("frames", [])] if e.get("lib") else []
-                files = [f for f in files if Path(f).is_file()]
-                if files:
-                    st.image(files, width=140)
                 last = A.get("/api/history/last", keys=ex["ex"], day=active["dayId"]).get(ex["ex"], {})
                 if last.get("last"):
                     st.caption("Last time: " + ", ".join(f"{to_disp(s['weightKg'])} {wl} × {s.get('reps') or '-'}"
@@ -271,6 +315,8 @@ with t_train:
                     "Done": bool(saved.get((ex["id"], n), {}).get("done")),
                 } for n in range(1, int(ex["sets"]) + 1)])
                 ed = st.data_editor(df, hide_index=True, key=f"ed-{active['id']}-{ex['id']}", width="stretch", disabled=["Set"], num_rows="fixed")
+                st.markdown("---")
+                exercise_guide(e, ex["id"])
             for _, r in ed.iterrows():
                 row = {"planExId": ex["id"], "exKey": ex["ex"], "setNo": int(r["Set"]), "weightKg": to_kg(float(r[f"Weight ({wl})"])) or None,
                        "reps": None if timed else (int(r[rcol]) or None), **({"secs": int(r[rcol]) or None} if timed else {}),

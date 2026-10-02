@@ -145,3 +145,51 @@ def scale_html(b: float) -> str:
         '<div style="display:flex;justify-content:space-between;font-size:11px;opacity:.65;margin-top:3px">'
         '<span>15</span><span>18.5</span><span>25</span><span>30</span><span>35</span><span>40+</span></div></div>'
     )
+
+
+# ───────────────────────── muscle map ─────────────────────────
+
+_MUSCLES: dict | None = None
+
+
+def _muscle_data() -> dict:
+    global _MUSCLES
+    if _MUSCLES is None:
+        import json
+        from importlib import resources
+
+        _MUSCLES = json.loads((resources.files("meskofit") / "data" / "muscles.json").read_text("utf-8"))
+    return _MUSCLES
+
+
+def muscle_label(m: str) -> str:
+    return _muscle_data()["labels"].get(m, m.title())
+
+
+def _shape_svg(s: dict, fill: str) -> str:
+    el = (f'<ellipse cx="{s["ellipse"][0]}" cy="{s["ellipse"][1]}" rx="{s["ellipse"][2]}" ry="{s["ellipse"][3]}" fill="{fill}"/>'
+          if s.get("ellipse") else f'<path d="{s["d"]}" fill="{fill}"/>')
+    return el + (f'<g transform="translate(120,0) scale(-1,1)">{el}</g>' if s["side"] == "L" else "")
+
+
+def muscle_svg(primary: list[str], secondary: list[str] | None = None, height: int = 230) -> str:
+    """Front and back body figures with the main muscles in red and helper muscles in a lighter tint."""
+    data = _muscle_data()
+    p = set(primary)
+    sec = set(secondary or []) - p
+    base, neutral, main, assist = "#d9dfdc", "#c4cbc8", "#e11d48", "#f6a3b5"
+
+    def fig(shapes: list[dict], x: int) -> str:
+        parts = []
+        for s in shapes:
+            m = s["m"]
+            fill = neutral if not m else main if m in p else assist if m in sec else base
+            parts.append(_shape_svg(s, fill))
+        return f'<g transform="translate({x},0)">{"".join(parts)}</g>'
+
+    label = ", ".join(muscle_label(m) for m in primary)
+    return (f'<svg viewBox="0 0 260 282" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Muscles worked: {label}" '
+            f'style="height:{height}px;width:auto;max-width:100%;display:block;margin:0 auto">'
+            f'{fig(data["front"], 4)}{fig(data["back"], 136)}'
+            '<text x="64" y="278" font-size="9" text-anchor="middle" fill="#6b7a75" font-family="sans-serif">FRONT</text>'
+            '<text x="196" y="278" font-size="9" text-anchor="middle" fill="#6b7a75" font-family="sans-serif">BACK</text></svg>')

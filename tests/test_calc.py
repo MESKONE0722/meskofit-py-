@@ -35,3 +35,10 @@ def test_figure_widens_with_bmi():
     assert thin.startswith("<svg") and wide.startswith("<svg") and thin != wide
     assert "Healthy weight" in calc.figure_svg(22) and "Obesity class II" in calc.figure_svg(38)
     assert "▼" in calc.scale_html(31)
+
+
+def test_muscle_map():
+    svg = calc.muscle_svg(["chest"], ["triceps", "shoulders"])
+    assert svg.startswith("<svg") and "#e11d48" in svg and "#f6a3b5" in svg
+    assert calc.muscle_label("middle back") == "Upper back"
+    assert "#e11d48" not in calc.muscle_svg([])
