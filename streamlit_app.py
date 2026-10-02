@@ -453,8 +453,18 @@ with t_goal:
             act_label = st.selectbox("How active are you?", list(calc.ACTIVITY), index=0)
             if amt:
                 if not profile.get("sex") or not profile.get("age"):
-                    st.info("Add your sex and age under More so I can estimate how many calories you burn.")
                     ok = False
+                    with st.form("sexage"):
+                        st.caption("To estimate how many calories you burn, I need two more things. They stay in your data.")
+                        f1, f2 = st.columns(2)
+                        sx2 = f1.selectbox("Sex", ["male", "female"], index=None, placeholder="Choose")
+                        ag2 = num(f2.text_input("Age", placeholder="years"))
+                        if st.form_submit_button("Save", type="primary"):
+                            if sx2 and ag2:
+                                A.put("/api/profile", {"sex": sx2, "age": int(ag2)})
+                                st.rerun()
+                            else:
+                                st.error("Choose sex and type your age.")
                 else:
                     pts = calc.project_intake(cur_kg, amt, profile["sex"], hcm, profile["age"], calc.ACTIVITY[act_label], today, days, floor_kg)
                     note = "This one accounts for burning fewer calories as you get lighter, so loss slows and levels off."
