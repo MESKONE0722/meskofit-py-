@@ -46,6 +46,11 @@ div[data-testid="stForm"]{background:#fff;border:1px solid #dfe6e3;border-radius
 div[data-testid="stVerticalBlockBorderWrapper"]:has(> div > div[data-testid="stVerticalBlock"] .mf-card){background:#fff}
 .stButton>button,.stDownloadButton>button,div[data-testid="stFormSubmitButton"]>button{border-radius:12px;font-weight:700;min-height:2.7rem}
 .stTextInput input,.stNumberInput input,.stDateInput input,div[data-baseweb="select"]>div{border-radius:10px}
+.st-key-libgrid [data-testid="stHorizontalBlock"],[class*="st-key-row"] [data-testid="stHorizontalBlock"]{flex-wrap:nowrap!important;gap:.6rem}
+.st-key-libgrid [data-testid="stColumn"],[class*="st-key-row"] [data-testid="stColumn"]{min-width:0!important;flex:1 1 0!important;width:auto!important}
+.st-key-libgrid img{aspect-ratio:4/3;object-fit:cover;width:100%;border-radius:10px}
+.mf-card2{background:#fff;border:1px solid #dfe6e3;border-radius:14px;padding:.5rem .6rem .6rem;margin-bottom:.15rem}
+.mf-cardname{font-weight:700;font-size:.9rem;line-height:1.2;margin:.35rem 0 .1rem}
 .mf-chip{display:inline-block;padding:.2rem .7rem;border-radius:999px;color:#fff;font-weight:700;font-size:.85rem}
 .mf-big{font-size:2.6rem;font-weight:800;line-height:1;letter-spacing:-.03em}
 .mf-sub{color:#6b7a75;font-size:.88rem}
@@ -131,6 +136,20 @@ def target(ex: dict) -> str:
 _IMG_BASE = Path(str(resources.files("meskofit") / "data" / "exercise-img"))
 
 
+def img_src(lib_id: str, n: int) -> str | None:
+    """Bundled photo if we have it, else the free-exercise-db copy online."""
+    local = _IMG_BASE / lib_id / f"{n}.jpg"
+    if local.is_file():
+        return str(local)
+    return f"https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/{lib_id}/{n}.jpg"
+
+
+def youtube_url(name: str) -> str:
+    from urllib.parse import quote_plus
+
+    return f"https://www.youtube.com/results?search_query={quote_plus(name + ' exercise proper form')}"
+
+
 def exercise_guide(e: dict, key: str) -> None:
     """Muscle map, photos and step-by-step instructions for one exercise."""
     prim, sec = e.get("primary") or [], e.get("secondary") or []
@@ -139,8 +158,7 @@ def exercise_guide(e: dict, key: str) -> None:
         st.markdown(
             '<div class="mf-sub" style="text-align:center;margin:.1rem 0 .6rem"><span style="color:#e11d48">●</span> main &nbsp; '
             '<span style="color:#f6a3b5">●</span> helps</div>', unsafe_allow_html=True)
-    files = [str(_IMG_BASE / e["lib"] / f"{i}.jpg") for i in e.get("frames", [])] if e.get("lib") else []
-    files = [f for f in files if Path(f).is_file()]
+    files = [img_src(e["lib"], i) for i in (e.get("frames") or [0, 1])] if e.get("lib") else []
     if files:
         st.image(files, caption=["Start", "Finish"][: len(files)] if len(files) == 2 else None, width=165)
     if prim:
@@ -247,6 +265,123 @@ def weight_on(day: str, after_ok: bool = True) -> float | None:
     return after[0] if (after and after_ok) else None
 
 
+# ───────────────────────── exercise library ─────────────────────────
+
+def favs() -> list[str]:
+    return list(A.get("/api/settings").get("favExercises") or [])
+
+
+def toggle_fav(lib_id: str) -> None:
+    f = favs()
+    f = [x for x in f if x != lib_id] if lib_id in f else f + [lib_id]
+    A.put("/api/settings", {"favExercises": f})
+
+
+def history_key(lib_id: str) -> str:
+    return next((k for k, v in cat.items() if v.get("lib") == lib_id), "lib:" + lib_id)
+
+
+def exercise_detail(lib_id: str) -> None:
+    e = A.get(f"/api/library/{lib_id}")
+    ck = history_key(lib_id)
+    if ck in cat:  # the curated entry has tips and the plan's names
+        e = {**e, **{k: v for k, v in cat[ck].items() if k in ("tips", "steps", "name")}}
+    if st.button("← Back to library"):
+        st.session_state.lib_open = None
+        st.rerun()
+    st.markdown(f"### {e['name']}")
+    isfav = lib_id in favs()
+    with st.container(key="row_actions"):
+        c1, c2 = st.columns(2)
+        if c1.button("★ Saved" if isfav else "☆ Save", key=f"fav{lib_id}", width="stretch"):
+            toggle_fav(lib_id)
+            st.rerun()
+        c2.link_button("▶ YouTube demo", youtube_url(e["name"]), width="stretch")
+    about, hist_tab, prog_tab = st.tabs(["About", "History", "Progress"])
+    with about:
+        st.caption(" · ".join(x for x in [(e.get("equipment") or "bodyweight").title(), (e.get("kind") or "").title()] if x))
+        exercise_guide(e, "detail")
+    hist = A.get(f"/api/history/exercise/{ck}")
+    with hist_tab:
+        if not hist:
+            st.info("You haven't logged this exercise yet.")
+        for h in hist[::-1][:12]:
+            st.markdown(f"**{h['date']}**  \n" + " · ".join(
+                f"{to_disp(s['weightKg'])} {wl} × {s['reps']}" if s.get("weightKg") and s.get("reps") else
+                f"{s['secs']} sec" if s.get("secs") else f"{s.get('reps') or '-'} reps" for s in h["sets"]))
+    with prog_tab:
+        pts = []
+        for h in hist:
+            best = max((s["weightKg"] * (1 + min(s["reps"], 15) / 30) if s.get("reps") and s["reps"] > 1 else (s["weightKg"] or 0)
+                        for s in h["sets"] if s.get("weightKg")), default=0)
+            if best:
+                pts.append({"date": h["date"], f"Estimated best ({wl})": to_disp(best)})
+        if len(pts) >= 2:
+            st.line_chart(pd.DataFrame(pts).set_index("date"), color=TEAL)
+            st.caption("Your estimated one-rep max for each session (from your best set).")
+        elif pts:
+            st.metric("Estimated one-rep max", f"{pts[0][f'Estimated best ({wl})']} {wl}")
+            st.caption("Log this exercise again to see a graph.")
+        else:
+            st.info("Log some weights to see your progress here.")
+
+
+def library_view() -> None:
+    st.markdown("### Exercise library")
+    if st.session_state.get("lib_open"):
+        exercise_detail(st.session_state.lib_open)
+        return
+    labels = calc._muscle_data()["labels"]
+    mus = st.pills("Muscle", sorted(labels, key=lambda m: labels[m]), format_func=calc.muscle_label, key="lmus", selection_mode="single")
+    qq = st.text_input("Search", placeholder="Search 870+ exercises", key="lq", label_visibility="collapsed")
+    sig = (mus, qq.strip())
+    if st.session_state.get("lsig") != sig:
+        st.session_state.lsig, st.session_state.lpage = sig, 0
+    fav_ids = favs()
+    if mus or qq.strip():
+        res = A.get("/api/library", q=qq.strip().replace(" ", "+"), **({"muscle": mus} if mus else {}))["results"]
+        title = None
+    elif fav_ids:
+        res = [{"id": i, "name": A.get(f"/api/library/{i}")["name"], "equipment": "", "primary": A.get(f"/api/library/{i}")["primary"]} for i in fav_ids]
+        title = "★ Your saved exercises"
+    else:
+        st.caption("Tap a muscle above or search to browse. Save ★ exercises you like and they show up here.")
+        return
+    if title:
+        st.markdown(f"**{title}**")
+    if not res:
+        st.info("No matches.")
+        return
+    per = 8
+    pages = (len(res) - 1) // per + 1
+    page = min(st.session_state.get("lpage", 0), pages - 1)
+    chunk = res[page * per:(page + 1) * per]
+    with st.container(key="libgrid"):
+        for i in range(0, len(chunk), 2):
+            cols = st.columns(2)
+            for col, r in zip(cols, chunk[i:i + 2]):
+                with col:
+                    src = img_src(r["id"], 0)
+                    st.image(src, width="stretch")
+                    icon = calc.muscle_icon_svg(r.get("primary") or [], None, 48)
+                    mlabel = ", ".join(calc.muscle_label(m) for m in (r.get("primary") or [])[:2])
+                    st.markdown(f'<div style="display:flex;gap:.45rem;align-items:center"><div>{icon}</div><div><div class="mf-cardname">{r["name"]}</div>'
+                                f'<div class="mf-sub">{mlabel}</div></div></div>', unsafe_allow_html=True)
+                    if st.button("Open", key=f"open{r['id']}", width="stretch"):
+                        st.session_state.lib_open = r["id"]
+                        st.rerun()
+    if pages > 1:
+        with st.container(key="row_pager"):
+            p1, p2, p3 = st.columns([1, 1, 1])
+            if p1.button("‹ Prev", disabled=page == 0, width="stretch"):
+                st.session_state.lpage = page - 1
+                st.rerun()
+            p2.markdown(f'<div style="text-align:center;padding-top:.55rem" class="mf-sub">{page + 1} / {pages}</div>', unsafe_allow_html=True)
+            if p3.button("Next ›", disabled=page >= pages - 1, width="stretch"):
+                st.session_state.lpage = page + 1
+                st.rerun()
+
+
 # ═════════════ TRAIN ═════════════
 with t_train:
     active = A.get("/api/sessions/active")
@@ -267,22 +402,7 @@ with t_train:
             if st.button("Start workout", type="primary", width="stretch"):
                 safe(A.post, "/api/sessions", {"dayId": pick["id"], "dayName": pick["name"], "level": level, "date": today_s})
                 st.rerun()
-        st.markdown("### Exercise guide")
-        st.caption("Look up any exercise to see the muscles it works and how to do it.")
-        mus = st.selectbox("Muscle", sorted(calc._muscle_data()["labels"]), index=None, placeholder="Any muscle",
-                           format_func=calc.muscle_label, key="gmus")
-        qq = st.text_input("Or search by name", placeholder="e.g. leg press", key="gq")
-        if mus or qq.strip():
-            res = A.get("/api/library", q=qq.strip().replace(" ", "+"), **({"muscle": mus} if mus else {}))["results"]
-            if res:
-                pickx = st.selectbox("Exercise", res, index=None, placeholder="Choose an exercise", key="gpick",
-                                     format_func=lambda r: f"{r['name']} ({r['equipment'] or 'bodyweight'})")
-                if pickx:
-                    ex_full = A.get(f"/api/library/{pickx['id']}")
-                    st.markdown(f"#### {ex_full['name']}")
-                    exercise_guide(ex_full, "guide")
-            else:
-                st.info("No matches.")
+        library_view()
     else:
         day = next((d for d in plan["days"] + [plan.get("core") or {}] if d.get("id") == active["dayId"]), None)
         st.subheader(active["dayName"])
@@ -349,9 +469,10 @@ with t_food:
     log = A.get(f"/api/log/{day}")
     meals = boot["settings"]["meals"]
     tot = {k: sum((e["nutrients"] or {}).get(k, 0) for e in log["entries"]) for k in ("kcal", "protein", "carbs", "fat")}
-    cols = st.columns(4)
-    for col, (k, lab) in zip(cols, [("kcal", "Calories"), ("protein", "Protein g"), ("carbs", "Carbs g"), ("fat", "Fat g")]):
-        col.metric(lab, round(tot[k]))
+    with st.container(key="row_macros"):
+        cols = st.columns(4)
+        for col, (k, lab) in zip(cols, [("kcal", "Calories"), ("protein", "Protein g"), ("carbs", "Carbs g"), ("fat", "Fat g")]):
+            col.metric(lab, round(tot[k]))
     for meal in meals:
         es = [e for e in log["entries"] if e["meal"].lower() == meal.lower()]
         if es:

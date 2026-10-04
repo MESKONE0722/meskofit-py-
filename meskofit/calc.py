@@ -193,3 +193,14 @@ def muscle_svg(primary: list[str], secondary: list[str] | None = None, height: i
             f'{fig(data["front"], 4)}{fig(data["back"], 136)}'
             '<text x="64" y="278" font-size="9" text-anchor="middle" fill="#6b7a75" font-family="sans-serif">FRONT</text>'
             '<text x="196" y="278" font-size="9" text-anchor="middle" fill="#6b7a75" font-family="sans-serif">BACK</text></svg>')
+
+
+def muscle_icon_svg(primary: list[str], secondary: list[str] | None = None, height: int = 58) -> str:
+    """One small body figure (front, or back if the main muscles are on the back) for cards and filters."""
+    data = _muscle_data()
+    p, sec = set(primary), set(secondary or []) - set(primary)
+    front_hit = any(s["m"] in p for s in data["front"])
+    shapes = data["front"] if front_hit or not any(s["m"] in p for s in data["back"]) else data["back"]
+    base, neutral, main, assist = "#d9dfdc", "#c4cbc8", "#e11d48", "#f6a3b5"
+    parts = "".join(_shape_svg(s, neutral if not s["m"] else main if s["m"] in p else assist if s["m"] in sec else base) for s in shapes)
+    return f'<svg viewBox="0 0 128 266" xmlns="http://www.w3.org/2000/svg" style="height:{height}px;width:auto"><g transform="translate(4,0)">{parts}</g></svg>'
