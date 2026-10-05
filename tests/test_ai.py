@@ -63,3 +63,20 @@ def test_disabled():
         make_client(lambda r: httpx.Response(500)).vision_json(ai.Config(), "", "", b"")
     with pytest.raises(ai.ErrDisabled):
         make_client(lambda r: httpx.Response(500)).models(ai.Config())
+
+
+def test_chat_both_dialects():
+    def handler(r: httpx.Request) -> httpx.Response:
+        body = json.loads(r.content)
+        assert body["messages"][0]["role"] == "system" and body["messages"][-1]["content"] == "hi"
+        if r.url.path == "/api/chat":
+            return httpx.Response(200, json={"message": {"content": " hello "}})
+        assert r.url.path == "/v1/chat/completions"
+        return httpx.Response(200, json={"choices": [{"message": {"content": "hey"}}]})
+
+    cl = make_client(handler)
+    msgs = [{"role": "user", "content": "hi"}]
+    assert cl.chat(ai.Config("ollama", "http://x", "m"), "sys", msgs) == "hello"
+    assert cl.chat(ai.Config("openai", "http://x/v1", "m"), "sys", msgs) == "hey"
+    with pytest.raises(ai.ErrDisabled):
+        cl.chat(ai.Config(), "sys", msgs)

@@ -165,6 +165,26 @@ class Client:
             raise AIError(f"the model did not return JSON: {content[:200]}")
         return raw
 
+    def chat(self, cfg: Config, system: str, messages: list[dict], timeout: float | None = None) -> str:
+        """Plain text conversation: `messages` are {"role": "user"|"assistant", "content": str}."""
+        if not cfg.enabled():
+            raise ErrDisabled()
+        msgs = [{"role": "system", "content": system}, *messages]
+        if cfg.provider == "ollama":
+            resp = self._do(cfg, "POST", cfg.base() + "/api/chat",
+                            {"model": cfg.model, "stream": False, "keep_alive": "15m", "messages": msgs}, timeout)
+            content = ((resp.get("message") or {}).get("content")) or ""
+        else:
+            resp = self._do(cfg, "POST", cfg.base() + "/chat/completions",
+                            {"model": cfg.model, "temperature": 0.4, "messages": msgs}, timeout)
+            choices = resp.get("choices") or []
+            if not choices:
+                raise AIError("the model returned no answer")
+            content = ((choices[0].get("message") or {}).get("content")) or ""
+        if not content.strip():
+            raise AIError("the model returned an empty answer")
+        return content.strip()
+
     def _do(self, cfg: Config, method: str, url: str, body: Any, timeout: float | None) -> dict:
         headers = {"Content-Type": "application/json"}
         if cfg.api_key:

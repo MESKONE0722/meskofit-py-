@@ -97,6 +97,18 @@ def safe(fn, *a, **k):
     return None
 
 
+def jpeg_b64(raw: bytes) -> str:
+    """Any phone photo -> a modest base64 JPEG the AI routes accept."""
+    import base64
+    import io
+    from PIL import Image, ImageOps
+    im = ImageOps.exif_transpose(Image.open(io.BytesIO(raw))).convert("RGB")
+    im.thumbnail((1280, 1280))
+    out = io.BytesIO()
+    im.save(out, "JPEG", quality=85)
+    return base64.b64encode(out.getvalue()).decode()
+
+
 def num(text: str | None) -> float | None:
     """Parse a typed number; blank or junk gives None."""
     try:
@@ -253,7 +265,10 @@ st.markdown(
     + (f'<div><div class="mf-sub">To goal</div><div style="font-size:1.5rem;font-weight:800">{abs(to_disp(cur_kg - goal_kg))} {wl}</div></div>' if cur_kg and goal_kg else "")
     + "</div></div>", unsafe_allow_html=True)
 
-t_train, t_food, t_body, t_goal, t_shot, t_prog, t_more = st.tabs(["Train", "Food", "Body & BMI", "Goal", "Shots", "Progress", "More"])
+ai_cfg = A.get("/api/settings").get("ai") or {}
+ai_on = bool(ai_cfg.get("provider") and (ai_cfg.get("model") or "").strip())
+t_train, t_food, t_body, t_goal, t_shot, t_prog, t_coach, t_more = st.tabs(
+    ["Train", "Food", "Body & BMI", "Goal", "Shots", "Progress", "Coach", "More"])
 
 
 def weight_on(day: str, after_ok: bool = True) -> float | None:
@@ -560,6 +575,49 @@ with t_food:
     st.markdown("### Add food")
     hr = datetime.now().hour
     default_meal = meals[0] if hr < 11 else meals[min(1, len(meals) - 1)] if hr < 16 else meals[min(2, len(meals) - 1)]
+    with st.expander("📷 Scan a meal (AI)"):
+        if not ai_on:
+            st.info("Not connected yet. Add an AI model under More → AI connection to turn this on. "
+                    "Until then, use Search below.")
+        else:
+            st.caption("Take or pick a photo. The AI names the foods and guesses portions; you fix the grams, "
+                       "and the macros are worked out from those grams. For best accuracy, weigh the plate.")
+            shot = st.file_uploader("Photo of your meal", type=["jpg", "jpeg", "png", "webp"], key="scanfile")
+            if shot is not None and st.button("Analyze photo", type="primary"):
+                with st.spinner("Looking at your meal…"):
+                    res = safe(A.post, "/api/ai/meal", {"image": jpeg_b64(shot.getvalue())})
+                if res:
+                    st.session_state.scan = res
+            scan = st.session_state.get("scan")
+            if scan:
+                if scan["notes"]:
+                    st.caption(scan["notes"])
+                if not scan["items"]:
+                    st.info("I couldn't see any food in that photo.")
+                picked = []
+                for i, it in enumerate(scan["items"]):
+                    c1, c2 = st.columns([3, 2])
+                    on = c1.checkbox(f"{it['name']} ({it['confidence']} confidence)", value=True, key=f"sc_on{i}")
+                    g = num(c2.text_input("grams", value=f"{it['grams']:g}", key=f"sc_g{i}", label_visibility="collapsed"))
+                    per = (it.get("match") or {}).get("per100") or {}
+                    if per.get("kcal") is not None:
+                        nut = {k: round(v * (g or 0) / 100, 1) for k, v in per.items() if isinstance(v, (int, float))}
+                        src = "usda"
+                    else:
+                        f = (g or 0) / it["grams"]
+                        nut = {k: round(v * f, 1) for k, v in it["ai"].items()}
+                        src = "ai"
+                    st.caption(f"{round(nut.get('kcal', 0))} kcal · P {round(nut.get('protein', 0))} · C {round(nut.get('carbs', 0))} · F {round(nut.get('fat', 0))}"
+                               + (" · from food database" if src == "usda" else " · AI estimate"))
+                    if on and g:
+                        picked.append((it, g, nut, src))
+                sm = st.selectbox("Meal", meals, index=meals.index(default_meal), key="scan_meal") if scan["items"] else None
+                if scan["items"] and st.button("Add selected to log", type="primary", disabled=not picked):
+                    for it, g, nut, src in picked:
+                        A.post("/api/log", {"date": day, "meal": sm, "name": it["name"], "amount": g, "unit": "g", "grams": g,
+                                            "nutrients": nut, "source": "ai-photo" if src == "ai" else "usda"})
+                    st.session_state.pop("scan", None)
+                    st.rerun()
     sn = st.session_state.get(_counter, {}).get("search", 0)
     with st.form(f"search{sn}"):
         q = st.text_input("Search by name, or type a barcode", placeholder="e.g. greek yogurt")
@@ -871,6 +929,60 @@ with t_prog:
     if not (P["body"] or P["nutrition"] or fin):
         st.info("Log a workout, meal or weigh-in and your graphs appear here.")
 
+# ═════════════ COACH ═════════════
+with t_coach:
+    wk0 = (today - timedelta(days=today.weekday())).isoformat()
+    done_wk = A.app.db.query("SELECT COUNT(*) FROM sessions WHERE finished_at IS NOT NULL AND date >= ?", wk0)[0][0]
+    goal_n = plan["weeklyGoal"]
+    knee = [json.loads(r[0] or "{}").get("kneePain") for r in
+            A.app.db.query("SELECT data FROM sessions WHERE finished_at IS NOT NULL ORDER BY date DESC, id DESC LIMIT 3")]
+    knee = [k for k in knee if k is not None]
+    prot = A.app.db.query("""SELECT AVG(p) FROM (SELECT SUM(json_extract(nutrients,'$.protein')) p FROM food_log
+                             WHERE date >= ? GROUP BY date)""", (today - timedelta(days=7)).isoformat())[0][0]
+    recent_w = [w for d, w in weights if d >= (today - timedelta(days=14)).isoformat()]
+    st.markdown("### Your week")
+    with st.container(key="row_coach"):
+        k1, k2, k3 = st.columns(3)
+        k1.metric("Workouts", f"{done_wk} / {goal_n}")
+        k2.metric("Knee pain", f"{sum(knee) / len(knee):.1f}/10" if knee else "–", help="Average of your last 3 finished workouts.")
+        k3.metric("Protein/day", f"{round(prot)} g" if prot else "–", help="Average over the days you logged food in the last 7 days.")
+    tips = []
+    if done_wk >= goal_n:
+        tips.append("You've hit this week's workout goal. Rest, walk and eat well.")
+    else:
+        tips.append(f"{goal_n - done_wk} more workout{'s' if goal_n - done_wk != 1 else ''} to hit your goal this week. Short and easy still counts.")
+    if knee and sum(knee) / len(knee) >= 5:
+        tips.append("Knee pain has been 5 or higher. Swap to seated or machine moves, shorten the range, and check with your doctor if it lingers.")
+    elif knee and sum(knee) / len(knee) <= 2:
+        tips.append("Knees are feeling good, so it's a fine time to add a little weight where you hit the top of the rep range.")
+    if prot is not None and prot < 90:
+        tips.append("Protein is on the low side. Aim for a palm-sized portion of lean protein at every meal to hold on to muscle while you lose weight.")
+    if len(recent_w) >= 2:
+        d = recent_w[-1] - recent_w[0]
+        tips.append(f"Over the last two weeks your weight moved {'down' if d < 0 else 'up'} {abs(to_disp(d))} {wl}.")
+    for t in tips:
+        st.markdown(f"- {t}")
+    st.markdown("### Ask your trainer")
+    if not ai_on:
+        st.info("The chat turns on when you add an AI model under More → AI connection. The summary above works without it.")
+    hist_c = st.session_state.setdefault("chat", [])
+    for m_ in hist_c:
+        with st.chat_message(m_["role"]):
+            st.write(m_["content"])
+    q_ = st.chat_input("Ask about your workout, weights or food", disabled=not ai_on, key="coachq")
+    if q_:
+        hist_c.append({"role": "user", "content": q_})
+        with st.spinner("Thinking…"):
+            res = safe(A.post, "/api/ai/chat", {"messages": hist_c})
+        if res:
+            hist_c.append({"role": "assistant", "content": res["reply"]})
+        else:
+            hist_c.pop()
+        st.rerun()
+    if hist_c and st.button("Clear chat"):
+        st.session_state.chat = []
+        st.rerun()
+
 # ═════════════ MORE ═════════════
 with t_more:
     st.markdown("### Profile")
@@ -902,6 +1014,31 @@ with t_more:
                 upd["levelHistory"] = (profile.get("levelHistory") or []) + [{"date": today_s, "level": lv}]
             A.put("/api/profile", upd)
             st.rerun()
+    st.markdown("### AI connection (optional)")
+    st.caption("Powers the meal-photo scan and the trainer chat. Leave it off and everything else still works. "
+               "Use an OpenAI-compatible service or a model running on your own computer (Ollama).")
+    with st.form("aiconn"):
+        prov = st.selectbox("Provider", ["Off", "openai", "ollama"], index=["", "openai", "ollama"].index(ai_cfg.get("provider") or "") if (ai_cfg.get("provider") or "") in ("", "openai", "ollama") else 0,
+                            format_func=lambda v: {"Off": "Off", "openai": "OpenAI-compatible", "ollama": "Ollama"}[v])
+        burl = st.text_input("Server address (blank for the default)", value=ai_cfg.get("baseUrl") or "", placeholder="https://api.openai.com/v1")
+        mdl = st.text_input("Model name", value=ai_cfg.get("model") or "", placeholder="a vision-capable model")
+        akey = st.text_input("API key", type="password", placeholder="saved" if ai_cfg.get("apiKeySet") else "paste key")
+        c1, c2 = st.columns(2)
+        save_ai = c1.form_submit_button("Save", type="primary")
+        test_ai = c2.form_submit_button("Test")
+    if save_ai or test_ai:
+        patch = {"provider": "" if prov == "Off" else prov, "baseUrl": burl.strip(), "model": mdl.strip()}
+        if akey:
+            patch["apiKey"] = akey
+        if save_ai:
+            A.put("/api/settings", {"ai": patch})
+            st.rerun()
+        else:
+            r = safe(A.post, "/api/ai/test", {"provider": patch["provider"], "baseUrl": patch["baseUrl"], "model": patch["model"], "apiKey": akey})
+            if r and r.get("ok"):
+                st.success("Connected." + ("" if r.get("modelFound") else " That model name wasn't in the server's list."))
+            elif r:
+                st.error(r.get("error") or "Could not connect.")
     st.markdown("### Food database key")
     with st.form("usda"):
         key = st.text_input("USDA key (optional, free at fdc.nal.usda.gov)", type="password",

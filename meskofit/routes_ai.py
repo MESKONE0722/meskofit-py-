@@ -233,3 +233,53 @@ def handle_ai_test(app: Any, req: Req) -> dict:
         return {"ok": False, "error": str(e)}
     found = any(m == cfg.model or m.removesuffix(":latest") == cfg.model for m in models)
     return {"ok": True, "models": models, "modelFound": found}
+
+
+COACH_SYSTEM = """You are a friendly, practical personal trainer inside a workout and food tracking app.
+Use the person's own numbers below. Keep answers short (under 150 words unless asked for more), concrete and encouraging.
+Suggest weights, reps and food swaps they can act on today. Never diagnose. If they mention pain beyond normal
+muscle soreness, dizziness, chest pain, or ask about medication, tell them to check with their doctor first.
+Their data:
+"""
+
+
+def coach_context(app: Any) -> str:
+    st = app.settings()
+    prof = app.db.kv_get("profile", {}) or {}
+    lines = [f"Level: {prof.get('level') or 'beginner'}", f"Units: {prof.get('units', 'imperial')}"]
+    for k, lab in (("heightCm", "height cm"), ("startWeightKg", "start weight kg"), ("goalWeightKg", "goal weight kg"),
+                   ("age", "age"), ("sex", "sex")):
+        if prof.get(k):
+            lines.append(f"{lab}: {prof[k]}")
+    w = app.db.query("SELECT date, weight_kg FROM body_log WHERE weight_kg IS NOT NULL ORDER BY date DESC LIMIT 6")
+    if w:
+        lines.append("Recent weights (kg): " + ", ".join(f"{r[0]} {r[1]:.1f}" for r in reversed(w)))
+    ss = app.db.query("SELECT date, day_name, finished_at, data FROM sessions ORDER BY date DESC, id DESC LIMIT 6")
+    for r in ss:
+        d = json.loads(r[3] or "{}")
+        lines.append(f"Workout {r[0]} {r[1]}" + ("" if r[2] else " (unfinished)") +
+                     (f", knee pain {d['kneePain']}/10" if "kneePain" in d else "") + (f", effort {d['rpe']}/10" if "rpe" in d else ""))
+    f = app.db.query("""SELECT date, SUM(json_extract(nutrients,'$.kcal')), SUM(json_extract(nutrients,'$.protein'))
+                        FROM food_log GROUP BY date ORDER BY date DESC LIMIT 5""")
+    for r in f:
+        lines.append(f"Food {r[0]}: {round(r[1] or 0)} kcal, {round(r[2] or 0)} g protein")
+    return "\n".join(lines)
+
+
+@router.post("/api/ai/chat")
+def handle_ai_chat(app: Any, req: Req) -> dict:
+    msgs = req.json_obj().get("messages")
+    if not isinstance(msgs, list) or not msgs:
+        raise bad_request("messages are required")
+    clean = []
+    for m in msgs[-12:]:
+        if not isinstance(m, dict) or m.get("role") not in ("user", "assistant") or not isinstance(m.get("content"), str):
+            raise bad_request("bad message")
+        clean.append({"role": m["role"], "content": m["content"][:4000]})
+    if clean[-1]["role"] != "user":
+        raise bad_request("last message must be from the user")
+    try:
+        reply = app.ai.chat(app.ai_config(), COACH_SYSTEM + coach_context(app), clean, timeout=AI_TIMEOUT)
+    except ai.AIError as e:
+        raise _fail(e)
+    return {"reply": reply}

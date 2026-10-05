@@ -193,3 +193,19 @@ def test_shots(env):
     assert "Abdomen" in c.get("/api/export").text
     assert c.delete("/api/shots/1").status_code == 200
     assert len(c.get("/api/shots").json()) == 1
+
+
+def test_ai_chat_disabled_and_context(tmp_path):
+    from meskofit.local import open_local
+    from meskofit.web import HTTPError
+    l = open_local(str(tmp_path))
+    l.put("/api/profile", {"setupDone": True, "level": "beginner"})
+    with pytest.raises(HTTPError) as e:
+        l.post("/api/ai/chat", {"messages": [{"role": "user", "content": "hi"}]})
+    assert e.value.status == 412
+    with pytest.raises(HTTPError) as e:
+        l.post("/api/ai/chat", {"messages": []})
+    assert e.value.status == 400
+    l.app.ai.chat = lambda cfg, system, msgs, timeout=None: "Try 5 more lb. " + str("Level: beginner" in system)
+    l.put("/api/settings", {"ai": {"provider": "ollama", "model": "m"}})
+    assert l.post("/api/ai/chat", {"messages": [{"role": "user", "content": "hi"}]})["reply"].endswith("True")
