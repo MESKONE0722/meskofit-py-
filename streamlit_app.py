@@ -18,7 +18,8 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
-from meskofit import calc
+from meskofit import calc, mealplan
+from meskofit.defaults import seed_profile
 from meskofit.local import Local, open_local
 from meskofit.routes_body import backup
 from meskofit.routes_shots import DOSES
@@ -49,6 +50,8 @@ div[data-testid="stVerticalBlockBorderWrapper"]:has(> div > div[data-testid="stV
 .st-key-libgrid [data-testid="stHorizontalBlock"],[class*="st-key-row"] [data-testid="stHorizontalBlock"]{flex-wrap:nowrap!important;gap:.6rem}
 .st-key-libgrid [data-testid="stColumn"],[class*="st-key-row"] [data-testid="stColumn"]{min-width:0!important;flex:1 1 0!important;width:auto!important}
 .st-key-libgrid img{aspect-ratio:4/3;object-fit:cover;width:100%;border-radius:10px}
+.st-key-row_macros [data-testid="stMetricValue"],.st-key-row_coach [data-testid="stMetricValue"]{font-size:1.35rem!important}
+.st-key-row_macros [data-testid="stMetric"]{padding:.5rem .6rem}
 .mf-card2{background:#fff;border:1px solid #dfe6e3;border-radius:14px;padding:.5rem .6rem .6rem;margin-bottom:.15rem}
 .mf-cardname{font-weight:700;font-size:.9rem;line-height:1.2;margin:.35rem 0 .1rem}
 .mf-chip{display:inline-block;padding:.2rem .7rem;border-radius:999px;color:#fff;font-weight:700;font-size:.85rem}
@@ -192,6 +195,7 @@ def card_html(inner: str) -> None:
 
 gate()
 A = api()
+seed_profile(A.app, Path(__file__).parent / "profile_defaults.json")
 boot = A.get("/api/bootstrap")
 profile = boot["profile"] or {}
 today = date.today()
@@ -623,6 +627,52 @@ with t_food:
         cols = st.columns(4)
         for col, (k, lab) in zip(cols, [("kcal", "Calories"), ("protein", "Protein g"), ("carbs", "Carbs g"), ("fat", "Fat g")]):
             col.metric(lab, round(tot[k]))
+    # ── your meal plan ──
+    dd = date.fromisoformat(day)
+    mp = mealplan.day_plan(dd.weekday())
+    logged_plan = {(e["meal"].lower(), e["name"]) for e in log["entries"] if e.get("source") == "plan"}
+    mnames = {m.lower(): m for m in meals}
+
+    def plan_meal_name(m: dict) -> str:
+        return mnames.get(m["name"].lower()) or mnames.get(m["name"].lower() + "s") or meals[0]
+
+    def log_plan_meal(m: dict) -> None:
+        A.post("/api/log", {"date": day, "meal": plan_meal_name(m), "name": m["what"], "amount": 1, "unit": "serving",
+                            "unitLabel": "plan serving", "source": "plan",
+                            "nutrients": {"kcal": m["kcal"], "protein": m["protein"], "carbs": m["carbs"], "fat": m["fat"]}})
+
+    t = mp["totals"]
+    st.progress(min(1.0, tot["kcal"] / mealplan.KCAL_HIGH),
+                text=f"{round(tot['kcal'])} of {mealplan.KCAL_LOW:,}–{mealplan.KCAL_HIGH:,} kcal today")
+    with st.expander(f"🍽 Meal plan · {mp['day']} · about {t['kcal']:,} kcal", expanded=True):
+        st.caption(f"Protein about {t['protein']} g · carbs about {t['carbs']} g · fat about {t['fat']} g. "
+                   "Calories come from your plan; protein, carbs and fat are estimates from the portions.")
+        pending = [m for m in mp["meals"] if (plan_meal_name(m).lower(), m["what"]) not in logged_plan]
+        if pending and st.button(f"Log the whole day ({sum(m['kcal'] for m in pending):,} kcal)", type="primary", width="stretch", key="plan_all"):
+            for m in pending:
+                log_plan_meal(m)
+            st.rerun()
+        for m in mp["meals"]:
+            done = (plan_meal_name(m).lower(), m["what"]) in logged_plan
+            st.markdown(f"**{'✅ ' if done else ''}{m['name']}: {m['what']}**  \n"
+                        f"<span class='mf-sub'>{m['kcal']} kcal · P {m['protein']} · C {m['carbs']} · F {m['fat']}</span>",
+                        unsafe_allow_html=True)
+            st.markdown("Portion: " + " · ".join(f"{it['food']} **{it['portion']}**" for it in m["items"]))
+            st.caption(m["how"])
+            if not done and st.button(f"Log {m['name'].lower()}", key=f"plan_{m['name']}", width="stretch"):
+                log_plan_meal(m)
+                st.rerun()
+    with st.expander("Week at a glance"):
+        st.dataframe(pd.DataFrame([{"Day": d["day"], "Dinner": d["meals"][3]["what"], "kcal": d["totals"]["kcal"],
+                                    "Protein g": d["totals"]["protein"], "Carbs g": d["totals"]["carbs"]} for d in mealplan.week_plan()]),
+                     hide_index=True, width="stretch")
+        st.caption("Breakfast, lunch and snack are the same every day. Rice and pasta show up twice a week (Wednesday and Saturday).")
+    with st.expander("Weighing tips"):
+        for tip in mealplan.TIPS:
+            st.markdown(f"- {tip}")
+    with st.expander("Monthly shopping list"):
+        st.dataframe(pd.DataFrame([{"Buy": a, "30-day amount": b} for a, b in mealplan.SHOPPING]), hide_index=True, width="stretch")
+        st.caption("Frozen vegetables monthly; buy fresh salad ingredients weekly.")
     for meal in meals:
         es = [e for e in log["entries"] if e["meal"].lower() == meal.lower()]
         if es:

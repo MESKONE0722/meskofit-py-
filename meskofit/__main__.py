@@ -104,6 +104,11 @@ def _run(args: argparse.Namespace) -> int:
         if args.port <= 0 and cm is None:
             raise _Fatal("both -port and -https-port are 0; nothing to serve")
 
+        from .defaults import seed_profile
+
+        # Optional: drop a profile_defaults.json in the data folder and a fresh install starts already set up.
+        seed_profile(app, data_dir / "profile_defaults.json")
+
         from .server import build
 
         asgi = build(app)

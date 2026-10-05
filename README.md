@@ -21,6 +21,13 @@ Or without installing: `pip install starlette uvicorn httpx cryptography segno`,
 Your browser opens a setup page with a QR code. Scan it with the iPhone camera, open the link, then
 **Share → Add to Home Screen**. Keep the program running while you use the app; `Ctrl+C` stops it.
 
+## Your profile and meal plan
+
+`profile_defaults.json` holds your name, age, height, weight, goal and level. A fresh install (or a wiped Streamlit
+Cloud app) creates your profile from it, so you never retype it. For the home server, copy the file into your data
+folder. The Food tab has your weekly meal plan with the portion of every ingredient, one-tap logging, a week view
+and the monthly shopping list (`/api/mealplan`).
+
 ## Streamlit version
 
 `streamlit_app.py` is the same app with a Streamlit interface, using the same database and logic.

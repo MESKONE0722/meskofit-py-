@@ -90,11 +90,12 @@ def all_routes() -> Router:
         routes_core,
         routes_food,
         routes_shots,
+        routes_meals,
         routes_train,
     )
 
     r = Router()
-    for mod in (routes_core, auth, routes_train, routes_food, routes_body, routes_ai, routes_shots):
+    for mod in (routes_core, auth, routes_train, routes_food, routes_body, routes_ai, routes_shots, routes_meals):
         for method, path, fn in mod.router.routes:
             r.add(method, path, fn)
     return r

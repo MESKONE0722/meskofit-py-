@@ -1,0 +1,11 @@
+{
+  "name": "Nono",
+  "age": 44,
+  "heightIn": 72,
+  "startWeightLb": 462,
+  "goalWeightLb": 175,
+  "level": "beginner",
+  "units": "imperial",
+  "kcalLow": 1700,
+  "kcalHigh": 1800
+}

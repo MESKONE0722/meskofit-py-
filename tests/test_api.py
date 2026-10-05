@@ -209,3 +209,22 @@ def test_ai_chat_disabled_and_context(tmp_path):
     l.app.ai.chat = lambda cfg, system, msgs, timeout=None: "Try 5 more lb. " + str("Level: beginner" in system)
     l.put("/api/settings", {"ai": {"provider": "ollama", "model": "m"}})
     assert l.post("/api/ai/chat", {"messages": [{"role": "user", "content": "hi"}]})["reply"].endswith("True")
+
+
+def test_mealplan_and_seed(tmp_path):
+    import json as _j
+    from meskofit.defaults import seed_profile
+    from meskofit.local import open_local
+    from meskofit.web import HTTPError
+    l = open_local(str(tmp_path))
+    wk = l.get("/api/mealplan")
+    assert len(wk["days"]) == 7 and wk["kcalLow"] == 1700
+    mon = l.get("/api/mealplan", weekday=0)
+    assert mon["totals"]["kcal"] == 1710 and mon["meals"][3]["items"][0]["portion"] == "170 g"
+    with pytest.raises(HTTPError):
+        l.get("/api/mealplan", weekday=9)
+    f = tmp_path / "d.json"
+    f.write_text(_j.dumps({"name": "N", "age": 44, "heightIn": 72, "startWeightLb": 462, "goalWeightLb": 175}))
+    assert seed_profile(l.app, f) is True and seed_profile(l.app, f) is False
+    p = l.get("/api/bootstrap")["profile"]
+    assert p["setupDone"] and abs(p["heightCm"] - 182.88) < 0.01 and len(l.get("/api/body")) == 1
