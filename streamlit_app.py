@@ -382,6 +382,71 @@ def library_view() -> None:
                 st.rerun()
 
 
+# ───────────────────────── coaching helpers (no AI, just your own history) ─────────────────────────
+
+def rep_range(ex) -> tuple[int, int] | None:
+    """'10-12' -> (10, 12); '12' -> (12, 12); '10/side' -> (10, 10); None for timed work."""
+    import re
+    m = re.match(r"\s*(\d+)(?:\s*-\s*(\d+))?", str(ex.get("reps") or ""))
+    return (int(m.group(1)), int(m.group(2) or m.group(1))) if m else None
+
+
+def e1rm(w: float, reps: int) -> float:
+    return w if reps == 1 else w * (1 + min(reps, 15) / 30) if w > 0 and reps > 0 else 0.0
+
+
+def suggestion(ex, kind: str, info: dict) -> str | None:
+    """Where to start today: repeat or bump last time's weight once every set reached the top of the range."""
+    rr = rep_range(ex)
+    if kind != "weight" or not rr:
+        return None
+    last = (info.get("last") or {}).get("sets") or []
+    lw = [s for s in last if s.get("weightKg") and s.get("reps")]
+    if not lw:
+        return (f"First time: start light. Pick a weight you could lift about {rr[1] + 3} times, "
+                f"then do {rr[0]}-{rr[1]} with 2-3 reps still in the tank.")
+    wt = max(s["weightKg"] for s in lw)
+    top = [s for s in lw if s["weightKg"] == wt]
+    if all(s["reps"] >= rr[1] for s in top) and len(top) >= int(ex["sets"]):
+        step = 5 if imperial else 2.5
+        return f"Suggested: <b>{to_disp(wt) + step:g} {wl}</b> (+{step:g}). You hit {rr[1]} reps on every set last time."
+    return f"Suggested: <b>{to_disp(wt):g} {wl}</b> again. Aim for {rr[1]} reps on every set, then go up."
+
+
+def is_pr(ex_sets: list[dict], info: dict) -> bool:
+    """A done set whose estimated one-rep max beats everything logged before this session."""
+    prior = (info.get("best") or {}).get("e1rmKg") or 0
+    if not info.get("sessions") or not prior:
+        return False
+    return any(e1rm(s["weightKg"], s["reps"]) > prior * 1.001 for s in ex_sets
+               if s.get("done") and s.get("weightKg") and s.get("reps"))
+
+
+def rest_timer() -> None:
+    secs = st.segmented_control("Rest timer", [45, 60, 90, 120, 180], default=90, key="rest_len",
+                                format_func=lambda v: f"{v}s" if v < 90 else f"{v // 60}:{v % 60:02d}")
+    secs = secs or 90
+    html = f"""
+<div style="font-family:system-ui,sans-serif;display:flex;align-items:center;gap:12px">
+ <div id="t" style="font-size:34px;font-weight:800;color:#0f766e;min-width:92px">{secs // 60}:{secs % 60:02d}</div>
+ <button id="b" style="flex:1;padding:12px;border:0;border-radius:12px;background:#0f766e;color:#fff;font-size:16px;font-weight:700">Start rest</button>
+</div>
+<script>
+let left={secs}, h=null; const t=document.getElementById('t'), b=document.getElementById('b');
+const show=()=>t.textContent=Math.floor(left/60)+':'+String(left%60).padStart(2,'0');
+function beep(){{try{{const c=new (window.AudioContext||window.webkitAudioContext)();for(let i=0;i<3;i++){{const o=c.createOscillator();o.frequency.value=880;o.connect(c.destination);o.start(c.currentTime+i*.3);o.stop(c.currentTime+i*.3+.15);}}}}catch(e){{}}
+ if(navigator.vibrate)navigator.vibrate([200,100,200]);}}
+b.onclick=()=>{{ if(h){{clearInterval(h);h=null;left={secs};show();b.textContent='Start rest';return;}}
+ left={secs};show();b.textContent='Skip';
+ h=setInterval(()=>{{left--;show();if(left<=0){{clearInterval(h);h=null;t.textContent='Go!';b.textContent='Start rest';beep();}}}},1000);}};
+</script>"""
+    if hasattr(st, "iframe"):
+        st.iframe(html, height=70)
+    else:  # older Streamlit
+        import streamlit.components.v1 as components
+        components.html(html, height=70)
+
+
 # ═════════════ TRAIN ═════════════
 with t_train:
     active = A.get("/api/sessions/active")
@@ -413,17 +478,26 @@ with t_train:
             return all(saved.get((ex["id"], n), {}).get("done") for n in range(1, int(ex["sets"]) + 1))
 
         first_open = next((ex["id"] for ex in exercises if not ex_done(ex)), None)
-        base = Path(str(resources.files("meskofit") / "data" / "exercise-img"))
+        rest_timer()
+        infos = A.get("/api/history/last", keys=",".join(ex["ex"] for ex in exercises), day=active["dayId"], exclude=active["id"]) if exercises else {}
         all_rows: list[dict] = []
         changed = False
         for ex in exercises:
             e = cat.get(ex["ex"], {"name": ex["ex"], "kind": "weight"})
             mark = "✅" if ex_done(ex) else "⬜"
-            with st.expander(f"{mark}  {e['name']} · {target(ex)}", expanded=(ex["id"] == first_open)):
-                last = A.get("/api/history/last", keys=ex["ex"], day=active["dayId"]).get(ex["ex"], {})
+            last = infos.get(ex["ex"], {})
+            pr = is_pr([saved[(ex["id"], n)] for n in range(1, int(ex["sets"]) + 1) if (ex["id"], n) in saved], last)
+            with st.expander(f"{mark}  {e['name']} · {target(ex)}" + ("  🏆 PR" if pr else ""), expanded=(ex["id"] == first_open)):
+                if pr:
+                    st.success("🏆 New personal record! Your estimated one-rep max beat your previous best.")
                 if last.get("last"):
                     st.caption("Last time: " + ", ".join(f"{to_disp(s['weightKg'])} {wl} × {s.get('reps') or '-'}"
                                                          for s in last["last"].get("sets", []) if s.get("weightKg") is not None))
+                    b = last.get("best") or {}
+                    if b.get("e1rmKg"):
+                        st.caption(f"Best estimated one-rep max: {to_disp(b['e1rmKg'])} {wl}")
+                if tip := suggestion(ex, e.get("kind", "weight"), last):
+                    st.markdown(f'<div class="mf-sub">💡 {tip}</div>', unsafe_allow_html=True)
                 timed = bool(ex.get("secs")) and not ex.get("reps")
                 rcol = "Seconds" if timed else "Reps"
                 if note := ex.get("note"):
