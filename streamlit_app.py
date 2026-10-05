@@ -437,6 +437,66 @@ def is_pr(ex_sets: list[dict], info: dict) -> bool:
                if s.get("done") and s.get("weightKg") and s.get("reps"))
 
 
+def block_timer(secs: int, start_label: str) -> None:
+    """A start / pause / reset countdown that beeps and vibrates at zero."""
+    html = f"""
+<div style="font-family:system-ui,sans-serif;display:flex;align-items:center;gap:10px">
+ <div id="t" style="font-size:34px;font-weight:800;color:#0f766e;min-width:92px">{secs // 60}:{secs % 60:02d}</div>
+ <button id="b" style="flex:1;padding:12px;border:0;border-radius:12px;background:#0f766e;color:#fff;font-size:16px;font-weight:700">{start_label}</button>
+ <button id="r" style="padding:12px;border:1px solid #0f766e;border-radius:12px;background:#fff;color:#0f766e;font-size:16px;font-weight:700">Reset</button>
+</div>
+<script>
+const total={secs}; let left=total, h=null;
+const t=document.getElementById('t'), b=document.getElementById('b'), r=document.getElementById('r');
+const show=()=>t.textContent=Math.floor(left/60)+':'+String(left%60).padStart(2,'0');
+function beep(){{try{{const c=new (window.AudioContext||window.webkitAudioContext)();for(let i=0;i<3;i++){{const o=c.createOscillator();o.frequency.value=880;o.connect(c.destination);o.start(c.currentTime+i*.3);o.stop(c.currentTime+i*.3+.15);}}}}catch(e){{}}
+ if(navigator.vibrate)navigator.vibrate([200,100,200]);}}
+function stop(){{clearInterval(h);h=null;}}
+b.onclick=()=>{{ if(h){{stop();b.textContent='Resume';return;}}
+ if(left<=0)left=total; b.textContent='Pause';
+ h=setInterval(()=>{{left--;show();if(left<=0){{stop();t.textContent='Done!';b.textContent='Again';beep();}}}},1000);}};
+r.onclick=()=>{{stop();left=total;show();b.textContent='{start_label}';}};
+</script>"""
+    if hasattr(st, "iframe"):
+        st.iframe(html, height=70)
+    else:
+        import streamlit.components.v1 as components
+        components.html(html, height=70)
+
+
+STAIRS_MIN = {"beginner": 5, "intermediate": 8, "expert": 10}
+
+
+def warmup_card() -> None:
+    """Your plan opens every workout with stairs and ends with treadmill; here that is home stairs and a walk."""
+    acts = A.get("/api/activities", **{"from": today_s, "to": today_s})
+    done = {a["kind"]: a["minutes"] for a in acts}
+    mins = STAIRS_MIN.get(level, 5)
+    with st.expander(("✅ " if "Stairs" in done else "🪜 ") + "Daily stairs warm-up" + (f" · {done['Stairs']:g} min logged" if "Stairs" in done else f" · {mins} min"),
+                     expanded="Stairs" not in done):
+        st.caption("Your plan starts every workout with 10 minutes on the stair machine (5 minimum). "
+                   "Climbing your home stairs does the same job. Hold the rail, take them at a pace where you can still talk, "
+                   "and rest whenever you need to; the clock just counts your climbing time.")
+        opts = sorted({5, mins, 10})
+        m = st.segmented_control("Minutes", opts, default=mins, key="stairs_min", format_func=lambda v: f"{v} min") or mins
+        block_timer(int(m) * 60, "Start climbing")
+        st.markdown(f'<div class="mf-sub">💡 Start at 5 minutes and add about 1 minute a week up to 10. '
+                    f'If a knee hurts above 4 out of 10, stop, or step up and down a single bottom step instead. '
+                    f'Take the way down slowly.</div>', unsafe_allow_html=True)
+        if "Stairs" not in done and st.button("Log stairs done", key="log_stairs", type="primary", width="stretch"):
+            A.post("/api/activities", {"date": today_s, "kind": "Stairs", "minutes": float(m)})
+            st.rerun()
+    with st.expander(("✅ " if "Treadmill" in done else "🚶 ") + "Finisher: 5 min treadmill walk"
+                     + (f" · {done['Treadmill']:g} min logged" if "Treadmill" in done else "")):
+        st.caption("Your plan ends every workout with 5 minutes: walk, jog, then run the last minute. "
+                   "With sore knees, keep it a brisk walk and make the last minute your fastest walk instead of a run. "
+                   "Add the jog back when your knees and weight allow.")
+        block_timer(300, "Start walking")
+        if "Treadmill" not in done and st.button("Log treadmill done", key="log_tread", width="stretch"):
+            A.post("/api/activities", {"date": today_s, "kind": "Treadmill", "minutes": 5.0})
+            st.rerun()
+
+
 def rest_timer() -> None:
     secs = st.segmented_control("Rest timer", [45, 60, 90, 120, 180], default=90, key="rest_len",
                                 format_func=lambda v: f"{v}s" if v < 90 else f"{v // 60}:{v % 60:02d}")
@@ -464,6 +524,7 @@ b.onclick=()=>{{ if(h){{clearInterval(h);h=null;left={secs};show();b.textContent
 
 # ═════════════ TRAIN ═════════════
 with t_train:
+    warmup_card()
     active = A.get("/api/sessions/active")
     if active is None:
         st.caption(f"{plan['label']} plan · {plan['weeklyGoal']} workouts a week · {plan['effort']}")
