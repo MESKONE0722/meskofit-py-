@@ -634,7 +634,8 @@ with t_food:
     mnames = {m.lower(): m for m in meals}
 
     def plan_meal_name(m: dict) -> str:
-        return mnames.get(m["name"].lower()) or mnames.get(m["name"].lower() + "s") or meals[0]
+        """The log stores the meal as its lower-case key ("breakfast", "snacks"), like the web app."""
+        return m.get("slot") or (m["name"].lower() if m["name"].lower() in mnames else meals[0].lower())
 
     def log_plan_meal(m: dict) -> None:
         A.post("/api/log", {"date": day, "meal": plan_meal_name(m), "name": m["what"], "amount": 1, "unit": "serving",
@@ -671,7 +672,7 @@ with t_food:
         for tip in mealplan.TIPS:
             st.markdown(f"- {tip}")
     with st.expander("Monthly shopping list"):
-        st.dataframe(pd.DataFrame([{"Buy": a, "30-day amount": b} for a, b in mealplan.SHOPPING]), hide_index=True, width="stretch")
+        st.dataframe(pd.DataFrame([{"Buy": a, "30-day amount": b} for a, b in ((x["item"], x["amount"]) for x in mealplan.SHOPPING)]), hide_index=True, width="stretch")
         st.caption("Frozen vegetables monthly; buy fresh salad ingredients weekly.")
     for meal in meals:
         es = [e for e in log["entries"] if e["meal"].lower() == meal.lower()]
@@ -725,7 +726,7 @@ with t_food:
                 sm = st.selectbox("Meal", meals, index=meals.index(default_meal), key="scan_meal") if scan["items"] else None
                 if scan["items"] and st.button("Add selected to log", type="primary", disabled=not picked):
                     for it, g, nut, src in picked:
-                        A.post("/api/log", {"date": day, "meal": sm, "name": it["name"], "amount": g, "unit": "g", "grams": g,
+                        A.post("/api/log", {"date": day, "meal": sm.lower(), "name": it["name"], "amount": g, "unit": "g", "grams": g,
                                             "nutrients": nut, "source": "ai-photo" if src == "ai" else "usda"})
                     st.session_state.pop("scan", None)
                     st.rerun()
@@ -758,7 +759,7 @@ with t_food:
                     else:
                         per = h.get("per100") or {}
                         nut = {k: round(v * grams / 100, 1) for k, v in per.items() if isinstance(v, (int, float))}
-                        safe(A.post, "/api/log", {"date": day, "meal": meal, "name": h["name"], "brand": h.get("brand"), "amount": grams,
+                        safe(A.post, "/api/log", {"date": day, "meal": meal.lower(), "name": h["name"], "brand": h.get("brand"), "amount": grams,
                                                   "unit": "g", "grams": grams, "nutrients": nut, "source": h["source"],
                                                   **({"foodId": h["localId"]} if h.get("localId") else {})})
                         st.session_state.pop("fres", None)
@@ -772,7 +773,7 @@ with t_food:
                               num(c[2].text_input("Carbs g")), num(c[3].text_input("Fat g")))
             ml = st.selectbox("Meal", meals, index=meals.index(default_meal), key="qm")
             if st.form_submit_button("Add") and kc:
-                A.post("/api/log", {"date": day, "meal": ml, "name": n or "Quick add", "amount": 1, "unit": "serving", "source": "quick",
+                A.post("/api/log", {"date": day, "meal": ml.lower(), "name": n or "Quick add", "amount": 1, "unit": "serving", "source": "quick",
                                     "nutrients": {"kcal": kc, "protein": pr or 0, "carbs": ca or 0, "fat": fa or 0}})
                 bump("quick")
                 st.rerun()
@@ -1049,14 +1050,14 @@ with t_coach:
             A.app.db.query("SELECT data FROM sessions WHERE finished_at IS NOT NULL ORDER BY date DESC, id DESC LIMIT 3")]
     knee = [k for k in knee if k is not None]
     prot = A.app.db.query("""SELECT AVG(p) FROM (SELECT SUM(json_extract(nutrients,'$.protein')) p FROM food_log
-                             WHERE date >= ? GROUP BY date)""", (today - timedelta(days=7)).isoformat())[0][0]
+                             WHERE date >= ? AND date < ? GROUP BY date)""", (today - timedelta(days=7)).isoformat(), today_s)[0][0]
     recent_w = [w for d, w in weights if d >= (today - timedelta(days=14)).isoformat()]
     st.markdown("### Your week")
     with st.container(key="row_coach"):
         k1, k2, k3 = st.columns(3)
         k1.metric("Workouts", f"{done_wk} / {goal_n}")
         k2.metric("Knee pain", f"{sum(knee) / len(knee):.1f}/10" if knee else "–", help="Average of your last 3 finished workouts.")
-        k3.metric("Protein/day", f"{round(prot)} g" if prot else "–", help="Average over the days you logged food in the last 7 days.")
+        k3.metric("Protein/day", f"{round(prot)} g" if prot else "–", help="Average over the whole days you logged food in the last 7 days (today is left out).")
     tips = []
     if done_wk >= goal_n:
         tips.append("You've hit this week's workout goal. Rest, walk and eat well.")

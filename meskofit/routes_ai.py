@@ -244,16 +244,23 @@ Their data:
 
 
 def coach_context(app: Any) -> str:
-    st = app.settings()
     prof = app.db.kv_get("profile", {}) or {}
     lines = [f"Level: {prof.get('level') or 'beginner'}", f"Units: {prof.get('units', 'imperial')}"]
     for k, lab in (("heightCm", "height cm"), ("startWeightKg", "start weight kg"), ("goalWeightKg", "goal weight kg"),
                    ("age", "age"), ("sex", "sex")):
         if prof.get(k):
             lines.append(f"{lab}: {prof[k]}")
+    if (prof.get("limits") or {}).get("knees") is True:
+        lines.append("Knees: sore, avoid high-impact moves")
+    if prof.get("kcalLow") and prof.get("kcalHigh"):
+        lines.append(f"Calorie target: {prof['kcalLow']:g}-{prof['kcalHigh']:g} kcal a day")
     w = app.db.query("SELECT date, weight_kg FROM body_log WHERE weight_kg IS NOT NULL ORDER BY date DESC LIMIT 6")
     if w:
         lines.append("Recent weights (kg): " + ", ".join(f"{r[0]} {r[1]:.1f}" for r in reversed(w)))
+    shots = sorted(app.db.kv_get("shots", []) or [], key=lambda x: x["date"])
+    if shots:
+        last = shots[-1]
+        lines.append(f"Weekly {last.get('drug') or 'Mounjaro'} shots, latest {last['doseMg']:g} mg on {last['date']}")
     ss = app.db.query("SELECT date, day_name, finished_at, data FROM sessions ORDER BY date DESC, id DESC LIMIT 6")
     for r in ss:
         d = json.loads(r[3] or "{}")

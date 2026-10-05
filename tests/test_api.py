@@ -218,13 +218,35 @@ def test_mealplan_and_seed(tmp_path):
     from meskofit.web import HTTPError
     l = open_local(str(tmp_path))
     wk = l.get("/api/mealplan")
-    assert len(wk["days"]) == 7 and wk["kcalLow"] == 1700
+    assert len(wk["days"]) == 7 and wk["kcalLow"] == 1700 and wk["shopping"]
     mon = l.get("/api/mealplan", weekday=0)
     assert mon["totals"]["kcal"] == 1710 and mon["meals"][3]["items"][0]["portion"] == "170 g"
+    assert mon["meals"][2]["slot"] == "snacks" and mon["kcalHigh"] == 1800
     with pytest.raises(HTTPError):
         l.get("/api/mealplan", weekday=9)
     f = tmp_path / "d.json"
-    f.write_text(_j.dumps({"name": "N", "age": 44, "heightIn": 72, "startWeightLb": 462, "goalWeightLb": 175}))
+    assert seed_profile(l.app, f) is False  # no file yet
+    f.write_text(_j.dumps({"name": "Nono", "age": 44, "heightIn": 72, "startWeightLb": 462, "goalWeightLb": 175,
+                           "limits": {"knees": True}, "targets": {"kcal": 1800, "protein": 150},
+                           "kcalLow": 1700, "kcalHigh": 1800}))
     assert seed_profile(l.app, f) is True and seed_profile(l.app, f) is False
-    p = l.get("/api/bootstrap")["profile"]
-    assert p["setupDone"] and abs(p["heightCm"] - 182.88) < 0.01 and len(l.get("/api/body")) == 1
+    boot = l.get("/api/bootstrap")
+    p = boot["profile"]
+    assert p["setupDone"] and abs(p["heightCm"] - 182.88) < 0.01 and p["activity"] == "light" and p["goalRate"] == -1
+    assert p["limits"] == {"knees": True} and "sex" not in p and p["name"] == "Nono"
+    assert boot["settings"]["targets"] == {"kcal": 1800, "protein": 150} and len(l.get("/api/body")) == 1
+
+
+def test_library_limit_and_coach_context(tmp_path):
+    from meskofit.local import open_local
+    from meskofit.routes_ai import coach_context
+    l = open_local(str(tmp_path))
+    assert len(l.get("/api/library", muscle="chest")["results"]) == 40
+    allr = l.get("/api/library", muscle="chest", limit=500)["results"]
+    assert len(allr) > 40 and "frames" in allr[0]
+    l.put("/api/profile", {"level": "beginner", "limits": {"knees": True}, "kcalLow": 1700, "kcalHigh": 1800})
+    l.post("/api/shots", {"date": "2026-10-01", "doseMg": 2.5})
+    ctx = coach_context(l.app)
+    for want in ("Level: beginner", "Knees: sore", "Calorie target: 1700-1800 kcal a day",
+                 "Weekly Mounjaro shots, latest 2.5 mg on 2026-10-01"):
+        assert want in ctx, ctx

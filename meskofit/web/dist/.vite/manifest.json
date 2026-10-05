@@ -1,0 +1,499 @@
+{
+  "_ExerciseImage-DMTuORZK.js": {
+    "file": "assets/ExerciseImage-DMTuORZK.js",
+    "name": "ExerciseImage",
+    "imports": [
+      "_ui-Cl0tMz41.js"
+    ]
+  },
+  "_ExerciseSheet-CpFj30Z_.js": {
+    "file": "assets/ExerciseSheet-CpFj30Z_.js",
+    "name": "ExerciseSheet",
+    "imports": [
+      "_ui-Cl0tMz41.js",
+      "_triangle-alert-DN9o1dI6.js",
+      "index.html",
+      "_ExerciseImage-DMTuORZK.js",
+      "_muscleShapes-CEEhg23x.js"
+    ]
+  },
+  "_LevelSheet-BEKFijm_.js": {
+    "file": "assets/LevelSheet-BEKFijm_.js",
+    "name": "LevelSheet",
+    "imports": [
+      "_ui-Cl0tMz41.js",
+      "index.html"
+    ]
+  },
+  "_arrow-up-BZ_N0shz.js": {
+    "file": "assets/arrow-up-BZ_N0shz.js",
+    "name": "arrow-up",
+    "imports": [
+      "_ui-Cl0tMz41.js"
+    ]
+  },
+  "_charts-GC03w1bz.js": {
+    "file": "assets/charts-GC03w1bz.js",
+    "name": "charts",
+    "imports": [
+      "_ui-Cl0tMz41.js"
+    ]
+  },
+  "_check-DuLWe2Ic.js": {
+    "file": "assets/check-DuLWe2Ic.js",
+    "name": "check",
+    "imports": [
+      "_ui-Cl0tMz41.js"
+    ]
+  },
+  "_circle-check-DvwZT6-0.js": {
+    "file": "assets/circle-check-DvwZT6-0.js",
+    "name": "circle-check",
+    "imports": [
+      "_ui-Cl0tMz41.js"
+    ]
+  },
+  "_coach-BgtvhF6J.js": {
+    "file": "assets/coach-BgtvhF6J.js",
+    "name": "coach",
+    "imports": [
+      "_dates-DshZxsls.js",
+      "index.html"
+    ]
+  },
+  "_dates-DshZxsls.js": {
+    "file": "assets/dates-DshZxsls.js",
+    "name": "dates"
+  },
+  "_download-BvnejbGz.js": {
+    "file": "assets/download-BvnejbGz.js",
+    "name": "download",
+    "imports": [
+      "_ui-Cl0tMz41.js"
+    ]
+  },
+  "_image-BRApdrfq.js": {
+    "file": "assets/image-BRApdrfq.js",
+    "name": "image"
+  },
+  "_images-RhlIx3YI.js": {
+    "file": "assets/images-RhlIx3YI.js",
+    "name": "images",
+    "imports": [
+      "_ui-Cl0tMz41.js"
+    ]
+  },
+  "_muscleShapes-CEEhg23x.js": {
+    "file": "assets/muscleShapes-CEEhg23x.js",
+    "name": "muscleShapes"
+  },
+  "_plus-iJ-5w4mx.js": {
+    "file": "assets/plus-iJ-5w4mx.js",
+    "name": "plus",
+    "imports": [
+      "_ui-Cl0tMz41.js"
+    ]
+  },
+  "_sparkles-wPCZUdWr.js": {
+    "file": "assets/sparkles-wPCZUdWr.js",
+    "name": "sparkles",
+    "imports": [
+      "_ui-Cl0tMz41.js"
+    ]
+  },
+  "_star-CvFPKhys.js": {
+    "file": "assets/star-CvFPKhys.js",
+    "name": "star",
+    "imports": [
+      "_ui-Cl0tMz41.js"
+    ]
+  },
+  "_syringe-CYy5i6cV.js": {
+    "file": "assets/syringe-CYy5i6cV.js",
+    "name": "syringe",
+    "imports": [
+      "_ui-Cl0tMz41.js"
+    ]
+  },
+  "_trash-jzMwbOOx.js": {
+    "file": "assets/trash-jzMwbOOx.js",
+    "name": "trash",
+    "imports": [
+      "_ui-Cl0tMz41.js"
+    ]
+  },
+  "_triangle-alert-DN9o1dI6.js": {
+    "file": "assets/triangle-alert-DN9o1dI6.js",
+    "name": "triangle-alert",
+    "imports": [
+      "_ui-Cl0tMz41.js"
+    ]
+  },
+  "_ui-Cl0tMz41.js": {
+    "file": "assets/ui-Cl0tMz41.js",
+    "name": "ui"
+  },
+  "index.html": {
+    "file": "assets/index-BLwfQ4bi.js",
+    "name": "index",
+    "src": "index.html",
+    "isEntry": true,
+    "imports": [
+      "_ui-Cl0tMz41.js",
+      "_dates-DshZxsls.js"
+    ],
+    "dynamicImports": [
+      "src/screens/Train.tsx",
+      "src/screens/DayDetail.tsx",
+      "src/screens/Session.tsx",
+      "src/screens/History.tsx",
+      "src/screens/ExerciseDetail.tsx",
+      "src/screens/Library.tsx",
+      "src/screens/GoalPlanner.tsx",
+      "src/screens/Shots.tsx",
+      "src/screens/MealPlan.tsx",
+      "src/screens/Coach.tsx",
+      "src/screens/PlanEditor.tsx",
+      "src/screens/Tools.tsx",
+      "src/screens/Food.tsx",
+      "src/screens/AddFood.tsx",
+      "src/screens/FoodDetail.tsx",
+      "src/screens/CustomFood.tsx",
+      "src/screens/MealPhoto.tsx",
+      "src/screens/Progress.tsx",
+      "src/screens/Photos.tsx",
+      "src/screens/More.tsx",
+      "src/screens/Connect.tsx"
+    ],
+    "css": [
+      "assets/index-CucRBf3A.css"
+    ],
+    "assets": [
+      "assets/big-shoulders-display-vietnamese-wght-normal-B-JM5mJH.woff2",
+      "assets/big-shoulders-display-latin-ext-wght-normal-EP2r9iG4.woff2",
+      "assets/big-shoulders-display-latin-wght-normal-Bn_gnr7w.woff2",
+      "assets/atkinson-hyperlegible-next-latin-ext-wght-normal-C6vrW8VD.woff2",
+      "assets/atkinson-hyperlegible-next-latin-wght-normal-BcXVPD7q.woff2"
+    ]
+  },
+  "node_modules/@fontsource-variable/atkinson-hyperlegible-next/files/atkinson-hyperlegible-next-latin-ext-wght-normal.woff2": {
+    "file": "assets/atkinson-hyperlegible-next-latin-ext-wght-normal-C6vrW8VD.woff2",
+    "src": "node_modules/@fontsource-variable/atkinson-hyperlegible-next/files/atkinson-hyperlegible-next-latin-ext-wght-normal.woff2"
+  },
+  "node_modules/@fontsource-variable/atkinson-hyperlegible-next/files/atkinson-hyperlegible-next-latin-wght-normal.woff2": {
+    "file": "assets/atkinson-hyperlegible-next-latin-wght-normal-BcXVPD7q.woff2",
+    "src": "node_modules/@fontsource-variable/atkinson-hyperlegible-next/files/atkinson-hyperlegible-next-latin-wght-normal.woff2"
+  },
+  "node_modules/@fontsource-variable/big-shoulders-display/files/big-shoulders-display-latin-ext-wght-normal.woff2": {
+    "file": "assets/big-shoulders-display-latin-ext-wght-normal-EP2r9iG4.woff2",
+    "src": "node_modules/@fontsource-variable/big-shoulders-display/files/big-shoulders-display-latin-ext-wght-normal.woff2"
+  },
+  "node_modules/@fontsource-variable/big-shoulders-display/files/big-shoulders-display-latin-wght-normal.woff2": {
+    "file": "assets/big-shoulders-display-latin-wght-normal-Bn_gnr7w.woff2",
+    "src": "node_modules/@fontsource-variable/big-shoulders-display/files/big-shoulders-display-latin-wght-normal.woff2"
+  },
+  "node_modules/@fontsource-variable/big-shoulders-display/files/big-shoulders-display-vietnamese-wght-normal.woff2": {
+    "file": "assets/big-shoulders-display-vietnamese-wght-normal-B-JM5mJH.woff2",
+    "src": "node_modules/@fontsource-variable/big-shoulders-display/files/big-shoulders-display-vietnamese-wght-normal.woff2"
+  },
+  "node_modules/zxing-wasm/dist/reader/zxing_reader.wasm": {
+    "file": "assets/zxing_reader-Bb9Mx2Pu.wasm",
+    "src": "node_modules/zxing-wasm/dist/reader/zxing_reader.wasm"
+  },
+  "src/lib/barcode.ts": {
+    "file": "assets/barcode-DhuOJQ2x.js",
+    "name": "barcode",
+    "src": "src/lib/barcode.ts",
+    "isDynamicEntry": true,
+    "imports": [
+      "_image-BRApdrfq.js"
+    ],
+    "assets": [
+      "assets/zxing_reader-Bb9Mx2Pu.wasm"
+    ]
+  },
+  "src/screens/AddFood.tsx": {
+    "file": "assets/AddFood-_ZD1HhjZ.js",
+    "name": "AddFood",
+    "src": "src/screens/AddFood.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_ui-Cl0tMz41.js",
+      "_plus-iJ-5w4mx.js",
+      "_star-CvFPKhys.js",
+      "_dates-DshZxsls.js",
+      "index.html",
+      "_image-BRApdrfq.js"
+    ],
+    "dynamicImports": [
+      "src/lib/barcode.ts"
+    ]
+  },
+  "src/screens/Coach.tsx": {
+    "file": "assets/Coach-Bbjs8x8o.js",
+    "name": "Coach",
+    "src": "src/screens/Coach.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_ui-Cl0tMz41.js",
+      "_trash-jzMwbOOx.js",
+      "_dates-DshZxsls.js",
+      "index.html"
+    ]
+  },
+  "src/screens/Connect.tsx": {
+    "file": "assets/Connect-CjIVJn_y.js",
+    "name": "Connect",
+    "src": "src/screens/Connect.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_ui-Cl0tMz41.js",
+      "_circle-check-DvwZT6-0.js",
+      "_download-BvnejbGz.js",
+      "index.html"
+    ]
+  },
+  "src/screens/CustomFood.tsx": {
+    "file": "assets/CustomFood-DSmcPjJH.js",
+    "name": "CustomFood",
+    "src": "src/screens/CustomFood.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_ui-Cl0tMz41.js",
+      "_sparkles-wPCZUdWr.js",
+      "index.html",
+      "_image-BRApdrfq.js"
+    ]
+  },
+  "src/screens/DayDetail.tsx": {
+    "file": "assets/DayDetail-DF6A4I_O.js",
+    "name": "DayDetail",
+    "src": "src/screens/DayDetail.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_ui-Cl0tMz41.js",
+      "_ExerciseSheet-CpFj30Z_.js",
+      "_triangle-alert-DN9o1dI6.js",
+      "_dates-DshZxsls.js",
+      "index.html",
+      "_ExerciseImage-DMTuORZK.js"
+    ]
+  },
+  "src/screens/ExerciseDetail.tsx": {
+    "file": "assets/ExerciseDetail-Dj43p34V.js",
+    "name": "ExerciseDetail",
+    "src": "src/screens/ExerciseDetail.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_ui-Cl0tMz41.js",
+      "_ExerciseSheet-CpFj30Z_.js",
+      "_star-CvFPKhys.js",
+      "_dates-DshZxsls.js",
+      "index.html",
+      "_charts-GC03w1bz.js",
+      "_coach-BgtvhF6J.js",
+      "src/screens/Library.tsx"
+    ]
+  },
+  "src/screens/Food.tsx": {
+    "file": "assets/Food-H2f3Fd2V.js",
+    "name": "Food",
+    "src": "src/screens/Food.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_ui-Cl0tMz41.js",
+      "_circle-check-DvwZT6-0.js",
+      "_plus-iJ-5w4mx.js",
+      "_dates-DshZxsls.js",
+      "index.html",
+      "src/screens/MealPlan.tsx"
+    ]
+  },
+  "src/screens/FoodDetail.tsx": {
+    "file": "assets/FoodDetail-DS0tpIi6.js",
+    "name": "FoodDetail",
+    "src": "src/screens/FoodDetail.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_ui-Cl0tMz41.js",
+      "_star-CvFPKhys.js",
+      "_triangle-alert-DN9o1dI6.js",
+      "_dates-DshZxsls.js",
+      "index.html"
+    ]
+  },
+  "src/screens/GoalPlanner.tsx": {
+    "file": "assets/GoalPlanner-WnKDM3bY.js",
+    "name": "GoalPlanner",
+    "src": "src/screens/GoalPlanner.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_ui-Cl0tMz41.js",
+      "_dates-DshZxsls.js",
+      "index.html",
+      "_charts-GC03w1bz.js"
+    ]
+  },
+  "src/screens/History.tsx": {
+    "file": "assets/History-rYHWmfM2.js",
+    "name": "History",
+    "src": "src/screens/History.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_ui-Cl0tMz41.js",
+      "_dates-DshZxsls.js",
+      "index.html"
+    ]
+  },
+  "src/screens/Library.tsx": {
+    "file": "assets/Library-D6fKLZEv.js",
+    "name": "Library",
+    "src": "src/screens/Library.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_ui-Cl0tMz41.js",
+      "_star-CvFPKhys.js",
+      "index.html",
+      "_muscleShapes-CEEhg23x.js"
+    ]
+  },
+  "src/screens/MealPhoto.tsx": {
+    "file": "assets/MealPhoto-CId4oebm.js",
+    "name": "MealPhoto",
+    "src": "src/screens/MealPhoto.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_ui-Cl0tMz41.js",
+      "_images-RhlIx3YI.js",
+      "_sparkles-wPCZUdWr.js",
+      "_dates-DshZxsls.js",
+      "index.html",
+      "_image-BRApdrfq.js"
+    ]
+  },
+  "src/screens/MealPlan.tsx": {
+    "file": "assets/MealPlan-C66oLW20.js",
+    "name": "MealPlan",
+    "src": "src/screens/MealPlan.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_ui-Cl0tMz41.js",
+      "_check-DuLWe2Ic.js",
+      "_dates-DshZxsls.js",
+      "index.html"
+    ]
+  },
+  "src/screens/More.tsx": {
+    "file": "assets/More-CyW_3O2P.js",
+    "name": "More",
+    "src": "src/screens/More.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_ui-Cl0tMz41.js",
+      "_download-BvnejbGz.js",
+      "_sparkles-wPCZUdWr.js",
+      "_syringe-CYy5i6cV.js",
+      "_dates-DshZxsls.js",
+      "index.html",
+      "_LevelSheet-BEKFijm_.js"
+    ]
+  },
+  "src/screens/Photos.tsx": {
+    "file": "assets/Photos-CS54rSf6.js",
+    "name": "Photos",
+    "src": "src/screens/Photos.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_ui-Cl0tMz41.js",
+      "_images-RhlIx3YI.js",
+      "_trash-jzMwbOOx.js",
+      "_dates-DshZxsls.js",
+      "index.html",
+      "_image-BRApdrfq.js"
+    ]
+  },
+  "src/screens/PlanEditor.tsx": {
+    "file": "assets/PlanEditor-ohp_knrb.js",
+    "name": "PlanEditor",
+    "src": "src/screens/PlanEditor.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_ui-Cl0tMz41.js",
+      "_arrow-up-BZ_N0shz.js",
+      "_plus-iJ-5w4mx.js",
+      "_trash-jzMwbOOx.js",
+      "index.html",
+      "_ExerciseImage-DMTuORZK.js"
+    ]
+  },
+  "src/screens/Progress.tsx": {
+    "file": "assets/Progress-CBidUUW7.js",
+    "name": "Progress",
+    "src": "src/screens/Progress.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_ui-Cl0tMz41.js",
+      "_plus-iJ-5w4mx.js",
+      "_syringe-CYy5i6cV.js",
+      "_dates-DshZxsls.js",
+      "index.html",
+      "_charts-GC03w1bz.js",
+      "_coach-BgtvhF6J.js"
+    ]
+  },
+  "src/screens/Session.tsx": {
+    "file": "assets/Session-BLTgq0OO.js",
+    "name": "Session",
+    "src": "src/screens/Session.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_ui-Cl0tMz41.js",
+      "_arrow-up-BZ_N0shz.js",
+      "_ExerciseSheet-CpFj30Z_.js",
+      "_check-DuLWe2Ic.js",
+      "_plus-iJ-5w4mx.js",
+      "_triangle-alert-DN9o1dI6.js",
+      "_dates-DshZxsls.js",
+      "index.html",
+      "_ExerciseImage-DMTuORZK.js",
+      "_coach-BgtvhF6J.js"
+    ]
+  },
+  "src/screens/Shots.tsx": {
+    "file": "assets/Shots-BajfRmfZ.js",
+    "name": "Shots",
+    "src": "src/screens/Shots.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_ui-Cl0tMz41.js",
+      "_plus-iJ-5w4mx.js",
+      "_dates-DshZxsls.js",
+      "index.html",
+      "_charts-GC03w1bz.js"
+    ]
+  },
+  "src/screens/Tools.tsx": {
+    "file": "assets/Tools-fPojKTI7.js",
+    "name": "Tools",
+    "src": "src/screens/Tools.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_ui-Cl0tMz41.js",
+      "_dates-DshZxsls.js",
+      "index.html",
+      "_coach-BgtvhF6J.js"
+    ]
+  },
+  "src/screens/Train.tsx": {
+    "file": "assets/Train-C7bqNFy9.js",
+    "name": "Train",
+    "src": "src/screens/Train.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_ui-Cl0tMz41.js",
+      "_dates-DshZxsls.js",
+      "index.html",
+      "_LevelSheet-BEKFijm_.js"
+    ]
+  }
+}

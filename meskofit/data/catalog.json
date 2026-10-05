@@ -3405,6 +3405,42 @@
     "You may want to move your pelvis forward and backward and back few times before holding the tailbone forward in this stretch."
    ],
    "tips": []
+  },
+  "home-stairs": {
+   "key": "home-stairs",
+   "name": "Home stairs",
+   "lib": null,
+   "img": null,
+   "frames": [],
+   "kind": "cardio",
+   "equipment": "body only",
+   "primary": [
+    "quadriceps"
+   ],
+   "secondary": [
+    "glutes",
+    "calves",
+    "hamstrings"
+   ],
+   "target": "Cardio",
+   "flags": [
+    "knee"
+   ],
+   "alts": [],
+   "lower": true,
+   "unilateral": false,
+   "steps": [
+    "Stand at the bottom of your stairs with one hand on the rail.",
+    "Walk up at a steady pace, putting your whole foot on each step.",
+    "At the top, turn around and come down slowly, one step at a time, still holding the rail.",
+    "Keep going up and down until the timer ends. Rest at the bottom whenever you need to; pause the timer while you rest."
+   ],
+   "tips": [
+    "Go at a pace where you can still talk in short sentences.",
+    "Coming down is harder on the knees than going up, so take it slowly.",
+    "If a full flight is too much, step up and down on the bottom step instead.",
+    "No machine weight limit, but make sure the stairs and rail are solid."
+   ]
   }
  }
 }

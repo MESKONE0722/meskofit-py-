@@ -18,7 +18,8 @@
      "treadmill-walk",
      "recumbent-bike",
      "elliptical",
-     "stairmaster"
+     "stairmaster",
+     "home-stairs"
     ],
     "intensity": "Easy pace \u2014 you can talk in full sentences.",
     "progression": "Add 1 minute each week until you reach 10 minutes."
@@ -387,6 +388,7 @@
     "default": "stairmaster",
     "options": [
      "stairmaster",
+     "home-stairs",
      "elliptical",
      "recumbent-bike",
      "treadmill-walk"
@@ -835,6 +837,7 @@
     "default": "stairmaster",
     "options": [
      "stairmaster",
+     "home-stairs",
      "elliptical",
      "recumbent-bike",
      "treadmill-walk"

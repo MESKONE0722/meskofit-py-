@@ -107,7 +107,11 @@ def _run(args: argparse.Namespace) -> int:
         from .defaults import seed_profile
 
         # Optional: drop a profile_defaults.json in the data folder and a fresh install starts already set up.
-        seed_profile(app, data_dir / "profile_defaults.json")
+        try:
+            if seed_profile(app, data_dir / "profile_defaults.json"):
+                print("Created your profile from profile_defaults.json.")
+        except (ValueError, OSError) as e:
+            print(f"profile_defaults.json: {e}")
 
         from .server import build
 

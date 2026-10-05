@@ -21,12 +21,19 @@ Or without installing: `pip install starlette uvicorn httpx cryptography segno`,
 Your browser opens a setup page with a QR code. Scan it with the iPhone camera, open the link, then
 **Share → Add to Home Screen**. Keep the program running while you use the app; `Ctrl+C` stops it.
 
-## Your profile and meal plan
+## What's in the app
 
-`profile_defaults.json` holds your name, age, height, weight, goal and level. A fresh install (or a wiped Streamlit
-Cloud app) creates your profile from it, so you never retype it. For the home server, copy the file into your data
-folder. The Food tab has your weekly meal plan with the portion of every ingredient, one-tap logging, a week view
-and the monthly shopping list (`/api/mealplan`).
+The web app on your iPhone (served by `meskofit`) is the main one; it's the same bundle as the Go version:
+Today, Train (with the 870+ exercise library, live PR badges, suggested weights and a home-stairs warm-up),
+Food (with your weekly meal plan and one-tap logging), Progress (BMI with a body figure, goal planner, shot
+tracker) and Coach (your week plus a trainer chat that uses the AI model set under More).
+
+## Your profile, pre-filled
+
+`profile_defaults.json` holds your name, age, height, weight, goal, level, knee setting and daily targets.
+Copy it into your data folder (`meskofit-data`) before the first start and your profile is created from it,
+so a fresh install skips setup. Add `"sex": "male"` or `"female"`; without it, Today asks once. The
+Streamlit version reads the copy next to `streamlit_app.py`.
 
 ## Streamlit version
 

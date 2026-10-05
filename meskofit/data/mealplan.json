@@ -1,0 +1,1213 @@
+{
+ "version": 1,
+ "title": "Weekly meal plan",
+ "kcalLow": 1700,
+ "kcalHigh": 1800,
+ "about": "Calories per meal are from your plan. Protein, carbs and fat are estimates worked out from the portions with common nutrition values, so your brands may differ a little.",
+ "days": [
+  {
+   "day": "Monday",
+   "meals": [
+    {
+     "slot": "breakfast",
+     "name": "Breakfast",
+     "what": "Spinach eggs with avocado",
+     "kcal": 415,
+     "protein": 27,
+     "carbs": 12,
+     "fat": 30,
+     "items": [
+      {
+       "food": "egg",
+       "grams": 100,
+       "portion": "2 large eggs (100 g)"
+      },
+      {
+       "food": "egg white (liquid)",
+       "grams": 100,
+       "portion": "100 g"
+      },
+      {
+       "food": "spinach",
+       "grams": 50,
+       "portion": "50 g"
+      },
+      {
+       "food": "avocado",
+       "grams": 100,
+       "portion": "100 g"
+      },
+      {
+       "food": "olive oil",
+       "grams": 5,
+       "portion": "5 g"
+      }
+     ],
+     "how": "Beat eggs and whites with pepper. Wilt the spinach in the oil, add the eggs and scramble until set. Avocado on the side."
+    },
+    {
+     "slot": "lunch",
+     "name": "Lunch",
+     "what": "Chicken, egg and avocado salad",
+     "kcal": 595,
+     "protein": 66,
+     "carbs": 19,
+     "fat": 26,
+     "items": [
+      {
+       "food": "chicken breast (cooked)",
+       "grams": 170,
+       "portion": "170 g"
+      },
+      {
+       "food": "egg",
+       "grams": 50,
+       "portion": "1 large egg (50 g)"
+      },
+      {
+       "food": "romaine / spring mix",
+       "grams": 100,
+       "portion": "100 g"
+      },
+      {
+       "food": "cucumber",
+       "grams": 100,
+       "portion": "100 g"
+      },
+      {
+       "food": "bell pepper",
+       "grams": 50,
+       "portion": "50 g"
+      },
+      {
+       "food": "avocado",
+       "grams": 50,
+       "portion": "50 g"
+      },
+      {
+       "food": "blue cheese",
+       "grams": 15,
+       "portion": "15 g"
+      },
+      {
+       "food": "pomegranate dressing",
+       "grams": 25,
+       "portion": "25 g"
+      }
+     ],
+     "how": "Chop the veg, add sliced egg, avocado, chicken and blue cheese. Weigh the dressing separately and toss just before eating."
+    },
+    {
+     "slot": "snacks",
+     "name": "Snack",
+     "what": "Greek yogurt with pecans",
+     "kcal": 200,
+     "protein": 19,
+     "carbs": 8,
+     "fat": 11,
+     "items": [
+      {
+       "food": "plain nonfat Greek yogurt",
+       "grams": 170,
+       "portion": "170 g"
+      },
+      {
+       "food": "plain pecans",
+       "grams": 15,
+       "portion": "15 g"
+      }
+     ],
+     "how": "Chop the pecans and stir them in. Swap: 2 boiled eggs is about 155-160 kcal."
+    },
+    {
+     "slot": "dinner",
+     "name": "Dinner",
+     "what": "Lemon salmon, zucchini, green beans",
+     "kcal": 500,
+     "protein": 41,
+     "carbs": 13,
+     "fat": 29,
+     "items": [
+      {
+       "food": "salmon (cooked)",
+       "grams": 170,
+       "portion": "170 g"
+      },
+      {
+       "food": "zucchini",
+       "grams": 125,
+       "portion": "125 g"
+      },
+      {
+       "food": "green beans",
+       "grams": 125,
+       "portion": "125 g"
+      },
+      {
+       "food": "olive oil",
+       "grams": 8,
+       "portion": "8 g"
+      }
+     ],
+     "how": "Roast the veg with 5 g oil at 400 F, 15-25 min. Brush the salmon with 3 g oil, lemon, garlic; bake to 145 F."
+    }
+   ],
+   "totals": {
+    "kcal": 1710,
+    "protein": 153,
+    "carbs": 52,
+    "fat": 96
+   }
+  },
+  {
+   "day": "Tuesday",
+   "meals": [
+    {
+     "slot": "breakfast",
+     "name": "Breakfast",
+     "what": "Spinach eggs with avocado",
+     "kcal": 415,
+     "protein": 27,
+     "carbs": 12,
+     "fat": 30,
+     "items": [
+      {
+       "food": "egg",
+       "grams": 100,
+       "portion": "2 large eggs (100 g)"
+      },
+      {
+       "food": "egg white (liquid)",
+       "grams": 100,
+       "portion": "100 g"
+      },
+      {
+       "food": "spinach",
+       "grams": 50,
+       "portion": "50 g"
+      },
+      {
+       "food": "avocado",
+       "grams": 100,
+       "portion": "100 g"
+      },
+      {
+       "food": "olive oil",
+       "grams": 5,
+       "portion": "5 g"
+      }
+     ],
+     "how": "Beat eggs and whites with pepper. Wilt the spinach in the oil, add the eggs and scramble until set. Avocado on the side."
+    },
+    {
+     "slot": "lunch",
+     "name": "Lunch",
+     "what": "Chicken, egg and avocado salad",
+     "kcal": 595,
+     "protein": 66,
+     "carbs": 19,
+     "fat": 26,
+     "items": [
+      {
+       "food": "chicken breast (cooked)",
+       "grams": 170,
+       "portion": "170 g"
+      },
+      {
+       "food": "egg",
+       "grams": 50,
+       "portion": "1 large egg (50 g)"
+      },
+      {
+       "food": "romaine / spring mix",
+       "grams": 100,
+       "portion": "100 g"
+      },
+      {
+       "food": "cucumber",
+       "grams": 100,
+       "portion": "100 g"
+      },
+      {
+       "food": "bell pepper",
+       "grams": 50,
+       "portion": "50 g"
+      },
+      {
+       "food": "avocado",
+       "grams": 50,
+       "portion": "50 g"
+      },
+      {
+       "food": "blue cheese",
+       "grams": 15,
+       "portion": "15 g"
+      },
+      {
+       "food": "pomegranate dressing",
+       "grams": 25,
+       "portion": "25 g"
+      }
+     ],
+     "how": "Chop the veg, add sliced egg, avocado, chicken and blue cheese. Weigh the dressing separately and toss just before eating."
+    },
+    {
+     "slot": "snacks",
+     "name": "Snack",
+     "what": "Greek yogurt with pecans",
+     "kcal": 200,
+     "protein": 19,
+     "carbs": 8,
+     "fat": 11,
+     "items": [
+      {
+       "food": "plain nonfat Greek yogurt",
+       "grams": 170,
+       "portion": "170 g"
+      },
+      {
+       "food": "plain pecans",
+       "grams": 15,
+       "portion": "15 g"
+      }
+     ],
+     "how": "Chop the pecans and stir them in. Swap: 2 boiled eggs is about 155-160 kcal."
+    },
+    {
+     "slot": "dinner",
+     "name": "Dinner",
+     "what": "Paprika chicken, zucchini, asparagus, avocado",
+     "kcal": 510,
+     "protein": 58,
+     "carbs": 13,
+     "fat": 22,
+     "items": [
+      {
+       "food": "chicken breast (cooked)",
+       "grams": 170,
+       "portion": "170 g"
+      },
+      {
+       "food": "zucchini",
+       "grams": 125,
+       "portion": "125 g"
+      },
+      {
+       "food": "asparagus",
+       "grams": 125,
+       "portion": "125 g"
+      },
+      {
+       "food": "avocado",
+       "grams": 50,
+       "portion": "50 g"
+      },
+      {
+       "food": "olive oil",
+       "grams": 8,
+       "portion": "8 g"
+      }
+     ],
+     "how": "Roast the veg with the oil, garlic and pepper at 400 F. Add paprika chicken (165 F) and the avocado."
+    }
+   ],
+   "totals": {
+    "kcal": 1720,
+    "protein": 170,
+    "carbs": 52,
+    "fat": 89
+   }
+  },
+  {
+   "day": "Wednesday",
+   "meals": [
+    {
+     "slot": "breakfast",
+     "name": "Breakfast",
+     "what": "Spinach eggs with avocado",
+     "kcal": 415,
+     "protein": 27,
+     "carbs": 12,
+     "fat": 30,
+     "items": [
+      {
+       "food": "egg",
+       "grams": 100,
+       "portion": "2 large eggs (100 g)"
+      },
+      {
+       "food": "egg white (liquid)",
+       "grams": 100,
+       "portion": "100 g"
+      },
+      {
+       "food": "spinach",
+       "grams": 50,
+       "portion": "50 g"
+      },
+      {
+       "food": "avocado",
+       "grams": 100,
+       "portion": "100 g"
+      },
+      {
+       "food": "olive oil",
+       "grams": 5,
+       "portion": "5 g"
+      }
+     ],
+     "how": "Beat eggs and whites with pepper. Wilt the spinach in the oil, add the eggs and scramble until set. Avocado on the side."
+    },
+    {
+     "slot": "lunch",
+     "name": "Lunch",
+     "what": "Chicken, egg and avocado salad",
+     "kcal": 595,
+     "protein": 66,
+     "carbs": 19,
+     "fat": 26,
+     "items": [
+      {
+       "food": "chicken breast (cooked)",
+       "grams": 170,
+       "portion": "170 g"
+      },
+      {
+       "food": "egg",
+       "grams": 50,
+       "portion": "1 large egg (50 g)"
+      },
+      {
+       "food": "romaine / spring mix",
+       "grams": 100,
+       "portion": "100 g"
+      },
+      {
+       "food": "cucumber",
+       "grams": 100,
+       "portion": "100 g"
+      },
+      {
+       "food": "bell pepper",
+       "grams": 50,
+       "portion": "50 g"
+      },
+      {
+       "food": "avocado",
+       "grams": 50,
+       "portion": "50 g"
+      },
+      {
+       "food": "blue cheese",
+       "grams": 15,
+       "portion": "15 g"
+      },
+      {
+       "food": "pomegranate dressing",
+       "grams": 25,
+       "portion": "25 g"
+      }
+     ],
+     "how": "Chop the veg, add sliced egg, avocado, chicken and blue cheese. Weigh the dressing separately and toss just before eating."
+    },
+    {
+     "slot": "snacks",
+     "name": "Snack",
+     "what": "Greek yogurt with pecans",
+     "kcal": 200,
+     "protein": 19,
+     "carbs": 8,
+     "fat": 11,
+     "items": [
+      {
+       "food": "plain nonfat Greek yogurt",
+       "grams": 170,
+       "portion": "170 g"
+      },
+      {
+       "food": "plain pecans",
+       "grams": 15,
+       "portion": "15 g"
+      }
+     ],
+     "how": "Chop the pecans and stir them in. Swap: 2 boiled eggs is about 155-160 kcal."
+    },
+    {
+     "slot": "dinner",
+     "name": "Dinner",
+     "what": "Chicken-and-rice bowl",
+     "kcal": 500,
+     "protein": 51,
+     "carbs": 37,
+     "fat": 13,
+     "items": [
+      {
+       "food": "chicken breast (cooked)",
+       "grams": 150,
+       "portion": "150 g"
+      },
+      {
+       "food": "rice (cooked)",
+       "grams": 100,
+       "portion": "100 g"
+      },
+      {
+       "food": "bell pepper",
+       "grams": 100,
+       "portion": "100 g"
+      },
+      {
+       "food": "zucchini",
+       "grams": 100,
+       "portion": "100 g"
+      },
+      {
+       "food": "olive oil",
+       "grams": 7,
+       "portion": "7 g"
+      }
+     ],
+     "how": "Saute the pepper and zucchini in the oil, add chicken and garlic, serve over exactly 100 g cooked rice."
+    }
+   ],
+   "totals": {
+    "kcal": 1710,
+    "protein": 163,
+    "carbs": 76,
+    "fat": 80
+   }
+  },
+  {
+   "day": "Thursday",
+   "meals": [
+    {
+     "slot": "breakfast",
+     "name": "Breakfast",
+     "what": "Spinach eggs with avocado",
+     "kcal": 415,
+     "protein": 27,
+     "carbs": 12,
+     "fat": 30,
+     "items": [
+      {
+       "food": "egg",
+       "grams": 100,
+       "portion": "2 large eggs (100 g)"
+      },
+      {
+       "food": "egg white (liquid)",
+       "grams": 100,
+       "portion": "100 g"
+      },
+      {
+       "food": "spinach",
+       "grams": 50,
+       "portion": "50 g"
+      },
+      {
+       "food": "avocado",
+       "grams": 100,
+       "portion": "100 g"
+      },
+      {
+       "food": "olive oil",
+       "grams": 5,
+       "portion": "5 g"
+      }
+     ],
+     "how": "Beat eggs and whites with pepper. Wilt the spinach in the oil, add the eggs and scramble until set. Avocado on the side."
+    },
+    {
+     "slot": "lunch",
+     "name": "Lunch",
+     "what": "Chicken, egg and avocado salad",
+     "kcal": 595,
+     "protein": 66,
+     "carbs": 19,
+     "fat": 26,
+     "items": [
+      {
+       "food": "chicken breast (cooked)",
+       "grams": 170,
+       "portion": "170 g"
+      },
+      {
+       "food": "egg",
+       "grams": 50,
+       "portion": "1 large egg (50 g)"
+      },
+      {
+       "food": "romaine / spring mix",
+       "grams": 100,
+       "portion": "100 g"
+      },
+      {
+       "food": "cucumber",
+       "grams": 100,
+       "portion": "100 g"
+      },
+      {
+       "food": "bell pepper",
+       "grams": 50,
+       "portion": "50 g"
+      },
+      {
+       "food": "avocado",
+       "grams": 50,
+       "portion": "50 g"
+      },
+      {
+       "food": "blue cheese",
+       "grams": 15,
+       "portion": "15 g"
+      },
+      {
+       "food": "pomegranate dressing",
+       "grams": 25,
+       "portion": "25 g"
+      }
+     ],
+     "how": "Chop the veg, add sliced egg, avocado, chicken and blue cheese. Weigh the dressing separately and toss just before eating."
+    },
+    {
+     "slot": "snacks",
+     "name": "Snack",
+     "what": "Greek yogurt with pecans",
+     "kcal": 200,
+     "protein": 19,
+     "carbs": 8,
+     "fat": 11,
+     "items": [
+      {
+       "food": "plain nonfat Greek yogurt",
+       "grams": 170,
+       "portion": "170 g"
+      },
+      {
+       "food": "plain pecans",
+       "grams": 15,
+       "portion": "15 g"
+      }
+     ],
+     "how": "Chop the pecans and stir them in. Swap: 2 boiled eggs is about 155-160 kcal."
+    },
+    {
+     "slot": "dinner",
+     "name": "Dinner",
+     "what": "Lemon-garlic chicken, cabbage, zucchini, avocado",
+     "kcal": 505,
+     "protein": 57,
+     "carbs": 15,
+     "fat": 22,
+     "items": [
+      {
+       "food": "chicken breast (cooked)",
+       "grams": 170,
+       "portion": "170 g"
+      },
+      {
+       "food": "cabbage",
+       "grams": 125,
+       "portion": "125 g"
+      },
+      {
+       "food": "zucchini",
+       "grams": 125,
+       "portion": "125 g"
+      },
+      {
+       "food": "avocado",
+       "grams": 50,
+       "portion": "50 g"
+      },
+      {
+       "food": "olive oil",
+       "grams": 8,
+       "portion": "8 g"
+      }
+     ],
+     "how": "Saute the cabbage and zucchini in the oil, add garlic, chicken and lemon juice. Avocado on the side."
+    }
+   ],
+   "totals": {
+    "kcal": 1715,
+    "protein": 169,
+    "carbs": 54,
+    "fat": 89
+   }
+  },
+  {
+   "day": "Friday",
+   "meals": [
+    {
+     "slot": "breakfast",
+     "name": "Breakfast",
+     "what": "Spinach eggs with avocado",
+     "kcal": 415,
+     "protein": 27,
+     "carbs": 12,
+     "fat": 30,
+     "items": [
+      {
+       "food": "egg",
+       "grams": 100,
+       "portion": "2 large eggs (100 g)"
+      },
+      {
+       "food": "egg white (liquid)",
+       "grams": 100,
+       "portion": "100 g"
+      },
+      {
+       "food": "spinach",
+       "grams": 50,
+       "portion": "50 g"
+      },
+      {
+       "food": "avocado",
+       "grams": 100,
+       "portion": "100 g"
+      },
+      {
+       "food": "olive oil",
+       "grams": 5,
+       "portion": "5 g"
+      }
+     ],
+     "how": "Beat eggs and whites with pepper. Wilt the spinach in the oil, add the eggs and scramble until set. Avocado on the side."
+    },
+    {
+     "slot": "lunch",
+     "name": "Lunch",
+     "what": "Chicken, egg and avocado salad",
+     "kcal": 595,
+     "protein": 66,
+     "carbs": 19,
+     "fat": 26,
+     "items": [
+      {
+       "food": "chicken breast (cooked)",
+       "grams": 170,
+       "portion": "170 g"
+      },
+      {
+       "food": "egg",
+       "grams": 50,
+       "portion": "1 large egg (50 g)"
+      },
+      {
+       "food": "romaine / spring mix",
+       "grams": 100,
+       "portion": "100 g"
+      },
+      {
+       "food": "cucumber",
+       "grams": 100,
+       "portion": "100 g"
+      },
+      {
+       "food": "bell pepper",
+       "grams": 50,
+       "portion": "50 g"
+      },
+      {
+       "food": "avocado",
+       "grams": 50,
+       "portion": "50 g"
+      },
+      {
+       "food": "blue cheese",
+       "grams": 15,
+       "portion": "15 g"
+      },
+      {
+       "food": "pomegranate dressing",
+       "grams": 25,
+       "portion": "25 g"
+      }
+     ],
+     "how": "Chop the veg, add sliced egg, avocado, chicken and blue cheese. Weigh the dressing separately and toss just before eating."
+    },
+    {
+     "slot": "snacks",
+     "name": "Snack",
+     "what": "Greek yogurt with pecans",
+     "kcal": 200,
+     "protein": 19,
+     "carbs": 8,
+     "fat": 11,
+     "items": [
+      {
+       "food": "plain nonfat Greek yogurt",
+       "grams": 170,
+       "portion": "170 g"
+      },
+      {
+       "food": "plain pecans",
+       "grams": 15,
+       "portion": "15 g"
+      }
+     ],
+     "how": "Chop the pecans and stir them in. Swap: 2 boiled eggs is about 155-160 kcal."
+    },
+    {
+     "slot": "dinner",
+     "name": "Dinner",
+     "what": "Sirloin, mushrooms, green beans",
+     "kcal": 525,
+     "protein": 55,
+     "carbs": 13,
+     "fat": 25,
+     "items": [
+      {
+       "food": "lean sirloin (cooked)",
+       "grams": 170,
+       "portion": "170 g"
+      },
+      {
+       "food": "mushrooms",
+       "grams": 125,
+       "portion": "125 g"
+      },
+      {
+       "food": "green beans",
+       "grams": 125,
+       "portion": "125 g"
+      },
+      {
+       "food": "olive oil",
+       "grams": 8,
+       "portion": "8 g"
+      }
+     ],
+     "how": "Sear the steak in 4 g oil to at least 145 F and rest 3 min. Saute the mushrooms in the other 4 g. Steam the beans."
+    }
+   ],
+   "totals": {
+    "kcal": 1735,
+    "protein": 167,
+    "carbs": 52,
+    "fat": 92
+   }
+  },
+  {
+   "day": "Saturday",
+   "meals": [
+    {
+     "slot": "breakfast",
+     "name": "Breakfast",
+     "what": "Spinach eggs with avocado",
+     "kcal": 415,
+     "protein": 27,
+     "carbs": 12,
+     "fat": 30,
+     "items": [
+      {
+       "food": "egg",
+       "grams": 100,
+       "portion": "2 large eggs (100 g)"
+      },
+      {
+       "food": "egg white (liquid)",
+       "grams": 100,
+       "portion": "100 g"
+      },
+      {
+       "food": "spinach",
+       "grams": 50,
+       "portion": "50 g"
+      },
+      {
+       "food": "avocado",
+       "grams": 100,
+       "portion": "100 g"
+      },
+      {
+       "food": "olive oil",
+       "grams": 5,
+       "portion": "5 g"
+      }
+     ],
+     "how": "Beat eggs and whites with pepper. Wilt the spinach in the oil, add the eggs and scramble until set. Avocado on the side."
+    },
+    {
+     "slot": "lunch",
+     "name": "Lunch",
+     "what": "Chicken, egg and avocado salad",
+     "kcal": 595,
+     "protein": 66,
+     "carbs": 19,
+     "fat": 26,
+     "items": [
+      {
+       "food": "chicken breast (cooked)",
+       "grams": 170,
+       "portion": "170 g"
+      },
+      {
+       "food": "egg",
+       "grams": 50,
+       "portion": "1 large egg (50 g)"
+      },
+      {
+       "food": "romaine / spring mix",
+       "grams": 100,
+       "portion": "100 g"
+      },
+      {
+       "food": "cucumber",
+       "grams": 100,
+       "portion": "100 g"
+      },
+      {
+       "food": "bell pepper",
+       "grams": 50,
+       "portion": "50 g"
+      },
+      {
+       "food": "avocado",
+       "grams": 50,
+       "portion": "50 g"
+      },
+      {
+       "food": "blue cheese",
+       "grams": 15,
+       "portion": "15 g"
+      },
+      {
+       "food": "pomegranate dressing",
+       "grams": 25,
+       "portion": "25 g"
+      }
+     ],
+     "how": "Chop the veg, add sliced egg, avocado, chicken and blue cheese. Weigh the dressing separately and toss just before eating."
+    },
+    {
+     "slot": "snacks",
+     "name": "Snack",
+     "what": "Greek yogurt with pecans",
+     "kcal": 200,
+     "protein": 19,
+     "carbs": 8,
+     "fat": 11,
+     "items": [
+      {
+       "food": "plain nonfat Greek yogurt",
+       "grams": 170,
+       "portion": "170 g"
+      },
+      {
+       "food": "plain pecans",
+       "grams": 15,
+       "portion": "15 g"
+      }
+     ],
+     "how": "Chop the pecans and stir them in. Swap: 2 boiled eggs is about 155-160 kcal."
+    },
+    {
+     "slot": "dinner",
+     "name": "Dinner",
+     "what": "Lean beef pasta with zucchini",
+     "kcal": 550,
+     "protein": 47,
+     "carbs": 40,
+     "fat": 15,
+     "items": [
+      {
+       "food": "93% lean ground beef (cooked)",
+       "grams": 150,
+       "portion": "150 g"
+      },
+      {
+       "food": "pasta (cooked)",
+       "grams": 100,
+       "portion": "100 g"
+      },
+      {
+       "food": "tomato sauce (no added sugar)",
+       "grams": 100,
+       "portion": "100 g"
+      },
+      {
+       "food": "zucchini",
+       "grams": 100,
+       "portion": "100 g"
+      }
+     ],
+     "how": "Brown the beef with no oil to 160 F and drain. Simmer with the zucchini and sauce, then mix in the pasta."
+    }
+   ],
+   "totals": {
+    "kcal": 1760,
+    "protein": 159,
+    "carbs": 79,
+    "fat": 82
+   }
+  },
+  {
+   "day": "Sunday",
+   "meals": [
+    {
+     "slot": "breakfast",
+     "name": "Breakfast",
+     "what": "Spinach eggs with avocado",
+     "kcal": 415,
+     "protein": 27,
+     "carbs": 12,
+     "fat": 30,
+     "items": [
+      {
+       "food": "egg",
+       "grams": 100,
+       "portion": "2 large eggs (100 g)"
+      },
+      {
+       "food": "egg white (liquid)",
+       "grams": 100,
+       "portion": "100 g"
+      },
+      {
+       "food": "spinach",
+       "grams": 50,
+       "portion": "50 g"
+      },
+      {
+       "food": "avocado",
+       "grams": 100,
+       "portion": "100 g"
+      },
+      {
+       "food": "olive oil",
+       "grams": 5,
+       "portion": "5 g"
+      }
+     ],
+     "how": "Beat eggs and whites with pepper. Wilt the spinach in the oil, add the eggs and scramble until set. Avocado on the side."
+    },
+    {
+     "slot": "lunch",
+     "name": "Lunch",
+     "what": "Chicken, egg and avocado salad",
+     "kcal": 595,
+     "protein": 66,
+     "carbs": 19,
+     "fat": 26,
+     "items": [
+      {
+       "food": "chicken breast (cooked)",
+       "grams": 170,
+       "portion": "170 g"
+      },
+      {
+       "food": "egg",
+       "grams": 50,
+       "portion": "1 large egg (50 g)"
+      },
+      {
+       "food": "romaine / spring mix",
+       "grams": 100,
+       "portion": "100 g"
+      },
+      {
+       "food": "cucumber",
+       "grams": 100,
+       "portion": "100 g"
+      },
+      {
+       "food": "bell pepper",
+       "grams": 50,
+       "portion": "50 g"
+      },
+      {
+       "food": "avocado",
+       "grams": 50,
+       "portion": "50 g"
+      },
+      {
+       "food": "blue cheese",
+       "grams": 15,
+       "portion": "15 g"
+      },
+      {
+       "food": "pomegranate dressing",
+       "grams": 25,
+       "portion": "25 g"
+      }
+     ],
+     "how": "Chop the veg, add sliced egg, avocado, chicken and blue cheese. Weigh the dressing separately and toss just before eating."
+    },
+    {
+     "slot": "snacks",
+     "name": "Snack",
+     "what": "Greek yogurt with pecans",
+     "kcal": 200,
+     "protein": 19,
+     "carbs": 8,
+     "fat": 11,
+     "items": [
+      {
+       "food": "plain nonfat Greek yogurt",
+       "grams": 170,
+       "portion": "170 g"
+      },
+      {
+       "food": "plain pecans",
+       "grams": 15,
+       "portion": "15 g"
+      }
+     ],
+     "how": "Chop the pecans and stir them in. Swap: 2 boiled eggs is about 155-160 kcal."
+    },
+    {
+     "slot": "dinner",
+     "name": "Dinner",
+     "what": "Garlic chicken, green beans, asparagus, avocado",
+     "kcal": 510,
+     "protein": 59,
+     "carbs": 18,
+     "fat": 22,
+     "items": [
+      {
+       "food": "chicken breast (cooked)",
+       "grams": 170,
+       "portion": "170 g"
+      },
+      {
+       "food": "green beans",
+       "grams": 125,
+       "portion": "125 g"
+      },
+      {
+       "food": "asparagus",
+       "grams": 125,
+       "portion": "125 g"
+      },
+      {
+       "food": "avocado",
+       "grams": 50,
+       "portion": "50 g"
+      },
+      {
+       "food": "olive oil",
+       "grams": 8,
+       "portion": "8 g"
+      }
+     ],
+     "how": "Roast the beans and asparagus with the oil and garlic. Serve with chicken (165 F) and avocado."
+    }
+   ],
+   "totals": {
+    "kcal": 1720,
+    "protein": 171,
+    "carbs": 57,
+    "fat": 89
+   }
+  }
+ ],
+ "tips": [
+  "Weigh meat, fish, rice and pasta after cooking. Weigh vegetables raw or frozen before cooking. Avocado: flesh only.",
+  "Weigh oil, dressing, nuts, cheese and sauce as served. Put the empty bowl on the scale and press tare before each ingredient.",
+  "If your day runs high, trim an oil or avocado portion (5 g oil is about 45 kcal, 25 g avocado about 40 kcal) rather than the protein or vegetables.",
+  "If you skip breakfast, move its food to another meal instead of dropping the whole day to about 1,300 kcal.",
+  "Drinks: water, or unsweetened tea or coffee. A mini Coke is 90 kcal and 25 g sugar, so count it.",
+  "This is lower-carb, not zero-carb. Review the calorie target and the big carb cut with your doctor, especially if you feel lightheaded."
+ ],
+ "shopping": [
+  {
+   "item": "Chicken breast",
+   "amount": "About 24 lb raw (10.9 kg). Portion and freeze."
+  },
+  {
+   "item": "Salmon",
+   "amount": "About 2.5 lb raw (1.13 kg)"
+  },
+  {
+   "item": "Lean sirloin",
+   "amount": "About 2 lb raw (0.91 kg)"
+  },
+  {
+   "item": "93% lean ground beef",
+   "amount": "About 2 lb raw (0.91 kg)"
+  },
+  {
+   "item": "Large eggs",
+   "amount": "90 eggs"
+  },
+  {
+   "item": "Liquid egg whites",
+   "amount": "3,000 g"
+  },
+  {
+   "item": "Plain nonfat Greek yogurt",
+   "amount": "5,100 g"
+  },
+  {
+   "item": "Blue cheese",
+   "amount": "450 g"
+  },
+  {
+   "item": "Plain pecans",
+   "amount": "450 g"
+  },
+  {
+   "item": "Pomegranate dressing",
+   "amount": "750 g (15 packets of 50 g)"
+  },
+  {
+   "item": "Olive oil",
+   "amount": "One 500 mL bottle"
+  },
+  {
+   "item": "Rice and pasta",
+   "amount": "A small bag or box of each (400 g cooked of each a month)"
+  },
+  {
+   "item": "Tomato sauce, no added sugar",
+   "amount": "400 g"
+  },
+  {
+   "item": "Seasonings",
+   "amount": "Garlic powder, paprika, pepper, Italian seasoning, a little salt, lemons"
+  },
+  {
+   "item": "Romaine / spring mix (weekly)",
+   "amount": "700 g a week"
+  },
+  {
+   "item": "Cucumber (weekly)",
+   "amount": "700 g a week"
+  },
+  {
+   "item": "Bell pepper",
+   "amount": "350 g fresh a week for salads, 100 g frozen a week for dinner"
+  },
+  {
+   "item": "Spinach",
+   "amount": "350 g a week"
+  },
+  {
+   "item": "Zucchini",
+   "amount": "700 g a week"
+  },
+  {
+   "item": "Green beans (frozen)",
+   "amount": "375 g a week"
+  },
+  {
+   "item": "Asparagus (frozen)",
+   "amount": "250 g a week"
+  },
+  {
+   "item": "Cabbage",
+   "amount": "125 g a week"
+  },
+  {
+   "item": "Mushrooms",
+   "amount": "125 g a week"
+  },
+  {
+   "item": "Avocado flesh",
+   "amount": "1,200 g a week"
+  }
+ ]
+}

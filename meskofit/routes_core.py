@@ -193,9 +193,12 @@ def library_search(app, req: Req):
                 break
         if ok:
             hits.append((score, {"id": e["id"], "name": e["name"], "equipment": e.get("equipment", ""),
-                                 "level": e.get("level", ""), "category": e.get("category", ""), "primary": prim}))
+                                 "level": e.get("level", ""), "category": e.get("category", ""), "primary": prim,
+                                 "frames": e.get("frames", 0)}))
     hits.sort(key=lambda h: -h[0])  # stable
-    return {"results": [h[1] for h in hits[:40]]}
+    limit = req.query.int("limit", 40)  # ?limit= lets the library page through a whole muscle group
+    limit = min(limit, 2000) if limit > 0 else 40
+    return {"results": [h[1] for h in hits[:limit]]}
 
 
 @router.get("/api/library/{id}")
