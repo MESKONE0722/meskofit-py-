@@ -1,4 +1,4 @@
-"""MeskoFit on Streamlit: the same data and logic as the web app, with a Streamlit interface.
+"""py123 on Streamlit: the same data and logic as the web app, with a Streamlit interface.
 
 Run:  streamlit run streamlit_app.py
 Data lives in ./meskofit-data (or $MESKOFIT_DATA). Set a password with $MESKOFIT_PASSWORD or the
@@ -27,7 +27,7 @@ from meskofit.web import HTTPError
 
 LB = calc.LB
 TEAL, INK, MUTED = "#0f766e", "#17211e", "#6b7a75"
-st.set_page_config(page_title="MeskoFit", page_icon="💪", layout="centered", initial_sidebar_state="collapsed")
+st.set_page_config(page_title="py123", page_icon="💪", layout="centered", initial_sidebar_state="collapsed")
 
 st.markdown("""
 <style>
@@ -81,7 +81,7 @@ def gate() -> None:
     pw = password()
     if not pw or st.session_state.get("ok"):
         return
-    st.title("MeskoFit")
+    st.title("py123")
     with st.form("login"):
         entered = st.text_input("Password", type="password")
         if st.form_submit_button("Open", type="primary") and entered:
@@ -204,7 +204,7 @@ today_s = today.isoformat()
 # ───────────────────────── first-run setup ─────────────────────────
 
 if not profile.get("setupDone"):
-    st.title("💪 MeskoFit")
+    st.title("💪 py123")
     st.caption("A few details so your plan, BMI and graphs fit you. Everything stays in your own data folder.")
     units = st.segmented_control("Units", ["Imperial (lb, ft, in)", "Metric (kg, cm)"], default=None, key="su_units")
     if units is None:
@@ -256,7 +256,7 @@ goal_kg = profile.get("goalWeightKg")
 
 # ───────────────────────── header ─────────────────────────
 
-hello = f"Hi {profile['name']}" if profile.get("name") else "MeskoFit"
+hello = f"Hi {profile['name']}" if profile.get("name") else "py123"
 bm = calc.bmi(cur_kg, hcm) if cur_kg and hcm else 0
 lost = (start_kg - cur_kg) if (start_kg and cur_kg) else 0
 st.markdown(

@@ -1,4 +1,4 @@
-"""A tiny private certificate authority so the iPhone can reach MeskoFit over HTTPS on the home network.
+"""A tiny private certificate authority so the iPhone can reach py123 over HTTPS on the home network.
 
 Safari only allows live camera access (getUserMedia) on secure origins, and a LAN IP over plain HTTP is
 not one. The CA is name-constrained to private IP ranges and local host names, so even if its key ever
@@ -114,8 +114,8 @@ class Manager:
         key = ec.generate_private_key(ec.SECP256R1())
         host = host_label()
         name = x509.Name([
-            x509.NameAttribute(NameOID.COMMON_NAME, f"MeskoFit Local CA ({host})"),
-            x509.NameAttribute(NameOID.ORGANIZATION_NAME, "MeskoFit"),
+            x509.NameAttribute(NameOID.COMMON_NAME, f"py123 Local CA ({host})"),
+            x509.NameAttribute(NameOID.ORGANIZATION_NAME, "py123"),
         ])
         now = _utcnow()
         b = (
@@ -209,7 +209,7 @@ class Manager:
                 x509.CertificateBuilder()
                 .subject_name(x509.Name([
                     x509.NameAttribute(NameOID.COMMON_NAME, "localhost"),
-                    x509.NameAttribute(NameOID.ORGANIZATION_NAME, "MeskoFit"),
+                    x509.NameAttribute(NameOID.ORGANIZATION_NAME, "py123"),
                 ]))
                 .issuer_name(self._ca_cert.subject)
                 .public_key(lk.public_key())
@@ -332,7 +332,7 @@ _MOBILECONFIG = """<?xml version="1.0" encoding="UTF-8"?>
 \t\t\t<key>PayloadContent</key>
 \t\t\t<data>{data}</data>
 \t\t\t<key>PayloadDescription</key>
-\t\t\t<string>Lets this iPhone trust your own MeskoFit server on your home network.</string>
+\t\t\t<string>Lets this iPhone trust your own py123 server on your home network.</string>
 \t\t\t<key>PayloadDisplayName</key>
 \t\t\t<string>{name}</string>
 \t\t\t<key>PayloadIdentifier</key>
@@ -346,9 +346,9 @@ _MOBILECONFIG = """<?xml version="1.0" encoding="UTF-8"?>
 \t\t</dict>
 \t</array>
 \t<key>PayloadDescription</key>
-\t<string>Installs the MeskoFit local certificate authority (limited to home-network addresses).</string>
+\t<string>Installs the py123 local certificate authority (limited to home-network addresses).</string>
 \t<key>PayloadDisplayName</key>
-\t<string>MeskoFit HTTPS</string>
+\t<string>py123 HTTPS</string>
 \t<key>PayloadIdentifier</key>
 \t<string>app.meskofit.profile.{outer}</string>
 \t<key>PayloadRemovalDisallowed</key>

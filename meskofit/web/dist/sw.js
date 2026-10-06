@@ -1,4 +1,4 @@
-/* MeskoFit service worker — keeps the app and your plan usable when the gym
+/* py123 service worker — keeps the app and your plan usable when the gym
    has no signal. Workout sets are saved on the phone and synced later by the
    app itself; this worker only caches the app shell and a few read requests. */
 const VERSION = "muvmq26d";
