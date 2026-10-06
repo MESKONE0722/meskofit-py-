@@ -65,7 +65,7 @@ def test_end_to_end(env):
     # plans
     plans = c.get("/api/plans").json()
     beg = plans["levels"]["beginner"]
-    assert len(beg["days"]) == 5
+    assert len(beg["days"]) == 7
     beg["days"][0]["exercises"].append({"id": "x1", "ex": "lib:Cable_Crossover", "sets": 2, "reps": "12"})
     r = c.put("/api/plans/beginner", json=beg)
     assert r.status_code == 200 and len(r.json()["customized"]) == 1

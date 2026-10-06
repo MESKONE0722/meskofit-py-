@@ -575,7 +575,20 @@
    ],
    "tips": [
     "Flat back, hinge at the hips, pull to your belly button."
-   ]
+   ],
+   "form": {
+    "anim": "row",
+    "wrong": [
+     "Rounded back.",
+     "Heaving the bar with momentum.",
+     "Standing up as you pull."
+    ],
+    "right": [
+     "Flat back and a hinge held at one angle.",
+     "Pull to your lower ribs, elbows back.",
+     "Pause, then lower slowly."
+    ]
+   }
   },
   "chest-supported-row": {
    "key": "chest-supported-row",
@@ -655,7 +668,20 @@
    "tips": [
     "Bar over mid-foot, flat back, push the floor away.",
     "Learn it light \u2014 form first."
-   ]
+   ],
+   "form": {
+    "anim": "hinge",
+    "wrong": [
+     "Back rounds as the bar leaves the floor.",
+     "Bar drifts away from your legs.",
+     "Hips shoot up before the bar moves."
+    ],
+    "right": [
+     "Flat back and the bar dragging up your legs.",
+     "Push the floor away, hips and shoulders rise together.",
+     "Finish tall, glutes tight."
+    ]
+   }
   },
   "landmine-row": {
    "key": "landmine-row",
@@ -728,7 +754,20 @@
    ],
    "tips": [
     "Support yourself with one hand on a bench to keep your back neutral."
-   ]
+   ],
+   "form": {
+    "anim": "row",
+    "wrong": [
+     "Twisting your torso to lift.",
+     "Shrugging toward your ear.",
+     "Rounded back."
+    ],
+    "right": [
+     "Square hips and shoulders.",
+     "Elbow drives to your hip.",
+     "Back flat the whole time."
+    ]
+   }
   },
   "reverse-fly-machine": {
    "key": "reverse-fly-machine",
@@ -1385,7 +1424,20 @@
    "tips": [
     "Squat inside a rack with safety bars set.",
     "Sit back and down; chest up."
-   ]
+   ],
+   "form": {
+    "anim": "squat",
+    "wrong": [
+     "Knees cave inward on the way up.",
+     "Chest drops and the bar tips forward.",
+     "Heels come off the floor."
+    ],
+    "right": [
+     "Knees track out over your toes.",
+     "Chest up, bar over mid-foot.",
+     "Whole foot stays planted."
+    ]
+   }
   },
   "box-squat": {
    "key": "box-squat",
@@ -1418,7 +1470,20 @@
    ],
    "tips": [
     "Raise the box if your knees complain; lower it over the months."
-   ]
+   ],
+   "form": {
+    "anim": "squat",
+    "wrong": [
+     "Dropping onto the box.",
+     "Chest falls forward.",
+     "Knees collapse inward."
+    ],
+    "right": [
+     "Sit back to the box under control.",
+     "Chest up, shins near vertical.",
+     "Drive up through the whole foot."
+    ]
+   }
   },
   "sit-to-stand": {
    "key": "sit-to-stand",
@@ -1564,7 +1629,20 @@
     "Step down with the left leg by flexing the hip and knee of the right leg as you inhale. Return to the original standing position by placing the right foot of to next to the left foot on the initial position.",
     "Repeat with the right leg for the recommended amount of repetitions and then perform with the left leg."
    ],
-   "tips": []
+   "tips": [],
+   "form": {
+    "anim": "stairs",
+    "wrong": [
+     "Pushing off the back foot instead of the front leg.",
+     "Knee collapsing inward.",
+     "Leaning far forward over the step."
+    ],
+    "right": [
+     "Put your whole foot on the step and drive through that heel.",
+     "Knee tracks over the toes.",
+     "Stand tall at the top."
+    ]
+   }
   },
   "db-shrug": {
    "key": "db-shrug",
@@ -1871,7 +1949,20 @@
    ],
    "tips": [
     "Straight line from head to heels; squeeze glutes."
-   ]
+   ],
+   "form": {
+    "anim": "pushup",
+    "wrong": [
+     "Hips sagging, which strains your lower back.",
+     "Hips piked up so the core switches off.",
+     "Holding your breath."
+    ],
+    "right": [
+     "Straight line from head to heels.",
+     "Glutes and abs tight.",
+     "Breathe slowly the whole way through."
+    ]
+   }
   },
   "incline-plank": {
    "key": "incline-plank",
@@ -2110,7 +2201,20 @@
     "Now breathe out and press your upper body back up to the starting position while squeezing your chest.",
     "After a brief pause at the top contracted position, you can begin to lower yourself downward again for as many repetitions as needed."
    ],
-   "tips": []
+   "tips": [],
+   "form": {
+    "anim": "pushup",
+    "wrong": [
+     "Hips sagging toward the floor.",
+     "Elbows flared straight out to the sides.",
+     "Head dropping and the neck craning."
+    ],
+    "right": [
+     "Straight line from head to heels.",
+     "Elbows about 45\u00b0 from your body.",
+     "Neck neutral, eyes on a spot just ahead of your hands."
+    ]
+   }
   },
   "incline-pushup": {
    "key": "incline-pushup",
@@ -2142,7 +2246,20 @@
    ],
    "tips": [
     "Hands on a bench, box or Smith bar. Higher = easier."
-   ]
+   ],
+   "form": {
+    "anim": "pushup",
+    "wrong": [
+     "Hips sagging or piking up.",
+     "Elbows flared wide.",
+     "Only moving halfway."
+    ],
+    "right": [
+     "Straight line from head to heels.",
+     "Elbows about 45\u00b0.",
+     "Chest down toward the bench, then press all the way up."
+    ]
+   }
   },
   "pull-ups": {
    "key": "pull-ups",
@@ -3440,7 +3557,379 @@
     "Coming down is harder on the knees than going up, so take it slowly.",
     "If a full flight is too much, step up and down on the bottom step instead.",
     "No machine weight limit, but make sure the stairs and rail are solid."
+   ],
+   "form": {
+    "anim": "stairs",
+    "wrong": [
+     "Landing only on your toes.",
+     "Leaning way forward and not using the rail when you need it.",
+     "Rushing down: that's the hard part on knees."
+    ],
+    "right": [
+     "Whole foot on each step.",
+     "Stand reasonably tall and use the rail.",
+     "Take the way down slowly, one step at a time."
+    ]
+   }
+  },
+  "kb-deadlift": {
+   "key": "kb-deadlift",
+   "name": "Kettlebell deadlift",
+   "lib": null,
+   "img": null,
+   "frames": [],
+   "kind": "weight",
+   "equipment": "kettlebell",
+   "primary": [
+    "glutes",
+    "hamstrings"
+   ],
+   "secondary": [
+    "lower back",
+    "quadriceps"
+   ],
+   "target": "Hips and hamstrings",
+   "flags": [],
+   "alts": [],
+   "lower": true,
+   "unilateral": false,
+   "steps": [
+    "Stand with feet about shoulder-width apart and the kettlebell on the floor between your feet, in line with your ankles.",
+    "Push your hips straight back, like closing a car door with your backside, until you can reach the handle with a flat back.",
+    "Take a big breath in, squeeze the handle and pull the slack out of your arms.",
+    "Stand up by driving your hips forward, with the bell staying close to your legs, and finish tall with your glutes squeezed.",
+    "Hinge back again and set the bell down under control. Reset your breath before the next rep."
+   ],
+   "tips": [
+    "This is the hinge you need for swings, so spend time here before you swing.",
+    "Your knees only bend a little. If your knees travel far forward it is turning into a squat.",
+    "Raise the bell on a block or a couple of books if you can't reach it with a flat back."
+   ],
+   "form": {
+    "anim": "hinge",
+    "wrong": [
+     "Round back: the spine curls and the bell pulls you forward.",
+     "Squatting it: knees shoot forward and hips stay low.",
+     "Pulling with the arms instead of pushing the floor away."
+    ],
+    "right": [
+     "Flat back from head to hips; the bell stays against your legs.",
+     "Hips go back first, knees soft.",
+     "Stand tall and squeeze your glutes at the top, without leaning back."
+    ]
+   }
+  },
+  "kb-swing": {
+   "key": "kb-swing",
+   "name": "Kettlebell swing (two-hand)",
+   "lib": null,
+   "img": null,
+   "frames": [],
+   "kind": "weight",
+   "equipment": "kettlebell",
+   "primary": [
+    "glutes",
+    "hamstrings"
+   ],
+   "secondary": [
+    "lower back",
+    "shoulders",
+    "abdominals"
+   ],
+   "target": "Hips, back and hamstrings",
+   "flags": [],
+   "alts": [],
+   "lower": true,
+   "unilateral": false,
+   "steps": [
+    "Stand with feet a little wider than your shoulders and the kettlebell on the floor about a foot in front of you.",
+    "Hinge back, grab the handle with both hands and tip the bell toward you, then hike it back between your legs, forearms against your thighs.",
+    "Snap your hips forward hard. The bell floats up to about chest height from that drive, not from your arms.",
+    "At the top, stand tall with glutes and abs tight and arms relaxed.",
+    "Let the bell fall back and guide it into the hike again by hinging, not squatting. After your last rep, set it down in front of you."
+   ],
+   "tips": [
+    "Start light: 18 to 26 lb is plenty. Form first, weight later.",
+    "Learn the kettlebell deadlift first. If your back rounds or your knees ache, go back to deadlifts.",
+    "Keep sets short (5 to 10 reps) and rest. A tired swing is a sloppy swing.",
+    "Stop the set when the bell no longer floats to the same height."
+   ],
+   "form": {
+    "anim": "swing",
+    "wrong": [
+     "Lifting the bell with your arms and shoulders.",
+     "Squatting down on every rep.",
+     "Leaning back at the top so your lower back arches."
+    ],
+    "right": [
+     "The hips do the work; arms are just ropes.",
+     "Hinge back and hike the bell high between your thighs.",
+     "Finish standing tall, ribs down, glutes tight. Bell at chest height."
+    ]
+   }
+  },
+  "kb-goblet-box-squat": {
+   "key": "kb-goblet-box-squat",
+   "name": "Goblet squat to a box",
+   "lib": null,
+   "img": null,
+   "frames": [],
+   "kind": "weight",
+   "equipment": "kettlebell",
+   "primary": [
+    "quadriceps",
+    "glutes"
+   ],
+   "secondary": [
+    "hamstrings",
+    "abdominals"
+   ],
+   "target": "Legs",
+   "flags": [
+    "knee"
+   ],
+   "alts": [
+    "sit-to-stand"
+   ],
+   "lower": true,
+   "unilateral": false,
+   "steps": [
+    "Set a sturdy chair or box behind you so that sitting on it puts your thighs about parallel to the floor, or higher.",
+    "Hold the kettlebell by the horns against your chest with your elbows pointing down.",
+    "Stand with feet a little wider than your hips and toes slightly out.",
+    "Push your hips back and sit down to the box under control, knees tracking over your toes.",
+    "Touch the box lightly, keep your chest up and stand back up by pushing through your whole foot."
+   ],
+   "tips": [
+    "Raise the box higher to shorten the range if your knees object. A higher seat is a real option, not a failure.",
+    "Stop if you feel sharp pain at the front of the knee.",
+    "Don't drop onto the box. Control the descent."
+   ],
+   "form": {
+    "anim": "squat",
+    "wrong": [
+     "Dropping onto the box, then bouncing up.",
+     "Knees collapse inward.",
+     "Chest falls forward and heels come off the floor."
+    ],
+    "right": [
+     "Hips go back, then down, with a controlled seat.",
+     "Knees push out in line with your toes.",
+     "Chest up, whole foot on the floor, bell held tight to your chest."
+    ]
+   }
+  },
+  "kb-getup-elbow": {
+   "key": "kb-getup-elbow",
+   "name": "Get-up to elbow",
+   "lib": null,
+   "img": null,
+   "frames": [],
+   "kind": "bodyweight",
+   "equipment": "body only",
+   "primary": [
+    "abdominals",
+    "shoulders"
+   ],
+   "secondary": [
+    "glutes",
+    "abdominals"
+   ],
+   "target": "Core and shoulder stability",
+   "flags": [],
+   "alts": [],
+   "lower": false,
+   "unilateral": true,
+   "steps": [
+    "Lie on your back on a firm bed or mat, right knee bent with your foot flat, left leg straight. Hold your right hand up, fist to the ceiling (a shoe on your fist works as a light weight).",
+    "Keep your eyes on your fist. Roll up onto your left elbow.",
+    "Pause there with your chest open. This is where beginners stop.",
+    "Reverse the motion slowly and lie back down. Do all reps on one side, then switch."
+   ],
+   "tips": [
+    "This is the first step toward a full Turkish get-up. Do it empty-handed or with a shoe until it feels easy.",
+    "Move slowly and keep your eyes on your fist.",
+    "Take your time. If you can't get up on the elbow yet, practice rolling to your side first."
+   ],
+   "form": {
+    "anim": null,
+    "wrong": [
+     "Rushing and kipping up with momentum.",
+     "Looking down at your body so the fist wanders.",
+     "Letting the arm drift forward."
+    ],
+    "right": [
+     "Slow, with your eyes on your fist.",
+     "Arm stays straight over your shoulder.",
+     "Press the floor away with the elbow, then lower with control."
+    ]
+   }
+  },
+  "kb-halo": {
+   "key": "kb-halo",
+   "name": "Kettlebell halo",
+   "lib": null,
+   "img": null,
+   "frames": [],
+   "kind": "weight",
+   "equipment": "kettlebell",
+   "primary": [
+    "shoulders"
+   ],
+   "secondary": [
+    "triceps",
+    "abdominals",
+    "middle back"
+   ],
+   "target": "Shoulder mobility",
+   "flags": [],
+   "alts": [],
+   "lower": false,
+   "unilateral": false,
+   "steps": [
+    "Stand tall holding the kettlebell upside down by the horns at chest height, elbows tucked.",
+    "Circle the bell slowly around your head, keeping it close.",
+    "Keep your ribs down and your glutes lightly tight.",
+    "Do half the reps one way, then the other way."
+   ],
+   "tips": [
+    "Light weight is enough. It is a warm-up for the shoulders, not a strength move.",
+    "Don't lean back to make room for the bell."
    ]
+  },
+  "kb-row": {
+   "key": "kb-row",
+   "name": "One-arm kettlebell row",
+   "lib": null,
+   "img": null,
+   "frames": [],
+   "kind": "weight",
+   "equipment": "kettlebell",
+   "primary": [
+    "lats",
+    "middle back"
+   ],
+   "secondary": [
+    "biceps",
+    "forearms"
+   ],
+   "target": "Back",
+   "flags": [],
+   "alts": [],
+   "lower": false,
+   "unilateral": true,
+   "steps": [
+    "Stand beside the kettlebell with one hand and one knee supported on a bench or a sturdy chair, back flat.",
+    "Grab the bell with your free hand, arm hanging straight.",
+    "Pull the bell toward your hip, leading with your elbow, and squeeze your shoulder blade.",
+    "Lower slowly until your arm is straight, then repeat. Do all reps and switch sides."
+   ],
+   "tips": [
+    "Keep your hips and shoulders square. Don't twist to heave it up.",
+    "Pause for a second at the top on every rep."
+   ],
+   "form": {
+    "anim": "row",
+    "wrong": [
+     "Twisting your whole body to heave the weight up.",
+     "Shrugging toward your ear.",
+     "Rounding your back."
+    ],
+    "right": [
+     "Hips and shoulders stay square to the floor.",
+     "Elbow drives toward your hip and the shoulder blade squeezes.",
+     "Back flat, neck in line with your spine."
+    ]
+   }
+  },
+  "kb-floor-press": {
+   "key": "kb-floor-press",
+   "name": "Kettlebell floor press",
+   "lib": null,
+   "img": null,
+   "frames": [],
+   "kind": "weight",
+   "equipment": "kettlebell",
+   "primary": [
+    "chest",
+    "triceps"
+   ],
+   "secondary": [
+    "shoulders"
+   ],
+   "target": "Chest",
+   "flags": [],
+   "alts": [],
+   "lower": false,
+   "unilateral": true,
+   "steps": [
+    "Lie on your back on the floor with knees bent and feet flat, holding the kettlebell by the handle at your chest, upper arm resting on the floor.",
+    "Press the bell straight up until your arm is straight.",
+    "Lower slowly until your upper arm touches the floor, then press again. Do all reps, then switch arms."
+   ],
+   "tips": [
+    "The floor protects your shoulders and keeps your knees out of it, which makes it a good first press.",
+    "Keep your wrist straight over your forearm."
+   ],
+   "form": {
+    "anim": null,
+    "wrong": [
+     "Wrist bent backward under the weight.",
+     "Elbow flared straight out to the side.",
+     "Lifting your hips off the floor."
+    ],
+    "right": [
+     "Wrist straight, stacked over the elbow.",
+     "Elbow about 45\u00b0 from your body.",
+     "Back and hips stay down on the floor."
+    ]
+   }
+  },
+  "kb-farmer-carry": {
+   "key": "kb-farmer-carry",
+   "name": "Kettlebell farmer carry",
+   "lib": null,
+   "img": null,
+   "frames": [],
+   "kind": "time",
+   "equipment": "kettlebell",
+   "primary": [
+    "forearms",
+    "traps"
+   ],
+   "secondary": [
+    "abdominals",
+    "glutes",
+    "shoulders"
+   ],
+   "target": "Grip and posture",
+   "flags": [],
+   "alts": [],
+   "lower": false,
+   "unilateral": false,
+   "steps": [
+    "Stand between two kettlebells (or one) and hinge down with a flat back to pick them up.",
+    "Stand tall with your shoulders back and down, arms straight at your sides.",
+    "Walk steadily with small, even steps for the time or distance.",
+    "Set the weights down with a hinge, not by rounding your back."
+   ],
+   "tips": [
+    "Carry in a hallway or around the room. 30 seconds is a good start.",
+    "A heavier bell in one hand (suitcase carry) works your core harder."
+   ],
+   "form": {
+    "anim": "carry",
+    "wrong": [
+     "Leaning to one side or slouching forward.",
+     "Shrugging the weights up.",
+     "Rushing with long, bouncing steps."
+    ],
+    "right": [
+     "Stand tall, ribs down, shoulders down and back.",
+     "Small, steady steps. Look straight ahead.",
+     "Squeeze the handles and keep your arms still."
+    ]
+   }
   }
  }
 }

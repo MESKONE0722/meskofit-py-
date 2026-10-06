@@ -28,6 +28,11 @@ Today, Train (with the 870+ exercise library, live PR badges, suggested weights 
 Food (with your weekly meal plan and one-tap logging), Progress (BMI with a body figure, goal planner, shot
 tracker) and Coach (your week plus a trainer chat that uses the AI model set under More).
 
+Under **Train → Home: stairs and kettlebell** there are two extra days outside the weekly rotation: a
+Pavel-style kettlebell starter (halo, deadlift, swings, get-up to elbow) and a Statham-style stairs +
+kettlebell circuit. Every exercise with form notes shows a **Form check**: animated wrong-vs-right figures
+and the cues. If you've edited a level's plan before, use **Edit the plan → Reset** to get the new days.
+
 ## Your profile, pre-filled
 
 `profile_defaults.json` holds your name, age, height, weight, goal, level, knee setting and daily targets.

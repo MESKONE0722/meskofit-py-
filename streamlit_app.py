@@ -187,6 +187,11 @@ def exercise_guide(e: dict, key: str) -> None:
     if e.get("tips"):
         st.markdown("**Tips**")
         st.markdown("\n".join(f"- {t}" for t in e["tips"]))
+    form = e.get("form") or {}
+    if form.get("wrong") or form.get("right"):
+        st.markdown("**Form check**")
+        st.markdown("\n".join([f"- ❌ {t}" for t in form.get("wrong", [])] + [f"- ✅ {t}" for t in form.get("right", [])]))
+        st.caption("The animated wrong-vs-right figures are in the PC app; this mockup shows the cues.")
 
 
 def card_html(inner: str) -> None:
@@ -535,6 +540,8 @@ with t_train:
         days = plan["days"] + ([plan["core"]] if plan.get("core") else [])
         pick = st.selectbox("Choose a workout", days, format_func=lambda d: d["name"], index=None, placeholder="Choose a workout")
         if pick:
+            if pick.get("note"):
+                st.caption(pick["note"])
             day_prim = sorted({m for ex in pick["exercises"] for m in cat.get(ex["ex"], {}).get("primary", [])})
             day_sec = sorted({m for ex in pick["exercises"] for m in cat.get(ex["ex"], {}).get("secondary", [])} - set(day_prim))
             if day_prim:

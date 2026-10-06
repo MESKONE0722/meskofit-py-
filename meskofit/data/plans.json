@@ -324,6 +324,126 @@
       "st-triceps",
       "st-elbows-back"
      ]
+    },
+    {
+     "id": "kb-pavel",
+     "name": "Kettlebell: Pavel-style starter",
+     "short": "KB",
+     "suggested": "Fri",
+     "focus": [
+      "glutes",
+      "hamstrings",
+      "shoulders",
+      "abdominals"
+     ],
+     "optional": true,
+     "note": "Inspired by Pavel Tsatsouline's Simple & Sinister: two lifts, swings and get-ups, done fresh and often. This is the beginner version: learn the hinge first, keep sets short and stop before form fades.",
+     "exercises": [
+      {
+       "id": "kp1",
+       "ex": "kb-halo",
+       "sets": 2,
+       "reps": "5",
+       "note": "5 each way, light"
+      },
+      {
+       "id": "kp2",
+       "ex": "kb-deadlift",
+       "sets": 3,
+       "reps": "8",
+       "note": "Learn the hinge. Flat back."
+      },
+      {
+       "id": "kp3",
+       "ex": "kb-swing",
+       "sets": 5,
+       "reps": "5",
+       "note": "Rest 45 to 60 seconds. Add reps or sets slowly toward 10 x 10. Stop when form fades."
+      },
+      {
+       "id": "kp4",
+       "ex": "kb-getup-elbow",
+       "sets": 3,
+       "reps": "3",
+       "note": "3 each side, slow"
+      }
+     ],
+     "stretches": [
+      "st-hip-flexor",
+      "st-calf-wall",
+      "st-seated-hamstring",
+      "st-upper-back"
+     ]
+    },
+    {
+     "id": "kb-statham",
+     "name": "Home stairs + kettlebell circuit",
+     "short": "Stairs+KB",
+     "suggested": "Sat",
+     "focus": [
+      "quadriceps",
+      "glutes",
+      "middle back",
+      "chest"
+     ],
+     "optional": true,
+     "note": "Built like Jason Statham's training: short, hard, nearly rest-free work with pyramids, carries and bodyweight moves, scaled to a beginner with your own stairs and a kettlebell.",
+     "exercises": [
+      {
+       "id": "ks1",
+       "ex": "home-stairs",
+       "sets": 3,
+       "secs": 120,
+       "note": "Easy talking pace. Rest as needed between rounds."
+      },
+      {
+       "id": "ks2",
+       "ex": "incline-pushup",
+       "sets": 1,
+       "reps": "25",
+       "note": "Pyramid: 1-2-3-4-5-4-3-2-1 with no rest between"
+      },
+      {
+       "id": "ks3",
+       "ex": "kb-goblet-box-squat",
+       "sets": 3,
+       "reps": "8",
+       "note": "High box is fine"
+      },
+      {
+       "id": "ks4",
+       "ex": "kb-row",
+       "sets": 3,
+       "reps": "10",
+       "note": "Each side"
+      },
+      {
+       "id": "ks5",
+       "ex": "kb-floor-press",
+       "sets": 3,
+       "reps": "10",
+       "note": "Each arm"
+      },
+      {
+       "id": "ks6",
+       "ex": "kb-farmer-carry",
+       "sets": 3,
+       "secs": 30,
+       "note": "Hallway or around the room"
+      },
+      {
+       "id": "ks7",
+       "ex": "plank",
+       "sets": 3,
+       "secs": 20
+      }
+     ],
+     "stretches": [
+      "st-hip-flexor",
+      "st-calf-wall",
+      "st-seated-hamstring",
+      "st-upper-back"
+     ]
     }
    ],
    "core": {
@@ -772,6 +892,126 @@
       "st-pelvic-tilt",
       "st-triceps",
       "st-elbows-back"
+     ]
+    },
+    {
+     "id": "kb-pavel",
+     "name": "Kettlebell: Pavel-style starter",
+     "short": "KB",
+     "suggested": "Fri",
+     "focus": [
+      "glutes",
+      "hamstrings",
+      "shoulders",
+      "abdominals"
+     ],
+     "optional": true,
+     "note": "Inspired by Pavel Tsatsouline's Simple & Sinister: two lifts, swings and get-ups, done fresh and often. This is the beginner version: learn the hinge first, keep sets short and stop before form fades.",
+     "exercises": [
+      {
+       "id": "kp1",
+       "ex": "kb-halo",
+       "sets": 2,
+       "reps": "5",
+       "note": "5 each way, light"
+      },
+      {
+       "id": "kp2",
+       "ex": "kb-deadlift",
+       "sets": 4,
+       "reps": "8",
+       "note": "Learn the hinge. Flat back."
+      },
+      {
+       "id": "kp3",
+       "ex": "kb-swing",
+       "sets": 7,
+       "reps": "5",
+       "note": "Rest 45 to 60 seconds. Add reps or sets slowly toward 10 x 10. Stop when form fades."
+      },
+      {
+       "id": "kp4",
+       "ex": "kb-getup-elbow",
+       "sets": 4,
+       "reps": "3",
+       "note": "3 each side, slow"
+      }
+     ],
+     "stretches": [
+      "st-hip-flexor",
+      "st-calf-wall",
+      "st-seated-hamstring",
+      "st-upper-back"
+     ]
+    },
+    {
+     "id": "kb-statham",
+     "name": "Home stairs + kettlebell circuit",
+     "short": "Stairs+KB",
+     "suggested": "Sat",
+     "focus": [
+      "quadriceps",
+      "glutes",
+      "middle back",
+      "chest"
+     ],
+     "optional": true,
+     "note": "Built like Jason Statham's training: short, hard, nearly rest-free work with pyramids, carries and bodyweight moves, scaled to a beginner with your own stairs and a kettlebell.",
+     "exercises": [
+      {
+       "id": "ks1",
+       "ex": "home-stairs",
+       "sets": 3,
+       "secs": 180,
+       "note": "Easy talking pace. Rest as needed between rounds."
+      },
+      {
+       "id": "ks2",
+       "ex": "incline-pushup",
+       "sets": 1,
+       "reps": "25",
+       "note": "Pyramid: 1-2-3-4-5-4-3-2-1 with no rest between"
+      },
+      {
+       "id": "ks3",
+       "ex": "kb-goblet-box-squat",
+       "sets": 3,
+       "reps": "8",
+       "note": "High box is fine"
+      },
+      {
+       "id": "ks4",
+       "ex": "kb-row",
+       "sets": 3,
+       "reps": "10",
+       "note": "Each side"
+      },
+      {
+       "id": "ks5",
+       "ex": "kb-floor-press",
+       "sets": 3,
+       "reps": "10",
+       "note": "Each arm"
+      },
+      {
+       "id": "ks6",
+       "ex": "kb-farmer-carry",
+       "sets": 3,
+       "secs": 30,
+       "note": "Hallway or around the room"
+      },
+      {
+       "id": "ks7",
+       "ex": "plank",
+       "sets": 3,
+       "secs": 20
+      }
+     ],
+     "stretches": [
+      "st-hip-flexor",
+      "st-calf-wall",
+      "st-seated-hamstring",
+      "st-upper-back"
      ]
     }
    ],
@@ -1293,6 +1533,126 @@
       "st-pelvic-tilt",
       "st-triceps",
       "st-elbows-back"
+     ]
+    },
+    {
+     "id": "kb-pavel",
+     "name": "Kettlebell: Pavel-style starter",
+     "short": "KB",
+     "suggested": "Fri",
+     "focus": [
+      "glutes",
+      "hamstrings",
+      "shoulders",
+      "abdominals"
+     ],
+     "optional": true,
+     "note": "Inspired by Pavel Tsatsouline's Simple & Sinister: two lifts, swings and get-ups, done fresh and often. This is the beginner version: learn the hinge first, keep sets short and stop before form fades.",
+     "exercises": [
+      {
+       "id": "kp1",
+       "ex": "kb-halo",
+       "sets": 2,
+       "reps": "5",
+       "note": "5 each way, light"
+      },
+      {
+       "id": "kp2",
+       "ex": "kb-deadlift",
+       "sets": 5,
+       "reps": "8",
+       "note": "Learn the hinge. Flat back."
+      },
+      {
+       "id": "kp3",
+       "ex": "kb-swing",
+       "sets": 9,
+       "reps": "5",
+       "note": "Rest 45 to 60 seconds. Add reps or sets slowly toward 10 x 10. Stop when form fades."
+      },
+      {
+       "id": "kp4",
+       "ex": "kb-getup-elbow",
+       "sets": 5,
+       "reps": "3",
+       "note": "3 each side, slow"
+      }
+     ],
+     "stretches": [
+      "st-hip-flexor",
+      "st-calf-wall",
+      "st-seated-hamstring",
+      "st-upper-back"
+     ]
+    },
+    {
+     "id": "kb-statham",
+     "name": "Home stairs + kettlebell circuit",
+     "short": "Stairs+KB",
+     "suggested": "Sat",
+     "focus": [
+      "quadriceps",
+      "glutes",
+      "middle back",
+      "chest"
+     ],
+     "optional": true,
+     "note": "Built like Jason Statham's training: short, hard, nearly rest-free work with pyramids, carries and bodyweight moves, scaled to a beginner with your own stairs and a kettlebell.",
+     "exercises": [
+      {
+       "id": "ks1",
+       "ex": "home-stairs",
+       "sets": 3,
+       "secs": 240,
+       "note": "Easy talking pace. Rest as needed between rounds."
+      },
+      {
+       "id": "ks2",
+       "ex": "incline-pushup",
+       "sets": 1,
+       "reps": "25",
+       "note": "Pyramid: 1-2-3-4-5-4-3-2-1 with no rest between"
+      },
+      {
+       "id": "ks3",
+       "ex": "kb-goblet-box-squat",
+       "sets": 3,
+       "reps": "8",
+       "note": "High box is fine"
+      },
+      {
+       "id": "ks4",
+       "ex": "kb-row",
+       "sets": 3,
+       "reps": "10",
+       "note": "Each side"
+      },
+      {
+       "id": "ks5",
+       "ex": "kb-floor-press",
+       "sets": 3,
+       "reps": "10",
+       "note": "Each arm"
+      },
+      {
+       "id": "ks6",
+       "ex": "kb-farmer-carry",
+       "sets": 3,
+       "secs": 30,
+       "note": "Hallway or around the room"
+      },
+      {
+       "id": "ks7",
+       "ex": "plank",
+       "sets": 3,
+       "secs": 20
+      }
+     ],
+     "stretches": [
+      "st-hip-flexor",
+      "st-calf-wall",
+      "st-seated-hamstring",
+      "st-upper-back"
      ]
     }
    ],
