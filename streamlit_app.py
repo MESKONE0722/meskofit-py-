@@ -18,6 +18,7 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
+from form_figures import figures_html
 from meskofit import calc, mealplan
 from meskofit.defaults import seed_profile
 from meskofit.local import Local, open_local
@@ -190,8 +191,14 @@ def exercise_guide(e: dict, key: str) -> None:
     form = e.get("form") or {}
     if form.get("wrong") or form.get("right"):
         st.markdown("**Form check**")
+        fig_html = figures_html(form.get("anim"), str(e.get("key", key)).startswith("kb-"))
+        if fig_html:
+            if hasattr(st, "iframe"):
+                st.iframe(fig_html, height=190)
+            else:
+                import streamlit.components.v1 as components
+                components.html(fig_html, height=190)
         st.markdown("\n".join([f"- ❌ {t}" for t in form.get("wrong", [])] + [f"- ✅ {t}" for t in form.get("right", [])]))
-        st.caption("The animated wrong-vs-right figures are in the PC app; this mockup shows the cues.")
 
 
 def card_html(inner: str) -> None:
