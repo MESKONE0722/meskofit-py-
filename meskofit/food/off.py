@@ -11,7 +11,7 @@ import httpx
 from .types import Food, Hit, barcode_variants, clean_tags, fmt_num, round_n
 
 # Identifies the app to Open Food Facts, as their API terms ask.
-USER_AGENT = "py123/1.0 (self-hosted personal fitness app)"
+USER_AGENT = "MeskoFit/1.0 (self-hosted personal fitness app)"
 
 
 class FoodError(Exception):

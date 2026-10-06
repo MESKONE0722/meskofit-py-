@@ -341,7 +341,7 @@ def export(app, req: Req):
     from .routes_core import current_plans
 
     doc = {
-        "app": "py123", "version": app.opt.version, "exportedAt": now(),
+        "app": "MeskoFit", "version": app.opt.version, "exportedAt": now(),
         "profile": app.profile(), "settings": st, "plans": current_plans(app),
         "body": table_json(app, "SELECT * FROM body_log ORDER BY date"),
         "sessions": table_json(app, "SELECT * FROM sessions ORDER BY date, id"),

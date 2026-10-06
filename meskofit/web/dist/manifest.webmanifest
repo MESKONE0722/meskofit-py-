@@ -1,6 +1,6 @@
 {
-  "name": "py123",
-  "short_name": "py123",
+  "name": "MeskoFit",
+  "short_name": "MeskoFit",
   "description": "Your workouts, food and progress — running on your own computer.",
   "start_url": "/",
   "scope": "/",

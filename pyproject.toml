@@ -1,7 +1,7 @@
 [project]
 name = "meskofit"
 version = "1.0.0"
-description = "Self-hosted workout, food and progress tracker. Python port of py123."
+description = "Self-hosted workout, food and progress tracker. Python port of MeskoFit."
 requires-python = ">=3.11"
 dependencies = [
   "starlette>=0.40",

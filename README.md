@@ -1,4 +1,4 @@
-# py123 (Python)
+# MeskoFit (Python)
 
 Your workout regimen with exercise diagrams, weight/BMI tracking, a calorie and macro tracker with
 barcode scanning, and detailed progress graphs. One Python program runs on your PC and opens on

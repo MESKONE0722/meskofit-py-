@@ -1,4 +1,4 @@
-"""The py123 application object: storage, food/AI clients, bundled data, and the Starlette app."""
+"""The MeskoFit application object: storage, food/AI clients, bundled data, and the Starlette app."""
 from __future__ import annotations
 
 import json

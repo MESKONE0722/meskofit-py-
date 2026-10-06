@@ -272,7 +272,7 @@ def mobileconfig(app, req: Req):
     if app.opt.certs is None:
         raise not_found("404 page not found")
     return Response(app.opt.certs.mobileconfig(), 200, {"Content-Type": "application/x-apple-aspen-config",
-                                                        "Content-Disposition": 'attachment; filename="py123.mobileconfig"'})
+                                                        "Content-Disposition": 'attachment; filename="MeskoFit.mobileconfig"'})
 
 
 # ───────────────────────── exercise pictures ─────────────────────────

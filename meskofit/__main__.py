@@ -1,4 +1,4 @@
-"""py123: a self-hosted workout, nutrition and progress tracker you run on your own PC and use from
+"""MeskoFit: a self-hosted workout, nutrition and progress tracker you run on your own PC and use from
 your iPhone over your home network. Port of main.go (flags keep their single-dash Go names; ``--name`` works too)."""
 from __future__ import annotations
 
@@ -21,7 +21,7 @@ log = logging.getLogger("meskofit")
 
 
 class _Fatal(Exception):
-    """Startup failure: printed as 'py123 could not start: ...' and exit code 1."""
+    """Startup failure: printed as 'MeskoFit could not start: ...' and exit code 1."""
 
 
 # ───────────────────────── CLI ─────────────────────────
@@ -60,13 +60,13 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     if args.show_version:
-        print("py123", __version__)
+        print("MeskoFit", __version__)
         return 0
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s", datefmt="%H:%M:%S", stream=sys.stderr)
     try:
         return _run(args)
     except _Fatal as e:
-        print("\n  py123 could not start:", e, file=sys.stderr)
+        print("\n  MeskoFit could not start:", e, file=sys.stderr)
         if sys.platform == "win32":  # keep a double-clicked console window readable
             print("\n  Press Enter to close.", file=sys.stderr)
             with contextlib.suppress(Exception):
@@ -168,7 +168,7 @@ def _listen(port: int, flag: str) -> list[socket.socket]:
 def port_error(port: int, flag: str, err: OSError) -> str:
     msg = str(err)
     if "in use" in msg or "Only one usage" in msg or getattr(err, "errno", 0) in (98, 48, 10048):
-        return f"port {port} is already in use — is py123 already running? Pick another with {flag}"
+        return f"port {port} is already in use — is MeskoFit already running? Pick another with {flag}"
     return msg
 
 
@@ -243,7 +243,7 @@ async def _serve(asgi, socks: dict[str, list[socket.socket]], cm: certs.Manager 
     try:
         done, _ = await asyncio.wait({waiter, *tasks}, return_when=asyncio.FIRST_COMPLETED)
         if waiter in done:
-            print("\nStopping py123…")
+            print("\nStopping MeskoFit…")
     finally:
         for s in servers.values():
             s.should_exit = True
@@ -277,7 +277,7 @@ def urls(http_port: int, https_port: int, have_certs: bool) -> dict[str, list[st
 
 def banner(app, cm: certs.Manager | None, http_port: int, https_port: int, data_dir: str, show_qr: bool) -> None:
     u = urls(http_port, https_port, cm is not None)
-    out = ["", f"  py123 {__version__} is running", ""]
+    out = ["", f"  MeskoFit {__version__} is running", ""]
     if not u["http"] and not u["https"]:
         out.append(f"  Open http://localhost:{http_port} on this computer.")
     else:

@@ -1,4 +1,4 @@
-"""QR codes for the terminal and as SVG, so the iPhone can open py123 by pointing its camera at the PC screen."""
+"""QR codes for the terminal and as SVG, so the iPhone can open MeskoFit by pointing its camera at the PC screen."""
 from __future__ import annotations
 
 import segno
