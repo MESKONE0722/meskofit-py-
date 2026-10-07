@@ -18,7 +18,7 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
-from form_figures import figures_html
+from form_figures import figures_html, form_for
 from meskofit import calc, mealplan
 from meskofit.defaults import seed_profile
 from meskofit.local import Local, open_local
@@ -188,17 +188,17 @@ def exercise_guide(e: dict, key: str) -> None:
     if e.get("tips"):
         st.markdown("**Tips**")
         st.markdown("\n".join(f"- {t}" for t in e["tips"]))
-    form = e.get("form") or {}
-    if form.get("wrong") or form.get("right"):
+    form = form_for(e)
+    if form:
         st.markdown("**Form check**")
-        fig_html = figures_html(form.get("anim"), str(e.get("key", key)).startswith("kb-"))
-        if fig_html:
+        if form["anim"]:
+            fig_html = figures_html(form["anim"], str(e.get("equipment", "")), str(e.get("key", "")))
             if hasattr(st, "iframe"):
                 st.iframe(fig_html, height=190)
             else:
                 import streamlit.components.v1 as components
                 components.html(fig_html, height=190)
-        st.markdown("\n".join([f"- ❌ {t}" for t in form.get("wrong", [])] + [f"- ✅ {t}" for t in form.get("right", [])]))
+        st.markdown("\n".join([f"- ❌ {t}" for t in form["wrong"]] + [f"- ✅ {t}" for t in form["right"]]))
 
 
 def card_html(inner: str) -> None:
@@ -316,7 +316,7 @@ def exercise_detail(lib_id: str) -> None:
     e = A.get(f"/api/library/{lib_id}")
     ck = history_key(lib_id)
     if ck in cat:  # the curated entry has tips and the plan's names
-        e = {**e, **{k: v for k, v in cat[ck].items() if k in ("tips", "steps", "name")}}
+        e = {**e, **{k: v for k, v in cat[ck].items() if k in ("tips", "steps", "name", "form")}, "key": ck}
     if st.button("← Back to library"):
         st.session_state.lib_open = None
         st.rerun()

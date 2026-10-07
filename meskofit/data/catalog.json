@@ -3752,7 +3752,7 @@
     "Take your time. If you can't get up on the elbow yet, practice rolling to your side first."
    ],
    "form": {
-    "anim": null,
+    "anim": "getup",
     "wrong": [
      "Rushing and kipping up with momentum.",
      "Looking down at your body so the fist wanders.",
@@ -3795,7 +3795,20 @@
    "tips": [
     "Light weight is enough. It is a warm-up for the shoulders, not a strength move.",
     "Don't lean back to make room for the bell."
-   ]
+   ],
+   "form": {
+    "anim": "raise",
+    "wrong": [
+     "Leaning back to make room for the bell.",
+     "Letting the bell swing away from your head.",
+     "Shrugging your shoulders up."
+    ],
+    "right": [
+     "Ribs down, glutes lightly tight.",
+     "Circle the bell close to your head, slowly.",
+     "Keep your elbows tucked and your shoulders down."
+    ]
+   }
   },
   "kb-row": {
    "key": "kb-row",
@@ -3872,7 +3885,7 @@
     "Keep your wrist straight over your forearm."
    ],
    "form": {
-    "anim": null,
+    "anim": "benchPress",
     "wrong": [
      "Wrist bent backward under the weight.",
      "Elbow flared straight out to the side.",

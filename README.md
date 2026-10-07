@@ -30,7 +30,7 @@ tracker) and Coach (your week plus a trainer chat that uses the AI model set und
 
 Under **Train → Home: stairs and kettlebell** there are two extra days outside the weekly rotation: a
 Pavel-style kettlebell starter (halo, deadlift, swings, get-up to elbow) and a Statham-style stairs +
-kettlebell circuit. Every exercise with form notes shows a **Form check**: animated wrong-vs-right figures
+kettlebell circuit. Every exercise, including the 870+ in the library, shows a **Form check**: animated wrong-vs-right figures
 and the cues. If you've edited a level's plan before, use **Edit the plan → Reset** to get the new days.
 
 ## Your profile, pre-filled
