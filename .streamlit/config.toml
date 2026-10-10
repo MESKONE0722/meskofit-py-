@@ -11,3 +11,8 @@ toolbarMode = "minimal"
 
 [browser]
 gatherUsageStats = false
+
+[server]
+# The repo ships a bundled web app (hundreds of files). Watching them all exhausts the
+# inotify limit on Streamlit Cloud, and a deployed app does not need hot reload anyway.
+fileWatcherType = "none"
