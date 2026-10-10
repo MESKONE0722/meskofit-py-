@@ -27,39 +27,52 @@ from meskofit.routes_shots import DOSES
 from meskofit.web import HTTPError
 
 LB = calc.LB
-TEAL, INK, MUTED = "#0f766e", "#17211e", "#6b7a75"
+TEAL, INK, MUTED = "#4a7fe0", "#111114", "#85868f"
 st.set_page_config(page_title="MeskoFit", page_icon="💪", layout="centered", initial_sidebar_state="collapsed")
 
 st.markdown("""
 <style>
+.stApp{background:#fff radial-gradient(120% 420px at 15% -60px,#f6e6f0 0%,rgba(246,230,240,0) 70%),radial-gradient(90% 360px at 100% -40px,#e6e8fb 0%,rgba(230,232,251,0) 70%) no-repeat}
 .block-container{padding-top:1.4rem;padding-bottom:5rem;max-width:760px}
 header[data-testid="stHeader"]{background:transparent}
 [data-testid="stSidebar"],[data-testid="collapsedControl"],[data-testid="stSidebarCollapsedControl"]{display:none}
-h1{font-weight:800;letter-spacing:-.02em;margin-bottom:.2rem}
-h2,h3{letter-spacing:-.01em}
-.stTabs [data-baseweb="tab-list"]{gap:2px;border-bottom:1px solid #d6dedb;overflow-x:auto}
-.stTabs [data-baseweb="tab"]{padding:.55rem .8rem;font-weight:600;white-space:nowrap}
-div[data-testid="stMetric"]{background:#fff;border:1px solid #dfe6e3;border-radius:14px;padding:.7rem .9rem;box-shadow:0 1px 2px rgba(0,0,0,.03)}
-div[data-testid="stMetricLabel"] p{font-size:.78rem;color:#6b7a75;font-weight:600}
-div[data-testid="stMetricValue"]{font-weight:800}
-div[data-testid="stExpander"]{background:#fff;border:1px solid #dfe6e3;border-radius:14px;overflow:hidden}
-div[data-testid="stExpander"] summary{font-weight:600}
-div[data-testid="stForm"]{background:#fff;border:1px solid #dfe6e3;border-radius:14px;padding:1rem}
+h1{font-weight:800;letter-spacing:-.03em;margin-bottom:.2rem}
+h2,h3{letter-spacing:-.02em;font-weight:750}
+[role="tablist"],.stTabs [data-baseweb="tab-list"]{gap:4px!important;border-bottom:0!important;overflow-x:auto;background:#fff!important;border-radius:999px!important;padding:5px!important;box-shadow:0 6px 24px rgba(30,30,70,.10),0 0 0 1px rgba(30,30,70,.05)!important}
+div:has(> [role="tablist"]){border-bottom:0!important;box-shadow:none!important}
+[role="tab"],.stTabs [data-baseweb="tab"]{padding:.5rem .95rem!important;font-weight:700;white-space:nowrap;border-radius:999px!important;color:#85868f;height:auto!important;border:0!important}
+[role="tab"][aria-selected="true"],.stTabs [aria-selected="true"]{background:#efeff5!important;color:#111114!important}
+[role="tab"]:hover{color:#111114}
+.react-aria-SelectionIndicator,.stTabs [data-baseweb="tab-highlight"],.stTabs [data-baseweb="tab-border"]{display:none!important}
+div[data-testid="stMetric"]{background:#fff;border-radius:20px;padding:.8rem 1rem;box-shadow:0 1px 2px rgba(30,30,70,.05),0 0 0 1px rgba(30,30,70,.045)}
+div[data-testid="stMetricLabel"] p{font-size:.78rem;color:#85868f;font-weight:600}
+div[data-testid="stMetricValue"]{font-weight:800;letter-spacing:-.02em}
+div[data-testid="stExpander"]{background:#fff;border:0;border-radius:20px;overflow:hidden;box-shadow:0 1px 2px rgba(30,30,70,.05),0 0 0 1px rgba(30,30,70,.045)}
+div[data-testid="stExpander"] summary{font-weight:700}
+div[data-testid="stExpander"] details{border:0!important;border-radius:20px!important}
+div[data-testid="stForm"]{background:#fff;border:0;border-radius:20px;padding:1rem;box-shadow:0 1px 2px rgba(30,30,70,.05),0 0 0 1px rgba(30,30,70,.045)}
 div[data-testid="stVerticalBlockBorderWrapper"]:has(> div > div[data-testid="stVerticalBlock"] .mf-card){background:#fff}
-.stButton>button,.stDownloadButton>button,div[data-testid="stFormSubmitButton"]>button{border-radius:12px;font-weight:700;min-height:2.7rem}
-.stTextInput input,.stNumberInput input,.stDateInput input,div[data-baseweb="select"]>div{border-radius:10px}
+.stButton>button,.stDownloadButton>button,div[data-testid="stFormSubmitButton"]>button{border-radius:999px;font-weight:700;min-height:3rem;border:1.5px solid #d8d8e2}
+.stButton>button[kind="primary"],div[data-testid="stFormSubmitButton"]>button[kind="primaryFormSubmit"]{background:#121216;border-color:#121216;color:#fff}
+.stTextInput input,.stNumberInput input,.stDateInput input,div[data-baseweb="select"]>div{border-radius:14px}
 .st-key-libgrid [data-testid="stHorizontalBlock"],[class*="st-key-row"] [data-testid="stHorizontalBlock"]{flex-wrap:nowrap!important;gap:.6rem}
 .st-key-libgrid [data-testid="stColumn"],[class*="st-key-row"] [data-testid="stColumn"]{min-width:0!important;flex:1 1 0!important;width:auto!important}
-.st-key-libgrid img{aspect-ratio:4/3;object-fit:cover;width:100%;border-radius:10px}
+.st-key-libgrid img{aspect-ratio:4/3;object-fit:cover;width:100%;border-radius:16px}
 .st-key-row_macros [data-testid="stMetricValue"],.st-key-row_coach [data-testid="stMetricValue"]{font-size:1.35rem!important}
 .st-key-row_macros [data-testid="stMetric"]{padding:.5rem .6rem}
-.mf-card2{background:#fff;border:1px solid #dfe6e3;border-radius:14px;padding:.5rem .6rem .6rem;margin-bottom:.15rem}
+.mf-card2{background:#fff;border-radius:20px;padding:.5rem .6rem .6rem;margin-bottom:.15rem;box-shadow:0 1px 2px rgba(30,30,70,.05),0 0 0 1px rgba(30,30,70,.045)}
 .mf-cardname{font-weight:700;font-size:.9rem;line-height:1.2;margin:.35rem 0 .1rem}
 .mf-chip{display:inline-block;padding:.2rem .7rem;border-radius:999px;color:#fff;font-weight:700;font-size:.85rem}
-.mf-big{font-size:2.6rem;font-weight:800;line-height:1;letter-spacing:-.03em}
-.mf-sub{color:#6b7a75;font-size:.88rem}
-.mf-hero{background:linear-gradient(135deg,#0f766e,#115e59);color:#fff;border-radius:18px;padding:1rem 1.2rem;margin:.4rem 0 1rem}
-.mf-hero .mf-sub{color:#c7e6e1}
+.mf-big{font-size:2.6rem;font-weight:800;line-height:1;letter-spacing:-.04em}
+.mf-sub{color:#85868f;font-size:.88rem}
+.mf-hero{background:#f3f2fb;color:#111114;border-radius:20px;padding:1rem 1.2rem;margin:.4rem 0 1rem;box-shadow:0 0 0 1px rgba(90,80,200,.06)}
+.mf-hero .mf-sub{color:#6b6c76}
+.mf-card3{background:#fff;border-radius:20px;padding:1rem 1.1rem;box-shadow:0 1px 2px rgba(30,30,70,.05),0 0 0 1px rgba(30,30,70,.045)}
+.mf-ringcard{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.mf-macros{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin:.6rem 0 1rem}
+.mf-macros .mf-card3{padding:.7rem .8rem;display:flex;flex-direction:column;gap:.5rem}
+.mf-mv{font-weight:800;font-size:1.2rem;letter-spacing:-.02em}
+.mf-ml{font-size:.78rem;color:#53545c}
 </style>
 """, unsafe_allow_html=True)
 
@@ -199,6 +212,43 @@ def exercise_guide(e: dict, key: str) -> None:
                 import streamlit.components.v1 as components
                 components.html(fig_html, height=190)
         st.markdown("\n".join([f"- ❌ {t}" for t in form["wrong"]] + [f"- ✅ {t}" for t in form["right"]]))
+
+
+def ring_svg(value: float, mx: float, size: int, stroke: int, color: str, glyph: str = "") -> str:
+    """A circular progress ring as inline SVG (starts at the top, fills clockwise)."""
+    import math
+    r = (size - stroke) / 2
+    c = 2 * math.pi * r
+    f = max(0.0, min(1.0, value / mx)) if mx else 0.0
+    arc = (f'<circle cx="{size / 2}" cy="{size / 2}" r="{r}" fill="none" stroke="{color}" stroke-width="{stroke}" '
+           f'stroke-linecap="round" stroke-dasharray="{c * f:.1f} {c:.1f}"/>') if f > 0 else ""
+    return (f'<div style="position:relative;width:{size}px;height:{size}px;flex:none">'
+            f'<svg width="{size}" height="{size}" viewBox="0 0 {size} {size}" style="transform:rotate(-90deg)">'
+            f'<circle cx="{size / 2}" cy="{size / 2}" r="{r}" fill="none" stroke="#efeff5" stroke-width="{stroke}"/>{arc}</svg>'
+            f'<div style="position:absolute;inset:0;display:grid;place-items:center;font-size:{size * .3:.0f}px">{glyph}</div></div>')
+
+
+def day_cards(tot: dict, targets: dict) -> None:
+    """Calories-left ring card and protein/carbs/fat cards, like the web app's Today screen."""
+    tk = targets.get("kcal") or mealplan.KCAL_HIGH
+    left = tk - tot["kcal"]
+    over = left < 0
+    big = f"{abs(round(left)):,}"
+    head = (f'<div class="mf-card3 mf-ringcard"><div><div class="mf-big"{" style=color:#b42828" if over else ""}>{big}</div>'
+            f'<div style="margin-top:.35rem;color:#53545c">{"Calories over target" if over else "Calories left"}</div>'
+            f'<div class="mf-sub">{round(tot["kcal"]):,} eaten of {round(tk):,}</div></div>'
+            + ring_svg(tot["kcal"], tk, 112, 11, "#ec835a" if over else "#111114", "🔥") + "</div>")
+    cards = ""
+    for k, lab, col, ico in (("protein", "Protein", "#e0474c", "🍗"), ("carbs", "Carbs", "#e8923a", "🌾"), ("fat", "Fat", "#4a7fe0", "💧")):
+        t = targets.get(k)
+        if not t:
+            cards += (f'<div class="mf-card3"><div class="mf-mv">{round(tot[k])}g</div><div class="mf-ml">{lab} eaten</div></div>')
+            continue
+        lf = t - tot[k]
+        cards += (f'<div class="mf-card3"><div><div class="mf-mv"{" style=color:#b42828" if lf < 0 else ""}>{abs(round(lf))}g</div>'
+                  f'<div class="mf-ml">{lab} {"over" if lf < 0 else "left"}</div></div>'
+                  f'<div style="align-self:center">{ring_svg(tot[k], t, 64, 7, col, ico)}</div></div>')
+    st.markdown(head + f'<div class="mf-macros">{cards}</div>', unsafe_allow_html=True)
 
 
 def card_html(inner: str) -> None:
@@ -457,9 +507,9 @@ def block_timer(secs: int, start_label: str) -> None:
     """A start / pause / reset countdown that beeps and vibrates at zero."""
     html = f"""
 <div style="font-family:system-ui,sans-serif;display:flex;align-items:center;gap:10px">
- <div id="t" style="font-size:34px;font-weight:800;color:#0f766e;min-width:92px">{secs // 60}:{secs % 60:02d}</div>
- <button id="b" style="flex:1;padding:12px;border:0;border-radius:12px;background:#0f766e;color:#fff;font-size:16px;font-weight:700">{start_label}</button>
- <button id="r" style="padding:12px;border:1px solid #0f766e;border-radius:12px;background:#fff;color:#0f766e;font-size:16px;font-weight:700">Reset</button>
+ <div id="t" style="font-size:34px;font-weight:800;color:#121216;min-width:92px">{secs // 60}:{secs % 60:02d}</div>
+ <button id="b" style="flex:1;padding:12px;border:0;border-radius:12px;background:#121216;color:#fff;font-size:16px;font-weight:700">{start_label}</button>
+ <button id="r" style="padding:12px;border:1px solid #121216;border-radius:12px;background:#fff;color:#121216;font-size:16px;font-weight:700">Reset</button>
 </div>
 <script>
 const total={secs}; let left=total, h=null;
@@ -519,8 +569,8 @@ def rest_timer() -> None:
     secs = secs or 90
     html = f"""
 <div style="font-family:system-ui,sans-serif;display:flex;align-items:center;gap:12px">
- <div id="t" style="font-size:34px;font-weight:800;color:#0f766e;min-width:92px">{secs // 60}:{secs % 60:02d}</div>
- <button id="b" style="flex:1;padding:12px;border:0;border-radius:12px;background:#0f766e;color:#fff;font-size:16px;font-weight:700">Start rest</button>
+ <div id="t" style="font-size:34px;font-weight:800;color:#121216;min-width:92px">{secs // 60}:{secs % 60:02d}</div>
+ <button id="b" style="flex:1;padding:12px;border:0;border-radius:12px;background:#121216;color:#fff;font-size:16px;font-weight:700">Start rest</button>
 </div>
 <script>
 let left={secs}, h=null; const t=document.getElementById('t'), b=document.getElementById('b');
@@ -637,10 +687,7 @@ with t_food:
     log = A.get(f"/api/log/{day}")
     meals = boot["settings"]["meals"]
     tot = {k: sum((e["nutrients"] or {}).get(k, 0) for e in log["entries"]) for k in ("kcal", "protein", "carbs", "fat")}
-    with st.container(key="row_macros"):
-        cols = st.columns(4)
-        for col, (k, lab) in zip(cols, [("kcal", "Calories"), ("protein", "Protein g"), ("carbs", "Carbs g"), ("fat", "Fat g")]):
-            col.metric(lab, round(tot[k]))
+    day_cards(tot, boot["settings"].get("targets") or {})
     # ── your meal plan ──
     dd = date.fromisoformat(day)
     mp = mealplan.day_plan(dd.weekday())
@@ -657,8 +704,6 @@ with t_food:
                             "nutrients": {"kcal": m["kcal"], "protein": m["protein"], "carbs": m["carbs"], "fat": m["fat"]}})
 
     t = mp["totals"]
-    st.progress(min(1.0, tot["kcal"] / mealplan.KCAL_HIGH),
-                text=f"{round(tot['kcal'])} of {mealplan.KCAL_LOW:,}–{mealplan.KCAL_HIGH:,} kcal today")
     with st.expander(f"🍽 Meal plan · {mp['day']} · about {t['kcal']:,} kcal", expanded=True):
         st.caption(f"Protein about {t['protein']} g · carbs about {t['carbs']} g · fat about {t['fat']} g. "
                    "Calories come from your plan; protein, carbs and fat are estimates from the portions.")
